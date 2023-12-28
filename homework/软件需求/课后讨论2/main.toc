@@ -1,0 +1,8 @@
+\contentsline {chapter}{\numberline {第一章\hspace {.3em}}课后讨论2}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}技术发展跟不上软件需求的原因与应对措施}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}原因}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}应对措施}{1}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}不同软件开发过程的特点}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}限制软件发展的原因？}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}解决需求冲突的方法？}{4}{section.1.4}%
+\contentsline {section}{\numberline {1.5}协调不一致业务需求的方法}{5}{section.1.5}%

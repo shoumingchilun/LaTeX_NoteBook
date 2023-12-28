@@ -1,0 +1,120 @@
+\documentclass[11pt, a4paper, oneside]{ctexbook}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor}
+\title{{\Huge{\textbf{软件需求工程}}}\\课后讨论1}
+\author{徐鸣飞}
+\date{}
+\linespread{1.5}
+
+\newtheorem{theorem}{定理}[section]
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{example}[theorem]{例}
+\newtheorem{proposition}[theorem]{命题}
+
+\geometry{a4paper,scale=0.7}
+
+
+\begin{document}
+
+\maketitle
+\pagenumbering{roman}
+\setcounter{page}{1}
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\chapter{课后讨论1}
+\section{常见应用软件}
+\subsection{定义}
+应用软件（Application Software）是一类专门为用户提供特定功能和任务的软件程序。与系统软件不同，应用软件是用户直接使用的，它们被设计用来满足各种不同的需求，从而使用户能够完成各种特定的任务。
+\subsection{常用应用软件}
+\begin{itemize}
+    \item \textbf{办公套件：}
+    \begin{itemize}
+        \item Microsoft Office：包括Word（文字处理）、Excel（表格处理）、PowerPoint（演示文稿制作）等。
+        \item Google Workspace：类似于Office，提供在线协作和办公工具。
+    \end{itemize}
+    \item \textbf{图形设计和多媒体：}
+    \begin{itemize}
+        \item Adobe Creative Cloud：包括Photoshop（图像编辑）、Illustrator（矢量图形设计）、Premiere Pro（视频编辑）等。
+        \item CorelDRAW：用于矢量图形设计的软件。
+    \end{itemize}
+    \item \textbf{网页浏览器：}Google Chrome、Mozilla Firefox、Microsoft Edge等：用于浏览互联网。
+    \item \textbf{音频和视频播放器：}VLC Media Player、Windows Media Player、iTunes等。
+    \item \textbf{社交媒体：}Facebook、Instagram、Twitter等：用于社交互动和信息分享。
+    \item \textbf{游戏软件：}Steam、Epic Games Launcher等：用于游戏购买、下载和管理。
+\end{itemize}
+\section{软件中间件}
+\subsection{定义}
+软件中间件（Software Middleware）是一种位于应用软件和操作系统之间的软件层，用于简化和促进分布式系统、网络通信和应用程序之间的交互。它充当了不同软件组件之间的连接器，提供了一种通用的、独立于平台的方式来支持通信、数据传输和服务调用。软件中间件通常包括一系列服务和工具，帮助不同的软件模块在异构的环境中协同工作。
+\subsection{常见软件中间件}
+\begin{itemize}
+    \item \textbf{消息中间件：}RabbitMQ：实现高级消息队列协议（AMQP）的消息中间件。\
+    \item \textbf{对象请求中间件：}CORBA（Common Object Request Broker Architecture）：用于支持不同平台上的对象之间的通信。
+    \item \textbf{数据库中间件：}Java Database Connectivity（JDBC）：Java中用于连接和执行SQL语句的API。
+    \item \textbf{事务处理中间件：}Microsoft Transaction Server（MTS）：用于Windows平台的事务处理中间件。
+    \item 还有Web中间件、服务总线中间件、远程过程调用中间件等等。
+\end{itemize}
+\section{大规模工业软件}
+\subsection{定义}
+应用于工业领域，用于管理、监控、控制和优化大型工业系统的软件。这些系统通常涵盖多个方面，包括生产、制造、供应链、设备维护、质量控制等。这些软件旨在提高生产效率、降低成本、确保质量和安全，并支持企业的决策制定。
+\subsection{分类}
+\begin{itemize}
+    \item \textbf{SCADA系统}（Supervisory Control and Data Acquisition）：用于监控和控制工业过程中的设备和系统。如Wonderware InTouch、Siemens WinCC等。
+    \item \textbf{PLM软件}（Product Lifecycle Management）：用于管理产品从设计阶段到生产、维护和退役的全生命周期。如PTC Windchill、Siemens Teamcenter等。
+    \item \textbf{MES系统}（Manufacturing Execution System）：用于跟踪和控制制造过程，将计划的生产转化为实际的产品。如Apriso FlexNet、Rockwell Software FactoryTalk ProductionCentre等。
+    \item \textbf{ERP系统}（Enterprise Resource Planning）：用于整合和管理企业各个部门的信息流，包括制造、采购、库存、销售等。如SAP ERP、Oracle E-Business Suite等。
+    \item \textbf{DCS系统}（Distributed Control System）：用于监控和控制工业过程中的连续和离散控制单元。如Emerson DeltaV、ABB 800xA等。
+    \item \textbf{EAM软件}（Enterprise Asset Management）：用于优化设备和资产的管理，包括维护、故障诊断和性能监控。如IBM Maximo、Infor EAM等。
+    \item \textbf{CAD/CAM/CAE软件}（Computer-Aided Design/ Computer-Aided Manufacturing/ Computer-Aided Engineering）：用于产品设计、制造和工程分析。如AutoCAD、CATIA、ANSYS等。
+\end{itemize}
+\section{游戏软件}
+\subsection{定义}
+游戏软件，特别是游戏引擎，是一种专门设计用于创建和开发电子游戏的软件框架。游戏引擎提供了一系列工具和功能，帮助开发者构建游戏世界、处理图形渲染、管理物理引擎、实现音频效果、处理输入等方面的任务。通过使用游戏引擎，开发者可以更轻松地创建高质量、交互性强的游戏。
+\subsection{介绍}
+常用的游戏引擎包括\textbf{Unity、Unreal Engine、CryEngine、Godot Engine}等。Unity是一款跨平台引擎，适用于2D和3D游戏开发，以其易用性和强大的生态系统而著称。Unreal Engine由Epic Games开发，以其卓越的图形引擎和物理引擎为特色，适用于制作高度逼真的3D游戏。CryEngine以引人注目的图形效果和开放世界游戏支持而著称，适用于制作视觉上引人注目的游戏体验。Godot Engine是一款开源引擎，支持2D和3D游戏开发，具有直观的可视化编辑器和脚本支持，适用于独立开发者和小型团队。这些引擎各有优势，开发者可以根据项目需求和个人偏好选择最适合的引擎，从而实现高质量、交互性强的游戏开发。
+\section{目前的大型国产硬件及其原装软件}
+以下是一些中国大型硬件制造商及其代表性的硬件和软件产品。
+\begin{itemize}
+    \item 华为（Huawei）：
+    \begin{itemize}
+        \item 硬件产品： 通信设备（例如5G基站）、智能手机、笔记本电脑、服务器、数据存储等。
+        \item 软件产品： EMUI（华为手机操作系统）、HarmonyOS（分布式操作系统）、FusionSphere（云计算平台）等。
+    \end{itemize}
+    \item 中兴通讯（ZTE）：
+    \begin{itemize}
+        \item 硬件产品： 通信设备、智能手机、网络解决方案等。
+        \item 软件产品： MiFavor（中兴手机操作系统）、Cloud UniCore（云计算解决方案）等。
+    \end{itemize}
+    \item 小米（Xiaomi）：
+    \begin{itemize}
+        \item 硬件产品： 智能手机、智能家居设备、智能穿戴设备等。
+        \item 软件产品： MIUI（小米手机操作系统）、Xiaomi Home（智能家居控制软件）等。
+    \end{itemize}
+    \item 联想（Lenovo）：
+    \begin{itemize}
+        \item 硬件产品： 笔记本电脑、台式机、服务器、智能设备等。
+        \item 软件产品： Vantage（Lenovo管理和支持应用程序）、LenovoEMC Storage（网络存储解决方案）等。
+    \end{itemize}
+    \item 大疆（DJI）：
+    \begin{itemize}
+        \item 硬件产品： 无人机、稳定器、航拍相机等。
+        \item 软件产品： DJI Fly（无人机控制应用程序）、DJI Assistant（设备管理工具）等。
+    \end{itemize}
+    \item 阿里巴巴（Alibaba）：
+    \begin{itemize}
+        \item 硬件产品： 云服务器、物联网设备。
+        \item 软件产品： 阿里云（云计算服务）、阿里巴巴云OS等。
+    \end{itemize}
+    \item 浪潮（Inspur）：
+    \begin{itemize}
+        \item 硬件产品： 服务器、存储设备、云计算解决方案。
+        \item 软件产品： iStack（云计算操作系统）、InCloudOS（企业级操作系统）等。
+    \end{itemize}
+\end{itemize}
+\end{document}

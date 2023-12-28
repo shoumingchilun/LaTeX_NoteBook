@@ -1,0 +1,91 @@
+\documentclass[11pt, a4paper, oneside]{ctexbook}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor, listings, fontspec, caption}
+
+% 标题、作者、创建日期
+\title{{\Huge{\textbf{XXXXXX}}}\\XXXX}
+\author{徐鸣飞}
+\date{2023年12月27日}
+
+% 设置全局字体
+\setmainfont{Times New Roman}
+
+% 设置页面的尺寸和布局。
+\geometry{a4paper,scale=0.75}
+
+% 行间距为1.5倍
+\linespread{1.5}
+
+% 定义定理环境
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{example}[theorem]{例}
+\newtheorem{proposition}[theorem]{命题}
+
+% 自定义配置
+% 设置全局的 enumerate 环境项之间的距离
+\setlist[enumerate]{itemsep=5pt, parsep=0pt, leftmargin=20pt, topsep=5pt, partopsep=0pt}
+
+% 定义新环境
+% 定义颜色
+\definecolor{commentcolor}{RGB}{182,73,1}
+% 定义代码
+\lstnewenvironment{java}[1][]{
+  \lstset{
+    language=Java,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{commentcolor},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    flexiblecolumns=true,
+    backgroundcolor=\color{gray!5},
+    numbers=left,
+    numberstyle=\tiny,
+    #1
+  }
+}{}
+\lstnewenvironment{plsql}[1][]{
+  \lstset{
+    language=SQL,
+    morekeywords={BEGIN,DECLARE,END,IF,ELSE,ELSIF,LOOP,WHILE,PROCEDURE,FUNCTION},
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{commentcolor},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    flexiblecolumns=true,
+    backgroundcolor=\color{gray!5},
+    numbers=left,
+    numberstyle=\tiny,
+    #1
+  }
+}{}
+
+% 文章开始
+\begin{document}
+
+% 生成标题
+\maketitle
+
+% 生成目录
+\newpage                    %新的一页
+\pagenumbering{Roman}       %页码以大写罗马数字形式表示
+\setcounter{page}{1}        %设置当前页为第一页
+\tableofcontents            %生成目录
+
+% 生成内容
+\newpage                    %新的一页
+\pagenumbering{arabic}      %页码以阿拉伯数字形式表示
+\setcounter{page}{1}        %设置当前页为第一页
+
+% 文章内容
+\chapter{第一章}
+
+% 文章结束
+\end{document}

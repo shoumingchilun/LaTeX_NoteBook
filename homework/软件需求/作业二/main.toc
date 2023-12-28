@@ -1,0 +1,10 @@
+\contentsline {chapter}{\numberline {第一章\hspace {.3em}}AI主播定义}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}定义}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}发展历史}{2}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}1.0时代——雏形初显，虚拟主持人登场}{2}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}2.0时代——偶像先行，AI虚拟主播顺风飞翔}{2}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}3.0时代——全面AI化，虚拟主播走入千家万户}{3}{subsection.1.2.3}%
+\contentsline {chapter}{\numberline {第二章\hspace {.3em}}AI主播出现的背景}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}AI主播与人工智能技术}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}AI主播与个人虚拟社交需求}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}AI主播与数字化媒体}{5}{section.2.3}%
