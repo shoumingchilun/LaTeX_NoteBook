@@ -1,4 +1,4 @@
-\documentclass[11pt, a4paper, oneside]{ctexbook}
+\documentclass[11pt, a4paper, oneside, UTF8]{ctexbook}
 \usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor, listings, fontspec, caption}
 
 % 标题、作者、创建日期
@@ -7,7 +7,9 @@
 \date{2023年12月27日}
 
 % 设置全局字体
-\setmainfont{Times New Roman}
+\setmainfont{Times New Roman}   %设置英文正常字体为Times New Roman
+\let\kaishu\relax %清除旧定义
+\newCJKfontfamily\kaishu{KaiTi}[AutoFakeBold] %重定义\kaishu
 
 % 设置页面的尺寸和布局。
 \geometry{a4paper,scale=0.75}
@@ -26,7 +28,7 @@
 % 自定义配置
 % 设置全局的 enumerate 环境项之间的距离
 \setlist[enumerate]{itemsep=5pt, parsep=0pt, leftmargin=20pt, topsep=5pt, partopsep=0pt}
-
+\setlist[itemize]{itemsep=5pt, parsep=0pt, leftmargin=20pt, topsep=5pt, partopsep=0pt}
 % 定义新环境
 % 定义颜色
 \definecolor{commentcolor}{RGB}{182,73,1}
@@ -133,7 +135,7 @@ NoSQL为Not Only SQL的缩写，是对不同于传统的关系型数据库的数
 NoSQL常用于超大规模数据的存储（例如谷歌或Facebook每天为他们的用户收集万亿比特的数据）。这些类型的数据存储不需要固定的模式，无需多余操作就可以横向扩展。
 
 \begin{center}
-  \begin{minipage}{0.99\textwidth}
+  \begin{minipage}{\textwidth}
     \center
     \includegraphics[width=0.5\textwidth]{picture/NoSQL数据库示意图.png}
     \captionsetup{hypcap=false}
@@ -147,12 +149,98 @@ NoSQL常用于超大规模数据的存储（例如谷歌或Facebook每天为他�
 
 \textit{即价值从效率转移到高度连接的数据资产中衍生。}
 
-\section{Oracle架构}
-
-\section{PL/SQL介绍}
-\subsection{概述}
+\section{PL/SQL概述}
+\subsection{介绍}
 \textbf{PL/SQL（Procedural Language/Structured Query Language）}：一种\textbf{过程化编程语言}，专门用于\textbf{Oracle数据库系统}。它将SQL（Structured Query Language）语句与结构化程序设计语言（如条件、循环等）相结合，提供了一种强大的方式来处理和操作数据库中的数据。
 
+\subsection{优点}
+\begin{enumerate}
+  \item {\bfseries\kaishu 数据库集成：} PL/SQL是为数据库设计的，能够直接嵌套在SQL中；许多与数据库有关的应用程序功能都已经集成在PL/SQL语言中。
+  \item {\bfseries\kaishu 模块化开发：} PL/SQL允许将代码模块化组织，通过存储过程和包的方式来管理和封装代码。这有助于提高代码的可维护性和重用性。
+  \item {\bfseries\kaishu 性能优化：}PL/SQL支持存储过程和函数，可以在数据库中预编译和存储，提高了执行效率。此外，PL/SQL还支持游标，能够有效地处理大量的数据。
+\end{enumerate}
+此外，还有其他如\textbf{安全性}（PL/SQL能够帮助限制对数据库的直接访问，从而提高了数据库的安全性）、\textbf{灵活性}（PL/SQL具有丰富的控制结构和数据类型，使其既可以用于简单的SQL查询，也可以用于复杂的业务逻辑实现）、\textbf{事务控制}（ PL/SQL提供了强大的事务控制功能，支持原子性、一致性、隔离性和持久性（ACID属性），确保了数据库操作的可靠性和一致性）等优点。
 
+\subsection{执行体系}
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.5\textwidth]{picture/PLSQL执行体系.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{PLSQL执行体系示意图}
+    \label{fig:PLSQL执行体系}
+  \end{minipage}
+\end{center}
+从图\ref{fig:PLSQL执行体系}中这些组件的角度来看PL/SQL的执行过程：
+\begin{description}
+  \item[PL/SQL引擎] \hfill
+  \begin{itemize}
+    \item PL/SQL解释器： 编译后的PL/SQL代码由PL/SQL引擎的解释器执行。解释器负责逐行执行PL/SQL代码，并管理变量、控制流程、处理异常等。
+    \item 数据交互： 在PL/SQL执行过程中，可能涉及到与数据库的交互，例如执行SQL语句、操作数据等。这些交互通过PL/SQL引擎协调实现。
+  \end{itemize}
+  \item[过程语句执行器] \hfill
+  \begin{itemize}
+    \item 过程语句解析： 如果PL/SQL程序包含了过程性语句，这些语句将被PL/SQL引擎的过程语句执行器处理。这可能包括存储过程、函数或触发器的调用。
+    \item 编译过程性代码： 过程语句执行器会编译PL/SQL代码，将其转换为可执行的形式。这个编译过程包括语法检查、编译成中间代码等步骤。
+  \end{itemize}
+  \item[SQL执行器]  \hfill
+  \begin{itemize}
+    \item 接收SQL语句： 当一个包含PL/SQL代码的程序被触发时，其中可能包含SQL语句。这些SQL语句被传递给SQL执行器，它负责执行这些语句。
+    \item 解析SQL语句： SQL执行器解析SQL语句，进行语法分析和语义检查。在这个阶段，执行计划被生成，这是一个描述如何执行查询的内部表示。
+  \end{itemize}
+  \item[Oracle数据库服务器] \hfill
+  \begin{itemize}
+    \item 数据存储和检索： 当PL/SQL程序执行SQL语句时，Oracle数据库服务器负责实际的数据存储和检索。执行计划告诉数据库服务器如何最有效地执行查询，并从表中检索或修改数据。
+  \end{itemize}
+\end{description}
+
+当有过程调用或SQL语句执行时，流程可能涉及多次从PL/SQL引擎到SQL执行器，再到数据库服务器的交互。
+
+需要注意的是，Oracle数据库的内部执行细节是复杂的，并且可能受到优化、缓存、并发控制等多方面的影响。
+
+\subsection{程序块结构认识}
+PL/SQL程序块是PL/SQL语言中的基本结构，它可以包含变量、常量、游标、异常处理等元素。PL/SQL程序块有三种主要形式：匿名块、存储过程和存储函数。
+类型说明：
+\begin{enumerate}
+  \item {\bfseries\kaishu 匿名块(Anonymous blocks)}：没有命名的程序块。匿名块是在应用程序内部需要的地方声明的，在这个应用程序每次执行时，这些匿名块都会被编译并执行。
+  \item  {\bfseries\kaishu 过程(Procedures)}和{\bfseries\kaishu 函数 (Functions) }：过程和函数也统称为\textit{子程序 (Subprograms)}，子程序是对匿名块的补充，子程序就是被命名的PL/SQL程序块，而它们可以存储在数据库中。
+\end{enumerate}
+一个简单的PL/SQL匿名块的结构如下：
+\begin{plsql}[caption=PL/SQL匿名块示例代码]
+DECLARE
+  -- 声明变量和常量
+  variable_name datatype;
+  constant_name CONSTANT datatype := value;
+
+BEGIN
+  -- 可执行的PL/SQL代码
+  -- 可以包括各种语句，如赋值、条件语句、循环等
+  -- 例如：
+  variable_name := value;
+  IF condition THEN
+     -- do something
+  END IF;
+
+EXCEPTION
+  -- 异常处理部分
+  -- 处理可能出现的异常
+  -- 例如：
+  WHEN others THEN
+     -- handle exception
+
+END;
+/
+\end{plsql}
+程序块结构说明：
+\begin{description}
+  \item[DECLARE] {\bfseries\kaishu 可选}，\textit{声明段}，以关键字DECLARE开始并以执行段的开始而结束。
+  \item[BEGIN] {\bfseries\kaishu 必选}，\textit{执行段}，以关键字BEGIN开始而以关键字END或关键字EXCEPTION结束。
+  \item[EXCEPTION] {\bfseries\kaishu 可选}，\textit{异常处理段}，以关键字EXCEPTION开始，以关键字END结束。
+\end{description}
+执行规则：
+\begin{enumerate}
+  \item 每一个PL/SQL控制语句都是以分号（;）结束。
+  \item 使用正斜杠（/）运行SQL*Plus内存缓冲区的匿名PL/SQL程序块。
+\end{enumerate}
 % 文章结束
 \end{document}
