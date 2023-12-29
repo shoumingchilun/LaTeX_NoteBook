@@ -149,6 +149,163 @@ NoSQL常用于超大规模数据的存储（例如谷歌或Facebook每天为他�
 
 \textit{即价值从效率转移到高度连接的数据资产中衍生。}
 
+\section{SQL*Plus工具}
+\subsection{介绍}
+SQLPlus是Oracle数据库系统中的一种交互式查询工具和脚本处理器。它是一个{\bfseries\kaishu 命令行工具}，允许用户连接到Oracle数据库并执行SQL查询、PL/SQL块以及其他数据库管理任务。
+
+\subsection{交互过程}
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.7\textwidth]{picture/SQLPLUS交互.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{SQL*Plus交互示意图}
+    \label{fig:SQLPLUS交互}
+  \end{minipage}
+\end{center}
+参与组件介绍：
+\begin{description}
+  \item[用户界面] 用户与SQLPlus进行交互的地方，可以是命令行界面或其他支持SQLPlus的用户界面。用户通过这个界面输入SQL查询、PL/SQL块或SQL*Plus命令。
+  \item[SQL*Plus引擎] SQLPlus引擎是一个解释器，负责解释和执行用户输入的SQLPlus命令，以及管理与Oracle数据库的交互。它解析并执行SQL查询、PL/SQL块，处理输出格式，管理连接和会话等。
+  \item[OCI（Oracle Call Interface）] OCI是Oracle数据库提供的一组API（应用程序接口），允许应用程序（包括SQLPlus）与Oracle数据库进行通信。\textbf{SQLPlus使用OCI}与数据库建立连接、发送SQL命令，以及接收执行结果。
+  \item[Oracle数据库引擎] 这是实际执行SQL查询、PL/SQL块的地方。当SQLPlus将命令发送给数据库时，Oracle数据库引擎负责解析和执行这些命令，然后返回结果给SQLPlus。
+  \item[数据缓冲区] SQL*Plus通常会在本地维护一个数据缓冲区，用于存储从数据库检索到的数据。这使得用户可以在本地对结果进行分析、浏览和编辑。
+\end{description}
+\subsection{Oracle数据库连接命令}
+在CMD中运行SQLPlus并连接到Oracle服务器的命令为：
+
+{\bfseries\kaishu sqlplus <用户名>/<密码>@//<数据库IP>:<Port>/<服务名>}
+
+如：
+\begin{example}
+  sqlplus system/system@//192.168.146.132:1521/helowin
+\end{example}
+
+\subsection{常用编辑命令}
+\begin{description}
+  \item[DESC] DESCRIBE，显示表结构，包括表的列名、数据类型和约束信息，效果见图\ref{fig:DESC_SQLPLUS}。
+  \item[L] 列出当前缓冲区中的 SQL 语句（未执行）的命令。
+  \item[\textup{[N]}] number，选中第n行；[n]后可追加内容[text]来替换第n行或新建第n行。
+  \item[A] APPEND，追加文本到缓冲区中的当前选中行。使用“.”单独一行表示结束追加。使用前要求缓冲区内存在文本。
+  \item[C] CHANGE，修改缓冲区中的当前选中行的文本，格式为{\bfseries\kaishu C /<原文>/<新文>}。
+  \item[DEL] DELETE，删除缓冲区中的当前选中行。可追加[n]代表删除第n行；追加[n][m]删除第n至m行。
+  \item[$\boldsymbol{/}$] 运行在SQL缓冲区中的SQL语句。
+  \item[CL] CLEAR，清除 SQL*Plus 屏幕上的内容，将屏幕滚动条移至顶部。
+\end{description}
+\begin{figure}[htbp]
+  \center
+  \includegraphics[width=\textwidth]{picture/DESC_SQLPLUS效果.png}
+  \caption{DESC效果图}
+  \label{fig:DESC_SQLPLUS}
+\end{figure}
+
+使用编辑缓冲区的命令前，需保证缓存区中存在内容：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.5\textwidth]{picture/输入内容到缓冲区.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{输入内容到缓冲区，使用enter换行，使用单独的.结束}
+    \label{fig:输入内容到缓冲区}
+  \end{minipage}
+\end{center}
+
+可使用L查看缓冲区：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.5\textwidth]{picture/L命令效果.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{L命令效果图}
+    \label{fig:L命令效果}
+  \end{minipage}
+\end{center}
+
+*号所在行为正在编辑行。
+可使用数字更改选中行后，使用A命令添加内容：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.5\textwidth]{picture/A命令效果.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{A命令、n命令效果图}
+    \label{fig:A命令效果}
+  \end{minipage}
+\end{center}
+
+可使用C命令更改指定行（注意原文与新文中无空格）：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.5\textwidth]{picture/C命令效果.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{C命令效果图}
+    \label{fig:C命令效果}
+  \end{minipage}
+\end{center}
+
+可使用DEL命令删除指定行：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.5\textwidth]{picture/DEL命令效果.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{DEL命令效果图}
+    \label{fig:DEL命令效果}
+  \end{minipage}
+\end{center}
+
+再次使用n命令新建行：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.5\textwidth]{picture/N命令效果图.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{N命令效果图}
+    \label{fig:N命令效果}
+  \end{minipage}
+\end{center}
+
+使用$\boldsymbol{/}$运行（使用后缓冲区不会被清除）：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.5\textwidth]{picture/运行命令效果图.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{运行命令效果图}
+    \label{fig:运行命令效果}
+  \end{minipage}
+\end{center}
+
+\subsection{SQL文件存取命令}
+
+\begin{description}
+  \item[SAVE] 把SQL缓冲区的内容存入指定的文件，如 \textit{SAVE D:\textbackslash SQL\textbackslash SMAPLE}。
+  \item[GET] 将指定的脚本文件装入SQL缓存区，如\textit{GET D:\textbackslash SQL\textbackslash SMAPLE}。
+  \item[START] @ 或START，把指定的脚本文件装入SQL缓冲区并运行，如\textit{@ D:\textbackslash SQL\textbackslash SMAPLE.sql}。
+\end{description}
+
+\subsection{输出保存命令}
+SPOOL，语法为：\\
+{\bfseries\kaishu SPO[OL] [File\_name[.ext]] [[CRE[ATE]|REP[LACE]|APP[END]] | OFF | OUT ]}。
+
+参数说明：
+\begin{description}
+  \item[File\_name] 指定脱机文件的名称，默认的文件扩展名为LST。
+  \item[\textup{CRE[ATE]}] 表示创建一个新的脱机文件，这也是SPOOL命令的默认状态。
+  \item[\textup{REP[LACE]}] 表示替代已经存在的脱机文件。
+  \item[\textup{APP[END]}] 表示把脱机内容附加到一个已经存在的脱机文件中。
+  \item[OFF | OUT] 表示关闭SPOOL输出。
+\end{description}
+
+\chapter{PL/SQL语法学习}
 \section{PL/SQL概述}
 \subsection{介绍}
 \textbf{PL/SQL（Procedural Language/Structured Query Language）}：一种\textbf{过程化编程语言}，专门用于\textbf{Oracle数据库系统}。它将SQL（Structured Query Language）语句与结构化程序设计语言（如条件、循环等）相结合，提供了一种强大的方式来处理和操作数据库中的数据。
@@ -198,7 +355,7 @@ NoSQL常用于超大规模数据的存储（例如谷歌或Facebook每天为他�
 
 需要注意的是，Oracle数据库的内部执行细节是复杂的，并且可能受到优化、缓存、并发控制等多方面的影响。
 
-\subsection{程序块结构认识}
+\section{程序块结构}
 PL/SQL程序块是PL/SQL语言中的基本结构，它可以包含变量、常量、游标、异常处理等元素。PL/SQL程序块有三种主要形式：匿名块、存储过程和存储函数。
 类型说明：
 \begin{enumerate}
@@ -231,6 +388,39 @@ EXCEPTION
 END;
 /
 \end{plsql}
+一个简单的PL/SQL函数的示例代码（获取员工薪水）：
+\begin{plsql}[caption=获取员工薪水函数示例代码]
+CREATE OR REPLACE FUNCTION get_employee_salary(p_employee_id NUMBER)
+RETURN NUMBER
+IS
+   -- 声明变量
+   v_salary NUMBER;
+BEGIN
+   -- 查询员工薪水
+   SELECT salary INTO v_salary
+   FROM employees
+   WHERE employee_id = p_employee_id;
+
+   -- 返回薪水
+   RETURN v_salary;
+END;
+/
+\end{plsql}
+一个简单的PL/SQL过程的示例代码（更新员工薪水）：
+\begin{plsql}[caption=更新员工薪水过程示例代码]
+CREATE OR REPLACE PROCEDURE update_employee_salary(p_employee_id NUMBER, p_new_salary NUMBER)
+IS
+BEGIN
+  -- 更新员工薪水
+  UPDATE employees
+  SET salary = p_new_salary
+  WHERE employee_id = p_employee_id;
+  
+  -- 提交事务
+  COMMIT;
+END;
+/
+\end{plsql}
 程序块结构说明：
 \begin{description}
   \item[DECLARE] {\bfseries\kaishu 可选}，\textit{声明段}，以关键字DECLARE开始并以执行段的开始而结束。
@@ -242,5 +432,8 @@ END;
   \item 每一个PL/SQL控制语句都是以分号（;）结束。
   \item 使用正斜杠（/）运行SQL*Plus内存缓冲区的匿名PL/SQL程序块。
 \end{enumerate}
+
+\section{变量}
+
 % 文章结束
 \end{document}
