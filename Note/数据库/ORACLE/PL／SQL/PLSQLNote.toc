@@ -25,3 +25,27 @@
 \contentsline {subsection}{\numberline {2.1.2}优点}{11}{subsection.2.1.2}%
 \contentsline {subsection}{\numberline {2.1.3}执行体系}{12}{subsection.2.1.3}%
 \contentsline {section}{\numberline {2.2}程序块结构}{13}{section.2.2}%
+\contentsline {section}{\numberline {2.3}变量}{15}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}变量命名规则}{16}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}变量声明语法}{16}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}变量类型}{16}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}变量声明建议}{18}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}赋值：字符串分隔符（引号限定符）}{18}{subsection.2.3.5}%
+\contentsline {subsubsection}{介绍}{18}{subsubsection*.10}%
+\contentsline {subsubsection}{演示}{18}{subsubsection*.11}%
+\contentsline {subsection}{\numberline {2.3.6}类型声明：\%TYPE属性}{19}{subsection.2.3.6}%
+\contentsline {subsubsection}{使用语法}{20}{subsubsection*.12}%
+\contentsline {subsubsection}{案例}{20}{subsubsection*.13}%
+\contentsline {section}{\numberline {2.4}布尔变量与布尔表达式}{20}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}布尔操作符}{21}{subsection.2.4.1}%
+\contentsline {section}{\numberline {2.5}代替变量和绑定变量}{21}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}代替变量}{21}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}绑定变量}{22}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}不同}{23}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6}LOB变量}{23}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}LOB变量类型}{23}{subsection.2.6.1}%
+\contentsline {subsubsection}{CLOB数据类型（Character Large Object）}{23}{subsubsection*.14}%
+\contentsline {subsubsection}{BLOB数据类型（Binary Large Object）}{23}{subsubsection*.15}%
+\contentsline {subsubsection}{BFILE数据类型（Binary File）}{24}{subsubsection*.16}%
+\contentsline {subsubsection}{NCLOB数据类型（National Language Character Large Object）}{24}{subsubsection*.17}%
+\contentsline {subsection}{\numberline {2.6.2}LOB变量使用}{24}{subsection.2.6.2}%

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  29 DEC 2023 14:43
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  30 DEC 2023 21:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -673,24 +673,23 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ) [1
 
 
-] (./PLSQLNote.toc)
+] (./PLSQLNote.toc [1
+
+])
 \tf@toc=\write4
 \openout4 = `PLSQLNote.toc'.
 
- [1
-
-]
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/sl' in size <10.95> not available
+(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 85.
+LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <10.95> not available
+(Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 85.
+ [2]
 第一章
 File: picture/数据库占比对比.png Graphic file (type bmp)
 <picture/数据库占比对比.png>
 [1
 
-]
-LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/sl' in size <10.95> not available
-(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 105.
-LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <10.95> not available
-(Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 105.
- [2]
+] [2]
 File: picture/层次数据库示意图.png Graphic file (type bmp)
 <picture/层次数据库示意图.png>
  [3]
@@ -779,17 +778,32 @@ Package fontspec Info: Font family 'FangSong(0)' created for font 'FangSong'
 (fontspec)             <->"FangSong/OT:script=hani;language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
- [13] [14] [15] (./PLSQLNote.aux)
+ [13] [14] [15] [16] [17] [18]
+File: picture/字符串分隔符效果图.png Graphic file (type bmp)
+<picture/字符串分隔符效果图.png>
+ [19]
+File: picture/布尔操作符.png Graphic file (type bmp)
+<picture/布尔操作符.png>
+ [20]
+File: picture/代替变量案例.png Graphic file (type bmp)
+<picture/代替变量案例.png>
+ [21]
+File: picture/绑定变量效果.png Graphic file (type bmp)
+<picture/绑定变量效果.png>
+ [22] [23]
+File: picture/CLOB示例.png Graphic file (type bmp)
+<picture/CLOB示例.png>
+ [24] (./PLSQLNote.aux)
 Package rerunfilecheck Info: File `PLSQLNote.out' has not changed.
-(rerunfilecheck)             Checksum: 4851DCF0458BD269789628B08BFFA3D0;2444.
+(rerunfilecheck)             Checksum: 62C6DFEBEA274EF9D3360876CFD0E1D7;4209.
  ) 
 Here is how much of TeX's memory you used:
- 20433 strings out of 476683
- 440890 string characters out of 5804928
+ 20632 strings out of 476683
+ 449787 string characters out of 5804928
  1922012 words of memory out of 5000000
- 40343 multiletter control sequences out of 15000+600000
+ 40537 multiletter control sequences out of 15000+600000
  525266 words of font info for 130 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,7n,97p,482b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PLSQLNote.pdf (17 pages).
+Output written on PLSQLNote.pdf (27 pages).
