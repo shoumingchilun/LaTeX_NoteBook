@@ -1,0 +1,62 @@
+\documentclass[11pt, a4paper, oneside]{ctexbook}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor}
+\title{{\Huge{\textbf{软件需求工程}}}\\课后作业（选做2个）}
+\author{徐鸣飞}
+\date{2023年12月31日}
+\linespread{1.5}
+
+\newtheorem{theorem}{定理}[section]
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{example}[theorem]{例}
+\newtheorem{proposition}[theorem]{命题}
+
+\geometry{a4paper,scale=0.7}
+
+
+% 设置全局字体
+\setmainfont{Times New Roman}
+\let\kaishu\relax                               %清除旧定义
+\newCJKfontfamily\kaishu{KaiTi}[AutoFakeBold]   %重定义\kaishu，开启加粗功能
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\chapter{为什么软件需求过程中需求变更是难免的？}
+
+软件需求在项目过程中发生变更是难免的，这是因为在软件开发过程中，很难在一开始就完全理解和预测用户的需求。理由如下：
+
+\begin{enumerate}
+    \item {\bfseries\kaishu 不完整或模糊的需求定义}： 初始的需求定义可能不够清晰或完整，导致在开发过程中发现新的需求或对原有需求进行澄清。
+    \item {\bfseries\kaishu 用户需求变更}： 用户可能在项目进行过程中更好地理解他们的需求，或者他们的业务环境发生变化，因此需要对软件进行调整以满足新的需求。
+    \item {\bfseries\kaishu 技术限制或新技术的引入}： 在软件开发过程中，可能会出现新的技术或者原有的技术限制，这可能会导致对需求进行修改以适应新的技术要求。
+    \item {\bfseries\kaishu 市场竞争和变化}： 市场条件可能会发生变化，竞争对手可能发布新的产品，这可能促使团队调整软件以保持竞争力。
+    \item {\bfseries\kaishu 项目范围变更}： 在项目进行的过程中，可能会发现原始的项目范围定义不够准确，需要对需求进行修改以适应实际情况。
+    \item {\bfseries\kaishu 用户反馈}： 当用户开始使用软件时，他们可能提出新的需求或对现有功能提出改进建议。这种反馈可能促使开发团队进行调整。
+    \item {\bfseries\kaishu 变化的法规和标准}： 法规和标准可能会发生变化，这可能会导致软件需要进行相应的修改以符合新的法规或标准要求。
+    \item {\bfseries\kaishu 团队的学习和演进}： 在项目的早期阶段，团队可能对领域和技术有更多的了解，这可能会引发对需求的重新评估和调整。
+\end{enumerate}
+
+\chapter{为什么必须进行需求变更管理？}
+需求变更管理是软件开发项目中至关重要的一个方面，它有助于确保项目的成功完成并满足用户的期望。理由如下：
+\begin{enumerate}
+    \item {\bfseries\kaishu 保持项目目标一致性}： 需求变更管理有助于确保项目的目标和最终交付物与最初确定的要求一致。这有助于防止项目漂移，确保项目成功地实现了最初设定的目标。
+    \item {\bfseries\kaishu 控制项目范围}： 需求变更管理有助于控制项目的范围，防止不受控制的范围膨胀。通过仔细评估和管理需求变更，可以更好地控制项目的规模和复杂性。
+    \item {\bfseries\kaishu 降低项目风险}： 如果需求变更未受控制，可能会导致项目进度延误、成本增加和质量降低。通过对需求变更进行管理，可以减轻项目风险，确保项目在规定的时间和预算内交付高质量的产品。
+    \item {\bfseries\kaishu 提高项目透明度}： 需求变更管理有助于提高项目的透明度，使项目团队和相关利益方能够清晰地了解变更的原因、影响和实施计划。这有助于建立更好的沟通和合作关系。
+    \item {\bfseries\kaishu 满足用户需求}： 用户需求可能在项目进行的过程中发生变化，需要及时而有效地进行管理，以确保最终交付的产品满足用户的实际需求。这有助于提高用户满意度。
+    \item {\bfseries\kaishu 遵循法规和标准}： 在一些行业中，软件项目必须符合特定的法规和标准。需求变更管理可以确保软件系统满足这些法规和标准的要求。
+    \item {\bfseries\kaishu 合理分配资源}： 通过对需求变更的有效管理，可以更好地分配项目资源，包括人力、时间和预算。这有助于优化项目的执行，并确保资源得到有效利用。
+    \item {\bfseries\kaishu 建立项目文档}： 需求变更管理可以帮助建立和维护详细的项目文档，包括变更请求、评估、批准和实施计划。这有助于跟踪项目进展和提供审计的依据。
+\end{enumerate}
+\end{document}
