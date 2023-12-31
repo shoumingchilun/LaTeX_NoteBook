@@ -1,0 +1,56 @@
+\documentclass[11pt, a4paper, oneside]{ctexbook}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor}
+\title{{\Huge{\textbf{软件需求工程}}}\\课后作业（8.2必选，8.1和8.3选做）}
+\author{徐鸣飞}
+\date{2023年12月31日}
+\linespread{1.5}
+
+\newtheorem{theorem}{定理}[section]
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{example}[theorem]{例}
+\newtheorem{proposition}[theorem]{命题}
+
+\geometry{a4paper,scale=0.7}
+
+% 设置全局字体
+\setmainfont{Times New Roman}
+\let\kaishu\relax                               %清除旧定义
+\newCJKfontfamily\kaishu{KaiTi}[AutoFakeBold]   %重定义\kaishu，开启加粗功能
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\chapter{从哪些角度进行需求规格说明的评审？}
+需求规格说明的评审是确保软件项目成功的关键步骤之一。评审有助于发现潜在的问题、提高质量、降低后期修改成本。评审角度如下：
+\begin{enumerate}
+    \item 需求是否完整？即评审人员是否知道有无任何遗漏的需求或在单个需求措施中有无遗漏的信息。
+    \item 需求是否一致？即不同的需求间是否存在冲突，特别是不同层次间的需求(如目标需求与功能或性能需求)是否一致。
+    \item 需求是否可理解？即所有文档的读者是否理解需求的意思。
+    \item 需求是否明确？即该需求是否有不同的解释。
+    \item 需求是否可实现？即该需求的实现会给开发正作带来什么样的技术风险等。
+    \item 需求是否可跟踪？即一个需求是否包含或涉及其他相关需求，以及这些需求为什么会被包含或被涉及。
+    \item 需求是否易于修改？即将来需要对软件需求进行增加或修改时，是否会引起一系列变动等。
+    \item 需求规格说明文档是否完整？即文档是否符合某一标准，如国家、军队或公司内部标准等。
+\end{enumerate}
+\chapter{有哪些评审方法？各有什么特点？}
+\begin{description}
+    \item[散发式评审（Ad-hoc Review）] 散发式评审是一种非正式的评审方法，小组成员自由阅读需求文档，并提出反馈和建议。这种方法简单易行，适用于小规模项目，但可能缺乏结构。
+    \item[检查表评审（Checklist Review）] 检查表评审使用预定义的检查表，该表包含需求规格中常见的问题和关注点。评审小组根据检查表逐一检查文档，具有结构性，确保关键方面被考虑。
+    \item[面向场景的评审（Scenario-Based Review）] 面向场景的评审围绕使用场景展开，小组成员考虑不同的使用情境来评估需求的有效性。有助于确保需求在实际应用中的适用性。
+    \item[模拟评审（Walkthrough）] 模拟评审由文档的作者或项目经理演示文档内容，其他团队成员提出问题和提供反馈。促进团队合作，提高对需求的理解程度。
+    \item[形式化审查（Formal Inspection）] 形式化审查是一种严格的、由规程定义的审查过程，通常由专门的审查小组执行。包括预审、会议、跟踪和记录，适用于大型项目，但需要更多时间和资源。
+    \item[原型评审（Prototype Review）] 原型评审针对系统原型或模型进行，以验证需求的实现方式。有助于在实际交付之前发现问题，加强对需求的理解。
+    \item[基于场景的评审（Use Case Review）] 基于场景的评审围绕用例展开，确保每个用例都能满足用户需求。与系统功能直接相关，有助于对需求进行深入理解。
+\end{description}
+\end{document}
