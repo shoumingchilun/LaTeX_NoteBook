@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  31 DEC 2023 18:34
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  1 JAN 2024 00:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -675,15 +675,16 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 
 ] (./PLSQLNote.toc [1
 
-])
+]
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/sl' in size <10.95> not available
+(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 66.
+LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <10.95> not available
+(Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 66.
+ [2])
 \tf@toc=\write4
 \openout4 = `PLSQLNote.toc'.
 
-LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/sl' in size <10.95> not available
-(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 85.
-LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <10.95> not available
-(Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 85.
- [2]
+ [3]
 第一章
 File: picture/数据库占比对比.png Graphic file (type bmp)
 <picture/数据库占比对比.png>
@@ -756,7 +757,7 @@ File: picture/PLSQL执行体系.png Graphic file (type bmp)
 (d:/LaTeX/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 366.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 367.
 
 Package fontspec Info: Could not resolve font "FangSong/BI" (it probably
 (fontspec)             doesn't exist).
@@ -783,39 +784,54 @@ Package fontspec Info: Font family 'FangSong(0)' created for font 'FangSong'
  [14
 
 ] [15] [16]
+File: picture/嵌套程序块示例代码运行结果.png Graphic file (type bmp)
+<picture/嵌套程序块示例代码运行结果.png>
+ [17]
 第四章
-[17
+[18
 
-] [18] [19] [20]
-File: picture/字符串分隔符效果图.png Graphic file (type bmp)
-<picture/字符串分隔符效果图.png>
- [21]
-File: picture/布尔操作符.png Graphic file (type bmp)
-<picture/布尔操作符.png>
- [22]
+] [19] [20]
 File: picture/代替变量案例.png Graphic file (type bmp)
 <picture/代替变量案例.png>
- [23]
+ [21]
 File: picture/绑定变量效果.png Graphic file (type bmp)
 <picture/绑定变量效果.png>
+ [22] [23]
+File: picture/布尔操作符.png Graphic file (type bmp)
+<picture/布尔操作符.png>
  [24] [25]
 File: picture/CLOB示例.png Graphic file (type bmp)
 <picture/CLOB示例.png>
- [26]
+ [26] [27]
+File: picture/字符串分隔符效果图.png Graphic file (type bmp)
+<picture/字符串分隔符效果图.png>
+ [28]
 第五章
-[27
+[29
 
-] [28] [29] (./PLSQLNote.aux)
+] [30] [31] [32]
+第六章
+[33
+
+]
+第七章
+[34
+
+] [35] [36] [37]
+第八章
+[38
+
+] [39] (./PLSQLNote.aux)
 Package rerunfilecheck Info: File `PLSQLNote.out' has not changed.
-(rerunfilecheck)             Checksum: 5CD5C0DBCFD825C9D207B2F73649A47A;4970.
+(rerunfilecheck)             Checksum: C8C0F59FE56AD0101EC99DF192377C0E;7296.
  ) 
 Here is how much of TeX's memory you used:
- 20711 strings out of 476683
- 454528 string characters out of 5804928
- 1930012 words of memory out of 5000000
- 40616 multiletter control sequences out of 15000+600000
+ 20776 strings out of 476683
+ 456655 string characters out of 5804928
+ 1957012 words of memory out of 5000000
+ 40680 multiletter control sequences out of 15000+600000
  525266 words of font info for 130 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,8n,97p,482b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PLSQLNote.pdf (32 pages).
+Output written on PLSQLNote.pdf (43 pages).
