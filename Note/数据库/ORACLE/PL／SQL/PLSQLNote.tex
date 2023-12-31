@@ -305,12 +305,12 @@ SPOOL，语法为：\\
   \item[OFF | OUT] 表示关闭SPOOL输出。
 \end{description}
 
-\chapter{PL/SQL语法学习}
-\section{PL/SQL概述}
-\subsection{介绍}
+% \chapter{PL/SQL语法学习}
+\chapter{PL/SQL概述}
+\section{介绍}
 \textbf{PL/SQL（Procedural Language/Structured Query Language）}：一种\textbf{过程化编程语言}，专门用于\textbf{Oracle数据库系统}。它将SQL（Structured Query Language）语句与结构化程序设计语言（如条件、循环等）相结合，提供了一种强大的方式来处理和操作数据库中的数据。
 
-\subsection{优点}
+\section{优点}
 \begin{enumerate}
   \item {\bfseries\kaishu 数据库集成：} PL/SQL是为数据库设计的，能够直接嵌套在SQL中；许多与数据库有关的应用程序功能都已经集成在PL/SQL语言中。
   \item {\bfseries\kaishu 模块化开发：} PL/SQL允许将代码模块化组织，通过存储过程和包的方式来管理和封装代码。这有助于提高代码的可维护性和重用性。
@@ -318,7 +318,7 @@ SPOOL，语法为：\\
 \end{enumerate}
 此外，还有其他如\textbf{安全性}（PL/SQL能够帮助限制对数据库的直接访问，从而提高了数据库的安全性）、\textbf{灵活性}（PL/SQL具有丰富的控制结构和数据类型，使其既可以用于简单的SQL查询，也可以用于复杂的业务逻辑实现）、\textbf{事务控制}（ PL/SQL提供了强大的事务控制功能，支持原子性、一致性、隔离性和持久性（ACID属性），确保了数据库操作的可靠性和一致性）等优点。
 
-\subsection{执行体系}
+\section{执行体系}
 \begin{center}
   \begin{minipage}{\textwidth}
     \center
@@ -355,7 +355,7 @@ SPOOL，语法为：\\
 
 需要注意的是，Oracle数据库的内部执行细节是复杂的，并且可能受到优化、缓存、并发控制等多方面的影响。
 
-\section{程序块结构}
+\chapter{程序块结构}
 PL/SQL程序块是PL/SQL语言中的基本结构，它可以包含变量、常量、游标、异常处理等元素。PL/SQL程序块有三种主要形式：匿名块、存储过程和存储函数。
 类型说明：
 \begin{enumerate}
@@ -433,7 +433,7 @@ END;
   \item 使用正斜杠（/）运行SQL*Plus内存缓冲区的匿名PL/SQL程序块。
 \end{enumerate}
 
-\section{变量}
+\chapter{变量}
  {\bfseries\kaishu 变量}，就是内存中一个命名的临时存储区，而变量中所存储的信息就是这个变量的当前值。
 
 在PL/SQL中，在使用一个变量之前，必须首先声明这个变量。一旦声明了这个变量，就可以在SQL语句和过程化（PL/SQL）语句中使用这个变量了。
@@ -445,7 +445,7 @@ END;
   \item 通过参数将值传入PL/SQL块
   \item 通过输出变量来查看结构
 \end{enumerate}
-\subsection{变量命名规则}
+\section{变量命名规则}
 \begin{itemize}
   \item 必须{\bfseries\kaishu 以英语字母开始}
   \item 可以包含{\bfseries\kaishu 英语字母}或{\bfseries\kaishu 数字}或{\bfseries\kaishu 特殊字符}——美元号（\$）、下划线（\_）、和井号（\#）
@@ -454,7 +454,7 @@ END;
   \item 不能是保留关键字
   \item 不能与数据库的表或列同名
 \end{itemize}
-\subsection{变量声明语法}
+\section{变量声明语法}
 在引用PL/SQL程序块中的变量之前，必须在声明段声明所有的变量（标识符）。
 在声明变量的同时还可以为变量赋初值，但是在声明变量时赋予初始值是可选的。
 如果在一个变量声明中引用了其他变量，一定要确保在之前的语句中已经声明了引用的变量。
@@ -470,7 +470,7 @@ END;
   v_birthday DATE;
 \end{plsql}
 
-\subsection{变量类型}
+\section{变量数据类型}
 PL/SQL支持四大类数据类型（最常用的是标量数据类型，目前熟悉这个即可）：
 \begin{enumerate}
   \item 标量（Scalar）数据类型：
@@ -517,7 +517,7 @@ PL/SQL支持四大类数据类型（最常用的是标量数据类型，目前�
           \item BFILE: 用于存储二进制文件的地址引用，文件存储在数据库外部。
         \end{itemize}
 \end{enumerate}
-\subsection{变量声明建议}
+\section{变量命名建议}
 \begin{enumerate}
   \item 遵守命名的规则，变量的命名规则与SQL对象的命名规则完全相同。
   \item 必须初始化被指定为非空（NOT NULL）和常量（Constant）的变量。
@@ -528,7 +528,7 @@ PL/SQL支持四大类数据类型（最常用的是标量数据类型，目前�
   \item 如果没有必要就不要在PL/SQL变量上强加非空（NOT NULL）约束。
   \item 代码中使用了 PL/SQL 游标、BLOB/CLOB Locator 或其他需要手动释放的资源，请确保在不再需要它们时及时释放这些资源，以避免内存泄漏。
 \end{enumerate}
-\subsection{赋值：字符串分隔符（引号限定符）}
+\section{赋值：字符串分隔符（引号限定符）}
 \subsubsection{介绍}
 q 和 p 是引号限定符，用于创建带有引号的字符串字面量。具体而言，q 和 p 用于创建带有引号的标识符或字符串，这样可以在字符串中包含特殊字符，而不必使用转义字符。q 用于创建带有双引号的标识符，而 p 用于创建带有单引号的字符串。
 
@@ -567,7 +567,7 @@ END;
     \label{fig:字符串分隔符效果图}
   \end{minipage}
 \end{center}
-\subsection{类型声明：\%TYPE属性}
+\section{类型声明：\%TYPE属性}
 为了避免这种变量数据类型和精度的硬编码（即数据类型和精度必须显式定义），PL/SQL引入\%TYPE属性。程序员（开发人员）可以使用\%TYPE属性按照之前已经声明过的变量或数据库的列来声明一个变量。当存储在一个变量中值来自于数据库中的表时，使用\%TYPE属性来声明这个变量时再适合不过的了。
 
 \subsubsection{使用语法}
@@ -703,6 +703,114 @@ END;
     \label{fig:CLOB示例}
   \end{minipage}
 \end{center}
+
+\chapter{词法单元}
+与其他程序设计语言一样，构成任何PL/SQL程序块的最基本单元的程序部件是词法单元。
+一个词法单元就是一个字符序列，其中字符可以是字母、数字、特殊字符、空格、制表字符（tabs）、回车符、符号。
+
+词法单元（位）又可以进一步划分成标识符、定界符、文字和注释四大类：
+\begin{description}
+  \item[标识符（Identifiers）] 标识符是命名的PL/SQL对象。
+  \item[定界符（Delimiters）] 定界符是一些具有特殊含义的符号，其本身也经常被用作词法单元或语句的分隔符。
+  \item[文字（Literals）] 任何赋予一个变量的值都是文字。
+  \item[注释（Comments）] 是PL/SQL代码解释信息。
+\end{description}
+
+\section{标识符（Identifiers）}
+标识符是用来命名数据库对象（如表、列、视图、过程、变量等）的名称。
+
+其命名规则与变量命名规则完全相同，因此标识符也不能与保留关键字同名。如果使用保留关键字作为标识符名字或者标识符名字中包含了空格或要区分大小写，则必须在声明这个标识符时，将它用双引号括起来，如：  {\bfseries\kaishu “begin date” DATE}。
+
+在之后使用这个标识符时也必须使用双引号。
+
+\subsection{标识符命名惯例}
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \centering % 居中对齐
+    \begin{tabular}{|c|c|c|} % 三列，居中对齐，列之间用竖线分隔
+      \hline % 画水平线
+      \textbf{标识符} & \textbf{命名惯例}  & \textbf{例子} \\
+      \hline
+      游标 & name\_cursor & emp\_cursor \\
+      异常 & e\_name & e\_invalid\_product \\
+      PL/SQL表类型 & name\_table\_type & ename\_table\_type \\
+      PL/SQL表类型的变量 & name\_table  & ename\_table \\
+      记录类型 & name\_record\_type & emp\_record\_type \\
+      记录类型的变量 & name\_record & emp\_record \\
+      \hline
+    \end{tabular}
+    \captionsetup{hypcap=false}
+    \captionof{table}{标识符命名惯例表}
+    \label{tab:标识符命名惯例} % 用于交叉引用的标签
+  \end{minipage}
+\end{center}
+
+\section{定界符（Delimiters）}
+定界符是用于界定代码块、语句、变量等元素范围的符号。在PL/SQL中，常见的定界符包括分号（;）、引号（'）和双引号（"）等。
+\subsection{简单定界符}
+简单定界符通常只有一个符号。
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \centering % 居中对齐
+    \begin{tabular}{|c|c|} % 三列，居中对齐，列之间用竖线分隔
+      \hline % 画水平线
+      \textbf{操作符} & \textbf{含义}  \\
+      \hline
+      + & 加法运算符  \\
+      - & 减法运算符  \\
+      * & 乘法运算符  \\
+      / & 除法运算符  \\
+      = & 相等操作符  \\
+      @ & 远程访问符  \\
+      \hline
+    \end{tabular}
+    \captionsetup{hypcap=false}
+    \captionof{table}{简单定界符表}
+    \label{tab:简单定界符} % 用于交叉引用的标签
+  \end{minipage}
+\end{center}
+
+\subsection{组合定界符}
+组合定界符由二个符号组成。
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \centering % 居中对齐
+    \begin{tabular}{|c|c|} % 三列，居中对齐，列之间用竖线分隔
+      \hline % 画水平线
+      \textbf{操作符} & \textbf{含义}  \\
+      \hline
+      ||  & 连接运算符  \\
+      := & 赋值操作符  \\
+      !=  & 不等运算符  \\
+      <> & 不等运算符  \\
+      /*\ */ & 开始/结束注释定界符  \\
+      --  & 单行注释符  \\
+      \hline
+    \end{tabular}
+    \captionsetup{hypcap=false}
+    \captionof{table}{组合定界符表}
+    \label{tab:组合定界符} % 用于交叉引用的标签
+  \end{minipage}
+\end{center}
+
+\section{文字（Literals）}
+任何赋予一个变量的值都是文字，即任何不是标识符的字符、数字、布尔或日期值都是文字。
+
+文字可分为以下四类：
+\begin{enumerate}
+  \item \textbf{字符文字}：字符文字也叫字符串文字，字符串文字的数据类型只能是CHAR或VARCHAR2，如“社会核心价值观”、“中国梦”等。
+  \item \textbf{数字文字}：一个数字文字就是一个正整数或实数，如“123”、“123.45”。
+  \item \textbf{布尔文字}：赋予布尔变量的值是布尔文字，其值为TRUE、FALSE和NULL。
+  \item \textbf{日期文字}：一个日期文字就是一个有效的日期类型数据，如9-mar-2022。
+\end{enumerate}
+
+\section{注释（Comments）}
+如果只注释一行：那么直接使用{-}{-}。
+
+如果注释的不止一行：那么使用符号 /* 和 */作为注释操作符。
 
 % 文章结束
 \end{document}
