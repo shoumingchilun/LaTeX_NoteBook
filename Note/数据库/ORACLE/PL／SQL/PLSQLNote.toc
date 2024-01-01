@@ -103,3 +103,20 @@
 \contentsline {subsection}{\numberline {11.4.2}使用CASE语句取代DECODE}{52}{subsection.11.4.2}%
 \contentsline {section}{\numberline {11.5}GOTO}{52}{section.11.5}%
 \contentsline {subsection}{\numberline {11.5.1}用处}{52}{subsection.11.5.1}%
+\contentsline {chapter}{\numberline {第十二章\hspace {.3em}}循环语句}{55}{chapter.12}%
+\contentsline {section}{\numberline {12.1}基本循环}{55}{section.12.1}%
+\contentsline {subsection}{\numberline {12.1.1}语法}{55}{subsection.12.1.1}%
+\contentsline {subsection}{\numberline {12.1.2}示例}{56}{subsection.12.1.2}%
+\contentsline {section}{\numberline {12.2}WHILE循环}{57}{section.12.2}%
+\contentsline {subsection}{\numberline {12.2.1}语法}{57}{subsection.12.2.1}%
+\contentsline {subsection}{\numberline {12.2.2}示例}{57}{subsection.12.2.2}%
+\contentsline {section}{\numberline {12.3}FOR循环}{58}{section.12.3}%
+\contentsline {subsection}{\numberline {12.3.1}语法}{58}{subsection.12.3.1}%
+\contentsline {subsection}{\numberline {12.3.2}示例}{59}{subsection.12.3.2}%
+\contentsline {section}{\numberline {12.4}循环的嵌套与标号}{59}{section.12.4}%
+\contentsline {subsection}{\numberline {12.4.1}介绍}{59}{subsection.12.4.1}%
+\contentsline {subsection}{\numberline {12.4.2}示例}{60}{subsection.12.4.2}%
+\contentsline {section}{\numberline {12.5}CONTINUE}{60}{section.12.5}%
+\contentsline {subsection}{\numberline {12.5.1}介绍}{60}{subsection.12.5.1}%
+\contentsline {subsection}{\numberline {12.5.2}示例}{61}{subsection.12.5.2}%
+\contentsline {chapter}{\numberline {第十三章\hspace {.3em}}组合数据类型}{62}{chapter.13}%

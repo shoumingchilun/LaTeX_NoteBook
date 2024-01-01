@@ -504,8 +504,8 @@ END;
 \begin{plsql}[caption=PL/SQL变量声明语法示例]
   DECLARE
   v_dogid NUMBER(10) NOT NULL := 38;
-  v_name VARCHAR2(25) := ‘White Tiger’
-  c_color CONSTANT VARCHAR2(15) := ‘White’
+  v_name VARCHAR2(25) := 'White Tiger'
+  c_color CONSTANT VARCHAR2(15) := 'White'
   v_birthday DATE;
 \end{plsql}
 
@@ -735,7 +735,7 @@ END;
 \subsubsection{介绍}
 q 和 p 是引号限定符，用于创建带有引号的字符串字面量。具体而言，q 和 p 用于创建带有引号的标识符或字符串，这样可以在字符串中包含特殊字符，而不必使用转义字符。q 用于创建带有双引号的标识符，而 p 用于创建带有单引号的字符串。
 
-（注意：p 定界符可以使用大多数字符作为定界符，但不能使用双引号 "，单引号 '，反引号 `，右括号 )，右中括号 ]，右大括号 \} 和感叹号 ! 作为定界符。）
+（注意：p 定界符可以使用大多数字符作为定界符，但不能使用双引号 '，单引号 '，反引号 `，右括号 )，右中括号 ]，右大括号 \} 和感叹号 ! 作为定界符。）
 \subsubsection{演示}
 不使用字符串分隔符的情况：
 \begin{plsql}[caption=不使用字符串分隔符]
@@ -834,7 +834,7 @@ DECLARE
 \end{center}
 
 \section{定界符（Delimiters）}
-定界符是用于界定代码块、语句、变量等元素范围的符号。在PL/SQL中，常见的定界符包括分号（;）、引号（'）和双引号（"）等。
+定界符是用于界定代码块、语句、变量等元素范围的符号。在PL/SQL中，常见的定界符包括分号（;）、引号（'）和双引号（'）等。
 \subsection{简单定界符}
 简单定界符通常只有一个符号。
 
@@ -1101,7 +1101,7 @@ BEGIN
   SELECT deptno,loc
   INTO v_deptno, v_loc
   FROM dept
-  WHERE dname = ‘ACCOUNTING’;
+  WHERE dname = 'ACCOUNTING';
 END;
 /
 \end{plsql}
@@ -1141,7 +1141,7 @@ PL/SQL中存在4类DML语言：
 \begin{plsql}[caption=INSERT代码示例]
 BEGIN
   INSERT INTO dept(deptno, dname, loc);
-  VALUES (deptid_sequence.NEXTVAL, ’燕城苑’,’天通苑’);
+  VALUES (deptid_sequence.NEXTVAL, '燕城苑','天通苑');
 END;
 /
 \end{plsql}
@@ -1154,7 +1154,7 @@ DECLARE
 BEGIN
   UPDATE emp
   SET sal = sal + v_sal_increase
-  WHERE job = ‘CLERK’;
+  WHERE job = 'CLERK';
 END;
 /
 \end{plsql}
@@ -1162,7 +1162,7 @@ END;
 \subsection{DELETE}
 \begin{plsql}[caption=DELETE代码示例]
 DECLARE
-  v_job emp.job%TYPE := ‘&p_job’;
+  v_job emp.job%TYPE := '&p_job';
   v_sal emp.sal%TYPE := &p_sal;
 BEGIN
   DELETE FROM emp_pl
@@ -1280,11 +1280,11 @@ END IF;
 \begin{plsql}
 DECLARE
   v_age number := &p_age;
-  v_gender CHAR(1) := ‘&p_sex’;
+  v_gender CHAR(1) := '&p_sex';
 BEGIN
-  IF (v_age BETWEEN 18 AND 35) AND (v_gender = ‘F’) 
+  IF (v_age BETWEEN 18 AND 35) AND (v_gender = 'F') 
   THEN
-    DBMS_OUTPUT.PUTLINE(‘符合研究生入学年龄’);
+    DBMS_OUTPUT.PUTLINE('符合研究生入学年龄');
   END IF;
 END;
 /
@@ -1329,15 +1329,15 @@ END;
 \subsection{示例}
 \begin{plsql}[caption=CASE示例代码]
 DECLARE
-  v_degree CHAR(1) := UPPER(‘&p_degree’);
+  v_degree CHAR(1) := UPPER('&p_degree');
   v_description VARCHAR2(250);
 BEGIN
   v_description := 
     CASE v_degree
-      WHEN ‘B’ THEN ‘此人拥有学士学位。’
-      WHEN ‘M’ THEN ‘此人拥有硕士学位。’
-      WHEN ‘D’ THEN ‘此人拥有博士学位。’
-      ELSE ‘此人拥有壮士学位。’
+      WHEN 'B' THEN '此人拥有学士学位。'
+      WHEN 'M' THEN '此人拥有硕士学位。'
+      WHEN 'D' THEN '此人拥有博士学位。'
+      ELSE '此人拥有壮士学位。'
     END;
   DBMS_OUTPUT.PUTLINE(v_description);
 END;
@@ -1356,17 +1356,17 @@ CASE表达式测试条件并返回一个值，而CASE语句测试条件并执行
 \subsection{示例代码}
 \begin{plsql}
 DECLARE
-  v_degree CHAR(1) := UPPER(‘&p_degree’);
+  v_degree CHAR(1) := UPPER('&p_degree');
 BEGIN
   CASE v_degree
-    WHEN ‘B’ THEN 
-      DBMS_OUTPUT.PUTLINE(‘此人拥有学士学位。’);
-    WHEN ‘M’ THEN 
-      DBMS_OUTPUT.PUTLINE(‘此人拥有硕士学位。’);
-    WHEN ‘D’ THEN ‘此人拥有博士学位。’
-      DBMS_OUTPUT.PUTLINE(‘此人拥有博士学位。’);
-    WHEN ‘X’ THEN
-      DBMS_OUTPUT.PUTLINE(‘此人拥有壮士学位。’);
+    WHEN 'B' THEN 
+      DBMS_OUTPUT.PUTLINE('此人拥有学士学位。');
+    WHEN 'M' THEN 
+      DBMS_OUTPUT.PUTLINE('此人拥有硕士学位。');
+    WHEN 'D' THEN '此人拥有博士学位。'
+      DBMS_OUTPUT.PUTLINE('此人拥有博士学位。');
+    WHEN 'X' THEN
+      DBMS_OUTPUT.PUTLINE('此人拥有壮士学位。');
   END CASE;
 END;
 /
@@ -1444,6 +1444,206 @@ BEGIN
 END;
 \end{plsql}
 
+\chapter{循环语句}
+所谓的循环就是多次重复一个语句或语句序列。PL/SQL提供了若干个循环结构以控制语句的重复执行。循环主要用于重复执行一些语句直到一个条件满足为止。在一个循环中必须要有一个退出条件，否则就是一个死循环。
 
+PL/SQL提供一下三种类型的循环结构：
+\begin{enumerate}
+  \item {\bfseries\kaishu 基本循环：}执行无条件的重复操作。
+  \item {\bfseries\kaishu WHILE循环：}执行基于一个条件的重复操作。
+  \item {\bfseries\kaishu FOR循环：}执行基于一个计数器的重复操作。
+\end{enumerate}
+
+建议：
+\begin{itemize}
+  \item 当语句在循环中至少要执行一次时，一般使用基本循环。
+  \item 如果在每次开始重复时都必须测试条件，一般使用WHILE循环。
+  \item 如果重复次数为已知，一般使用FOR循环。
+\end{itemize}
+
+\section{基本循环}
+\subsection{语法}
+最简单的循环语句就是
+基本循环，它是由包含在\textbf{LOOP}和\textbf{END LOOP}关键字之间的一个语句序列构成。每次执行的流程达到END LOOP语句时，程序的控制就是转到LOOP结构的最上面。基本循环运行它的语句至少执行一次，即使在进入这个循环时EXIT条件已经满足，也要执行一次。如果没有EXIT语句，基本循环是一个死循环。
+
+语法：
+\begin{plsql}[caption=基本循环语法]
+LOOP -- 定界符
+  statement; -- 一个或多个语句
+  …
+  EXIT [WHEN condition]; -- 退出语句(EXIT语句)
+END LOOP; -- 定界符
+\end{plsql}
+
+\begin{description}
+  \item[Condition] 一个布尔变量或者布尔表达式。
+  \item[Statement] 一个或多个SQL语句或一个或多个PL/SQL语句。
+\end{description}
+
+\subsection{示例}
+\begin{plsql}[caption=基本循环示例代码]
+DECLARE
+  v_empno emp_pl.empno%TYPE;
+  v_deptno emp_pl.deptno%TYPE := &p_deptno;
+  v_sal emp_pl.sal%TYPE := &p_sal;
+  v_hiredate emp_pl.hiredate%TYPE := SYSDAYE;
+  v_job emp_pl.job%TYPE := '&p_job';
+  v_counter NUMBER(2) := 1;
+  v_max_num NUMBER(2) := &P_max_num;
+BEGIN
+  SELECT MAX(empno) INTO v_empno FROM emp_pl;
+  LOOP
+    INSERT INTO emp_pl(empno, hiredate, job, sal, deptno)
+    VALUES((v_empno + v_counter), v_hiredate, v_job, v_sal, v_deptno);
+    v_counter := v_counter + 1;
+    EXIT WHEN v_counter > v_max_num;
+  END LOOP;
+END;
+\end{plsql}
+
+\section{WHILE循环}
+\subsection{语法}
+PL/SQL还提供了一种与基本（LOOP）循环相似的WHILE LOOP循环语句，但是使用WHILE循环条件为真（TRUE）时重复执行循环体中的语句，而当条件不再是TRUE（F或N）时退出循环。
+
+循环的条件是在每次重复开始时测试，这种循环是在条件为FALSE或NULL终止。WHILE LOOP的循环语句语法如下：
+\begin{plsql}[caption=WHILE循环语法]
+WHILE 条件 LOOP
+  语句1;
+  语句2;
+  …
+END LOOP;
+\end{plsql}
+
+在WHILE LOOP循环语句中，循环的条件必须放在WHILE和LOOP两个关键字之间，而循环的条件是在每次重复开始时测试的。与LOOP循环语句相同，在WHILE LOOP循环语句中所包含的语句既可以是PL/SQL语句也可以是SQL语句。
+
+\subsection{示例}
+\begin{plsql}[caption=WHILE循环示例代码]
+DECLARE
+  v_deptno dept.deptno%TYPE;
+  v_loc dept.loc%TYPE := '&p_loc';
+  v_counter NUMBER(2) := 1;
+  v_max_num NUMBER(2) := &p_max_num;
+BEGIN
+  WHILE v_counter <= v_max_num LOOP;
+    INSERT INTO dept_pl(deptno, loc)
+    VALUES(deptid_sequence.NEXTVAL, v_loc);
+    v_counter := v_counter + 1;
+  END LOOP;
+END;
+/
+\end{plsql}
+
+\section{FOR循环}
+\subsection{语法}
+For循环具有与基本循环一样的通用结构，不过For循环在LOOP关键字之前有一个控制语句用来设置PL/SQL程序执行的重复次数。For循环具有如下特性：
+\begin{enumerate}
+  \item 使用FOR循环简化了对重复次数的测试.
+  \item 不用声明计数器，它是隐含声明的.
+  \item 在语法上需要说明下限和上限.
+\end{enumerate}
+
+语法：
+\begin{plsql}[caption=FOR循环语法]
+FOR counter IN [REVERSE] lower_bound..upper_bound LOOP
+  statement1;
+  statement2;
+  …
+END LOOP;
+\end{plsql}
+\begin{description}
+  \item[counter] 是一个隐含声明的整型数，其值在循环的每次重复时自动增加或减少（默认是增加）。
+  \item[REVERSE] 指定计数器每次重复时是从上限到下限递减（默认是从下限到上限）。
+  \item[lower\_bound] 下限。
+  \item[upper\_bound] 上限。
+\end{description}
+
+语句序列每执行一次，计数器默认加1。除了整数之外，循环范围的下限和上限还可以是文字、变量和表达式，但是必须可以转换成整数的数据类型。如果下限和上限不是整数，PL/SQL按四舍五入的方法将其转为整数。因此，13/2和17/3都是有效的上限或下限值。
+
+\subsection{示例}
+\begin{plsql}[caption=FOR循环示例代码]
+DECLARE
+  v_deptno dept.deptno%TYPE;
+  v_loc dept.loc%TYPE := '&p_loc';
+  v_max_num NUMBER(2) := &p_max_num;
+BEGIN
+  FOR i IN 1..v_max_num LOOP
+    INSERT INTO dept_pl(deptno, loc);
+    VALUES(deptid_sequence.NEXTVAL, v_loc);
+  END LOOP;
+END;
+/
+\end{plsql}
+
+使用FOR循环时应该遵守的规则：
+\begin{enumerate}
+  \item 只在循环中引入计数器，计数器在循环外没有定义。
+  \item {\bfseries\kaishu 不要为计数器赋值}，即不要将计数器变量放在赋值运算符的左边。
+  \item 上限和下限都不应该为空值 NULL。
+\end{enumerate}
+
+\section{循环的嵌套与标号}
+\subsection{介绍}
+循环体本身也是一个PL/SQL程序块，所以PL/SQL的循环同样可以嵌套，而且可以进行多层嵌套、将基本循环、WHILE循环和FOR循环彼此之间混合嵌套。
+
+一个被嵌套的循环的结束并不结束包含它的循环（除非出现异常）。不过，可以使用标号以区分不同的块和循环体，并引用带有标号的EXIT语句直接退出外层循环。
+
+标号的命名规则与其它标识符完全相同（在之前条件语句中，GOTO章节也用到了标号）。标号必须放在一个语句之前，既可以是在同一行，也可以是在单独的行。为基本循环加标号时，标号要放在关键字LOOP之前并用标号定界符 “<<”和“>>”括起来，如<<dog\_loop>>，其中dog\_loop为标号。在FOR循环和WHILE循环中，标号要放在关键字FOR或WHILE之前。
+
+\subsection{示例}
+程序有2个嵌套的FOR循环，用户利用代替变量输入一个正整数n，之后再外循环中的程序计算出1~n所有自然数之和。内循环计算所输入自然数的阶乘（n!）。
+当i+j>4成立时，程序就跳转到Inner\_loop标号所再得语句。其中，i和j分别为外循环和内循环的计数。
+
+\begin{plsql}[caption=嵌套循环示例代码]
+  DECLARE
+  v_t NUMBER := 0;
+  v_f NUMBER := 1;
+  v_num NUMBER := 10;
+BEGIN
+  <<Outer_Loop>>
+  FOR i IN 1..v_num LOOP
+    v_t := v_t + i;
+    DBMS_OUTPUT.PUT_LINE('1~'||i||'自然数的总和是：'||v_t);
+    <<Inner_Loop>>
+    FOR j IN 1..v_num LOOP
+      EXIT Inner_Loop WHEN i+j >4;
+      v_f := v_f * j;
+      DBMS_OUTPUT.PUT_LINE('自然数'||j||'的阶乘是：'||v_f);
+    END LOOP;
+    v_f := 1;
+  END LOOP Outer_Loop;
+END;
+/
+\end{plsql}
+
+\section{CONTINUE}
+\subsection{介绍}
+Oracle 11g和Oracle 12c引入了CONTINUE语句，该语句能够使程序的控制转移到循环体中的下一次新循环或者直接离开循环。通常使用CONTINUE语句在主要的处理开始之前在一个循环内部过滤掉不需要的数据（和处理操作）。
+
+\subsection{示例}
+注意：此代码效果与嵌套循环示例代码效果相同。
+
+\begin{plsql}[caption=CONTINUE示例代码]
+DECLARE
+  v_t NUMBER := 0;
+  v_f NUMBER := 1;
+  v_num NUMBER := 20;
+BEGIN
+  <<Outer_Loop>>
+  FOR i IN 1..v_num LOOP
+    v_f := 1;
+    v_t := v_t + i;
+    DBMS_OUTPUT.PUT_LINE('1~'||i||'自然数的总和是：'||v_t);
+    <<Inner_Loop>>
+    FOR j IN 1..v_num LOOP
+      CONTINUE Outer_Loop WHEN i+j >4;
+      v_f := v_f * j;
+      DBMS_OUTPUT.PUT_LINE('自然数'||j||'的阶乘是：'||v_f);
+    END LOOP;
+  END LOOP Outer_Loop;
+END;
+/
+\end{plsql}
+
+\chapter{组合数据类型}
 % 文章结束
 \end{document}
