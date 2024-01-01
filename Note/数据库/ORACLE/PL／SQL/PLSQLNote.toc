@@ -77,3 +77,29 @@
 \contentsline {section}{\numberline {8.2}PL/SQL中序列的操作}{39}{section.8.2}%
 \contentsline {subsection}{\numberline {8.2.1}NEXTVAL}{39}{subsection.8.2.1}%
 \contentsline {subsection}{\numberline {8.2.2}CURRVAL}{39}{subsection.8.2.2}%
+\contentsline {chapter}{\numberline {第九章\hspace {.3em}}SELECT}{40}{chapter.9}%
+\contentsline {section}{\numberline {9.1}INTO}{40}{section.9.1}%
+\contentsline {section}{\numberline {9.2}变量与列同名问题}{41}{section.9.2}%
+\contentsline {chapter}{\numberline {第十章\hspace {.3em}}DML}{43}{chapter.10}%
+\contentsline {section}{\numberline {10.1}概述}{43}{section.10.1}%
+\contentsline {section}{\numberline {10.2}DML代码示例}{43}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}INSERT}{43}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}UPDATE}{44}{subsection.10.2.2}%
+\contentsline {subsection}{\numberline {10.2.3}DELETE}{44}{subsection.10.2.3}%
+\contentsline {section}{\numberline {10.3}MERGE}{45}{section.10.3}%
+\contentsline {subsection}{\numberline {10.3.1}基本语法}{45}{subsection.10.3.1}%
+\contentsline {subsection}{\numberline {10.3.2}示例代码}{45}{subsection.10.3.2}%
+\contentsline {chapter}{\numberline {第十一章\hspace {.3em}}条件语句}{47}{chapter.11}%
+\contentsline {section}{\numberline {11.1}布尔条件}{47}{section.11.1}%
+\contentsline {section}{\numberline {11.2}IF语句}{47}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}语法}{47}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}示例}{48}{subsection.11.2.2}%
+\contentsline {subsection}{\numberline {11.2.3}注意}{49}{subsection.11.2.3}%
+\contentsline {section}{\numberline {11.3}CASE表达式}{49}{section.11.3}%
+\contentsline {subsection}{\numberline {11.3.1}语法}{49}{subsection.11.3.1}%
+\contentsline {subsection}{\numberline {11.3.2}示例}{50}{subsection.11.3.2}%
+\contentsline {section}{\numberline {11.4}CASE语句}{51}{section.11.4}%
+\contentsline {subsection}{\numberline {11.4.1}示例代码}{51}{subsection.11.4.1}%
+\contentsline {subsection}{\numberline {11.4.2}使用CASE语句取代DECODE}{52}{subsection.11.4.2}%
+\contentsline {section}{\numberline {11.5}GOTO}{52}{section.11.5}%
+\contentsline {subsection}{\numberline {11.5.1}用处}{52}{subsection.11.5.1}%

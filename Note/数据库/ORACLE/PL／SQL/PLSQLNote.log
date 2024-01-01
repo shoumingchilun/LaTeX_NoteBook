@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  1 JAN 2024 00:28
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  1 JAN 2024 13:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -680,11 +680,11 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/sl' in size <10.95> not av
 (Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 66.
 LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <10.95> not available
 (Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 66.
- [2])
+ [2] [3])
 \tf@toc=\write4
 \openout4 = `PLSQLNote.toc'.
 
- [3]
+ [4]
 第一章
 File: picture/数据库占比对比.png Graphic file (type bmp)
 <picture/数据库占比对比.png>
@@ -821,17 +821,29 @@ File: picture/字符串分隔符效果图.png Graphic file (type bmp)
 第八章
 [38
 
-] [39] (./PLSQLNote.aux)
+] [39]
+第九章
+[40
+
+] [41] [42]
+第十章
+[43
+
+] [44] [45] [46]
+第十一章
+[47
+
+] [48] [49] [50] [51] [52] [53] [54] (./PLSQLNote.aux)
 Package rerunfilecheck Info: File `PLSQLNote.out' has not changed.
-(rerunfilecheck)             Checksum: C8C0F59FE56AD0101EC99DF192377C0E;7296.
+(rerunfilecheck)             Checksum: 2C42322E9ED99854A63AF609E93C2949;9615.
  ) 
 Here is how much of TeX's memory you used:
- 20776 strings out of 476683
- 456655 string characters out of 5804928
- 1957012 words of memory out of 5000000
- 40680 multiletter control sequences out of 15000+600000
+ 20918 strings out of 476683
+ 459729 string characters out of 5804928
+ 1967012 words of memory out of 5000000
+ 40822 multiletter control sequences out of 15000+600000
  525266 words of font info for 130 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,8n,97p,482b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PLSQLNote.pdf (43 pages).
+Output written on PLSQLNote.pdf (59 pages).
