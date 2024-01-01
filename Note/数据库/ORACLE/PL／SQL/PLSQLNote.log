@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  1 JAN 2024 16:18
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  1 JAN 2024 16:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -846,10 +846,10 @@ Package rerunfilecheck Info: File `PLSQLNote.out' has not changed.
 (rerunfilecheck)             Checksum: 1CCB54305C72E8A83975D6D33DA2555A;11088.
  ) 
 Here is how much of TeX's memory you used:
- 20884 strings out of 476683
- 458003 string characters out of 5804928
+ 20883 strings out of 476683
+ 457991 string characters out of 5804928
  1970012 words of memory out of 5000000
- 40788 multiletter control sequences out of 15000+600000
+ 40787 multiletter control sequences out of 15000+600000
  525266 words of font info for 130 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,8n,97p,482b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s

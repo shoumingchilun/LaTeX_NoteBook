@@ -1284,7 +1284,7 @@ DECLARE
 BEGIN
   IF (v_age BETWEEN 18 AND 35) AND (v_gender = 'F') 
   THEN
-    DBMS_OUTPUT.PUTLINE('符合研究生入学年龄');
+    DBMS_OUTPUT.PUT_LINE('符合研究生入学年龄');
   END IF;
 END;
 /
@@ -1339,7 +1339,7 @@ BEGIN
       WHEN 'D' THEN '此人拥有博士学位。'
       ELSE '此人拥有壮士学位。'
     END;
-  DBMS_OUTPUT.PUTLINE(v_description);
+  DBMS_OUTPUT.PUT_LINE(v_description);
 END;
 /
 \end{plsql}
@@ -1360,13 +1360,13 @@ DECLARE
 BEGIN
   CASE v_degree
     WHEN 'B' THEN 
-      DBMS_OUTPUT.PUTLINE('此人拥有学士学位。');
+      DBMS_OUTPUT.PUT_LINE('此人拥有学士学位。');
     WHEN 'M' THEN 
-      DBMS_OUTPUT.PUTLINE('此人拥有硕士学位。');
+      DBMS_OUTPUT.PUT_LINE('此人拥有硕士学位。');
     WHEN 'D' THEN '此人拥有博士学位。'
-      DBMS_OUTPUT.PUTLINE('此人拥有博士学位。');
+      DBMS_OUTPUT.PUT_LINE('此人拥有博士学位。');
     WHEN 'X' THEN
-      DBMS_OUTPUT.PUTLINE('此人拥有壮士学位。');
+      DBMS_OUTPUT.PUT_LINE('此人拥有壮士学位。');
   END CASE;
 END;
 /
