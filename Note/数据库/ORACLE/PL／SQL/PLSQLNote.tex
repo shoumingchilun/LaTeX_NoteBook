@@ -130,7 +130,7 @@ Oracle是一款\textbf{商业性质的关系型数据库管理系统（RDBMS）}
 \subsection{2000s-2020s:NoSQL}
 NoSQL为Not Only SQL的缩写，是对不同于传统的关系型数据库的数据库管理系统的统称。
 
-\textbf{网络上的数据本质上不是表格的结构。}
+{\bfseries\kaishu 网络上的数据本质上不是表格的结构。}
 
 NoSQL常用于超大规模数据的存储（例如谷歌或Facebook每天为他们的用户收集万亿比特的数据）。这些类型的数据存储不需要固定的模式，无需多余操作就可以横向扩展。
 
@@ -170,6 +170,7 @@ SQLPlus是Oracle数据库系统中的一种交互式查询工具和脚本处理�
   \item[OCI（Oracle Call Interface）] OCI是Oracle数据库提供的一组API（应用程序接口），允许应用程序（包括SQLPlus）与Oracle数据库进行通信。\textbf{SQLPlus使用OCI}与数据库建立连接、发送SQL命令，以及接收执行结果。
   \item[Oracle数据库引擎] 这是实际执行SQL查询、PL/SQL块的地方。当SQLPlus将命令发送给数据库时，Oracle数据库引擎负责解析和执行这些命令，然后返回结果给SQLPlus。
   \item[数据缓冲区] SQL*Plus通常会在本地维护一个数据缓冲区，用于存储从数据库检索到的数据。这使得用户可以在本地对结果进行分析、浏览和编辑。
+  \item[命令缓冲区] 用于存储执行过的SQL语句或PL/SQL块，以便可以轻松地重新执行它们或进行修改。当在SQL*Plus中输入一个SQL语句或PL/SQL块并按下Enter键时，该语句会被存储在命令缓冲区中，以便稍后再次使用。
 \end{description}
 \subsection{Oracle数据库连接命令}
 在CMD中运行SQLPlus并连接到Oracle服务器的命令为：
@@ -236,7 +237,7 @@ SQLPlus是Oracle数据库系统中的一种交互式查询工具和脚本处理�
   \end{minipage}
 \end{center}
 
-可使用C命令更改指定行（注意原文与新文中无空格）：
+可使用C命令更改指定行（注意原文与新文中间无空格作为间隔）：
 
 \begin{center}
   \begin{minipage}{\textwidth}
@@ -293,7 +294,8 @@ SQLPlus是Oracle数据库系统中的一种交互式查询工具和脚本处理�
 \end{description}
 
 \subsection{输出保存命令}
-SPOOL，语法为：\\
+SPOOL 命令用于将输出结果保存到文件中。该命令可以将 SQL 查询结果、PL/SQL 块的输出等保存到一个文件，这对于记录和分析数据库操作非常有用。
+语法为：\\
 {\bfseries\kaishu SPO[OL] [File\_name[.ext]] [[CRE[ATE]|REP[LACE]|APP[END]] | OFF | OUT ]}。
 
 参数说明：
@@ -316,7 +318,7 @@ SPOOL，语法为：\\
   \item {\bfseries\kaishu 模块化开发：} PL/SQL允许将代码模块化组织，通过存储过程和包的方式来管理和封装代码。这有助于提高代码的可维护性和重用性。
   \item {\bfseries\kaishu 性能优化：}PL/SQL支持存储过程和函数，可以在数据库中预编译和存储，提高了执行效率。此外，PL/SQL还支持游标，能够有效地处理大量的数据。
 \end{enumerate}
-此外，还有其他如\textbf{安全性}（PL/SQL能够帮助限制对数据库的直接访问，从而提高了数据库的安全性）、\textbf{灵活性}（PL/SQL具有丰富的控制结构和数据类型，使其既可以用于简单的SQL查询，也可以用于复杂的业务逻辑实现）、\textbf{事务控制}（ PL/SQL提供了强大的事务控制功能，支持原子性、一致性、隔离性和持久性（ACID属性），确保了数据库操作的可靠性和一致性）等优点。
+此外，还有其他如\textbf{安全性}（PL/SQL能够帮助限制对数据库的直接访问，从而提高了数据库的安全性）、\textbf{灵活性}（PL/SQL具有丰富的控制结构和数据类型，使其既可以用于简单的SQL查询，也可以用于复杂的业务逻辑实现）、\textbf{事务控制}（ PL/SQL提供了强大的事务控制功能，支持原子性、一致性、隔离性和持久性（ACID属性））等优点。
 
 \section{执行体系}
 \begin{center}
@@ -337,8 +339,8 @@ SPOOL，语法为：\\
     \end{itemize}
   \item[过程语句执行器] \hfill
     \begin{itemize}
-      \item 过程语句解析： 如果PL/SQL程序包含了过程性语句，这些语句将被PL/SQL引擎的过程语句执行器处理。这可能包括存储过程、函数或触发器的调用。
       \item 编译过程性代码： 过程语句执行器会编译PL/SQL代码，将其转换为可执行的形式。这个编译过程包括语法检查、编译成中间代码等步骤。
+      \item 过程语句解析： 如果PL/SQL程序包含了过程性语句，这些语句将被PL/SQL引擎的过程语句执行器处理。这可能包括存储过程、函数或触发器的调用。
     \end{itemize}
   \item[SQL执行器]  \hfill
     \begin{itemize}
@@ -357,11 +359,11 @@ SPOOL，语法为：\\
 
 \chapter{程序块结构}
 \section{程序块}
-PL/SQL程序块是PL/SQL语言中的基本结构，它可以包含变量、常量、游标、异常处理等元素。PL/SQL程序块有三种主要形式：匿名块、存储过程和存储函数。
-类型说明：
+PL/SQL程序块是PL/SQL语言中的基本结构，它可以包含变量、常量、游标、异常处理等元素。PL/SQL程序块有三种主要形式：{\bfseries\kaishu 匿名块、存储过程和存储函数。}
+
 \begin{enumerate}
   \item {\bfseries\kaishu 匿名块(Anonymous blocks)}：没有命名的程序块。匿名块是在应用程序内部需要的地方声明的，在这个应用程序每次执行时，这些匿名块都会被编译并执行。
-  \item  {\bfseries\kaishu 过程(Procedures)}和{\bfseries\kaishu 函数 (Functions) }：过程和函数也统称为\textit{子程序 (Subprograms)}，子程序是对匿名块的补充，子程序就是被命名的PL/SQL程序块，而它们可以存储在数据库中。
+  \item  {\bfseries\kaishu 过程(Procedures)}和{\bfseries\kaishu 函数 (Functions) }：过程和函数也统称为{\bfseries\kaishu 子程序 (Subprograms)}，子程序是对匿名块的补充，子程序就是被命名的PL/SQL程序块，而它们可以存储在数据库中。
 \end{enumerate}
 一个简单的PL/SQL匿名块的结构如下：
 \begin{plsql}[caption=PL/SQL匿名块示例代码]
@@ -491,7 +493,7 @@ END;
   \item 长度最长为{\bfseries\kaishu 30}个字符
   \item {\bfseries\kaishu 不区分大小写}
   \item 不能是保留关键字
-  \item 不能与数据库的表或列同名
+  \item 不能（不宜）与数据库的表或列同名
 \end{itemize}
 \section{变量声明语法}
 在引用PL/SQL程序块中的变量之前，必须在声明段声明所有的变量（标识符）。
@@ -499,10 +501,10 @@ END;
 如果在一个变量声明中引用了其他变量，一定要确保在之前的语句中已经声明了引用的变量。
 
 声明语法：
-{\bfseries\kaishu 标识符 [CONSTANT] 数据类型 [NOT NULL] [:= initial\_value]}
+{\bfseries\kaishu 标识符 [CONSTANT] 数据类型 [NOT NULL] [[:= | DEFAULT] initial\_value]}
 
 \begin{plsql}[caption=PL/SQL变量声明语法示例]
-  DECLARE
+DECLARE
   v_dogid NUMBER(10) NOT NULL := 38;
   v_name VARCHAR2(25) := 'White Tiger'
   c_color CONSTANT VARCHAR2(15) := 'White'
@@ -541,12 +543,12 @@ PL/SQL支持四大类数据类型（最常用的是标量数据类型，目前�
         \begin{itemize}
           \item \%ROWTYPE: 表示一个表行的结构，通常在变量声明中使用。
           \item RECORD: 类似于\%ROWTYPE，但可以自定义结构。
-          \item TABLE: 用于存储同一数据类型的集合。可以是索引表（INDEX BY）或关联数组。
+          \item TABLE: 用于存储同一数据类型的集合。可以是索引表（INDEX BY表，也称关联数组）或嵌套表。
         \end{itemize}
   \item 引用（Reference）数据类型：
         \begin{itemize}
-          \item REF CURSOR: 用于存储游标引用，可用于动态查询结果的处理。
-          \item PL/SQL RECORD: 通过 TYPE 语句定义的记录类型。
+          \item 游标（CURSOR）：游标是一种引用数据类型，用于对查询结果进行迭代。可以使用显式游标或隐式游标。
+          \item 引用游标（REF CURSOR）: 用于存储游标引用，可用于动态查询结果的处理。
         \end{itemize}
   \item 大对象（LOB）数据类型：
         \begin{itemize}
@@ -594,10 +596,12 @@ WHERE SNO=&ReplaceVariable1;
 
 
 在这里，ReplaceVariable1是一个代替变量，SQL*Plus会在执行查询之前提示用户输入ReplaceVariable1的值，并将其替换到SQL语句中。DEFINE ReplaceVariable1 = 982 用于定义SQLPlus变量。
+
+注意：如果需要`\&variable '这样的字符串，可以使用两个连续的 \& 来避免 SQL*Plus 将其解释为代替变量，如\textbf{`\&\&your\_value'}。
 \subsection{绑定变量}
 绑定变量是在{\bfseries\kaishu 使用（或调用）PL/SQL的 环境}中创建的，而不是在PL/SQL程序的声明段中定义的。在一个PL/SQL程序块中声明的所有变量只在执行这个程序块时可以使用。而在这个程序块执行后，这些变量所使用的内存就释放了。然而，绑定变量则不同，在程序块执行后，绑定变量依然存在并允许访问。
 
-绑定变量是在SQL语句中使用占位符（通常是冒号:后跟变量名）来代替实际的数值或表达式。在PL/SQL中，通过使用绑定变量，可以减少SQL语句的解析次数，提高性能。绑定变量在SQL语句执行时被动态绑定，而不是在每次执行时重新解析整个SQL语句。
+绑定变量是在SQL语句中使用占位符（通常是冒号:后跟变量名）来代替实际的数值或表达式。{\bfseries\kaishu 在PL/SQL中，通过使用绑定变量，可以减少SQL语句的解析次数，提高性能。}绑定变量在SQL语句执行时被动态绑定，而不是在每次执行时重新解析整个SQL语句。
 
 运行演示：
 \begin{center}
@@ -629,14 +633,14 @@ WHERE SNO=&ReplaceVariable1;
   \end{itemize}
 \end{enumerate}
 \section{变量作用域}
-一个变量（标识符）在声明它的程序块中是可见的，并且在所有嵌套的子块中也是可见的。如果一个PL/SQL块没有发现本地声明的变量，该PL/SQL程序块将向上查找包含它的父块。程序块绝不会向下查看所包含的子块或查找同一级别（没有嵌套关系）块。
+一个变量（标识符）在声明它的程序块中是可见的，并且在所有嵌套的子块中也是可见的。如果一个PL/SQL块没有发现本地声明的变量，该PL/SQL程序块将向上查找包含它的父块，而不会向下查看所包含的子块或查找同一级别（没有嵌套关系）块。
 
-作用域适用所有的对象，包括变量、游标、用户定义的异常和约束。
+作用域适用所有的对象，包括变量、游标、用户定义的异常和约束等。
 
 \subsection{局部变量（Local Variables）}
 \begin{enumerate}
   \item 局部变量是在一个程序块内部声明的变量，仅在该程序块内部可见和可访问。
-  \item 局部变量的生命周期仅限于包含它的程序块的执行期间。一旦程序块执行完毕，局部变量就会被销毁，不再可用。
+  \item 局部变量的生命周期仅限于包含它的程序块的执行期间。\textbf{一旦程序块执行完毕，局部变量就会被销毁，不再可用。}
   \item 局部变量通常在DECLARE部分声明，并可以用于存储临时数据或中间计算结果。
 \end{enumerate}
 
@@ -652,7 +656,7 @@ END;
 \subsection{嵌套局部变量（Nested Local Variables）}
 \begin{enumerate}
   \item 嵌套程序块中声明的局部变量对外部程序块不可见，但对内部程序块可见。
-  \item 如果内部程序块声明了与外部程序块相同名称的局部变量，它们不会相互冲突。内部变量会遮蔽外部变量。
+  \item 如果内部程序块声明了与外部程序块相同名称的局部变量，它们不会相互冲突。{\bfseries\kaishu 内部变量会遮蔽外部变量。}
 \end{enumerate}
 
 \begin{plsql}[caption=嵌套局部变量作用域示例]
@@ -667,6 +671,8 @@ BEGIN
   -- 在外部程序块中，只能访问 outer_variable
 END;
 \end{plsql}
+
+注意：此处定义了一个内部过程inner\_variable。
 
 \subsection{全局变量（Global Variables）}
 \begin{enumerate}
@@ -684,7 +690,7 @@ END;
   \item 可以通过{\bfseries\kaishu 逻辑操作符AND、OR和NOT}对布尔变量进行运算，运算总是产生TURE、FALSE或NULL。
   \item 数字、字符和日期表达式可以被用来返回一个布尔值。
 \end{itemize}
-\subsection{布尔操作符}
+\subsection{布尔操作符（结果为布尔类型）}
 \begin{center}
   \begin{minipage}{\textwidth}
     \center
@@ -734,8 +740,7 @@ END;
 \section{赋值：字符串分隔符（引号限定符）}
 \subsubsection{介绍}
 q 和 p 是引号限定符，用于创建带有引号的字符串字面量。具体而言，q 和 p 用于创建带有引号的标识符或字符串，这样可以在字符串中包含特殊字符，而不必使用转义字符。q 用于创建带有双引号的标识符，而 p 用于创建带有单引号的字符串。
-
-（注意：p 定界符可以使用大多数字符作为定界符，但不能使用双引号 '，单引号 '，反引号 `，右括号 )，右中括号 ]，右大括号 \} 和感叹号 ! 作为定界符。）
+注意：p 定界符可以使用大多数字符作为定界符，但不能使用双引号 '，单引号 '，反引号\textasciigrave，右括号 )，右中括号 ]，右大括号 \} 和感叹号 ! 作为定界符。
 \subsubsection{演示}
 不使用字符串分隔符的情况：
 \begin{plsql}[caption=不使用字符串分隔符]
@@ -775,8 +780,8 @@ END;
 
 \subsubsection{使用语法}
 \begin{enumerate}
-  \item 标识符 表名.列名\%TYPE
-  \item 标识符 定义好的变量\%TYPE
+  \item 标识符\ 表名.列名\%TYPE
+  \item 标识符\ 定义好的变量\%TYPE
 \end{enumerate}
 \subsubsection{案例}
 \begin{plsql}
@@ -806,7 +811,7 @@ DECLARE
 \section{标识符（Identifiers）}
 标识符是用来命名数据库对象（如表、列、视图、过程、变量等）的名称。
 
-其命名规则与变量命名规则完全相同，因此标识符也不能与保留关键字同名。如果使用保留关键字作为标识符名字或者标识符名字中包含了空格或要区分大小写，则必须在声明这个标识符时，将它用双引号括起来，如：  {\bfseries\kaishu “begin date” DATE}。
+其命名规则与变量命名规则完全相同，因此标识符也不能与保留关键字同名。{\bfseries\kaishu 如果使用保留关键字作为标识符名字或者标识符名字中包含了空格或要区分大小写}，则必须在声明这个标识符时，将它用双引号括起来，如：  {\bfseries\kaishu “begin date” DATE}。
 
 在之后使用这个标识符时也必须使用双引号。
 
@@ -834,7 +839,7 @@ DECLARE
 \end{center}
 
 \section{定界符（Delimiters）}
-定界符是用于界定代码块、语句、变量等元素范围的符号。在PL/SQL中，常见的定界符包括分号（;）、引号（'）和双引号（'）等。
+定界符是用于界定代码块、语句、变量等元素范围的符号。在PL/SQL中，常见的定界符包括分号（;）、引号（'）和双引号（''）等。
 \subsection{简单定界符}
 简单定界符通常只有一个符号。
 
@@ -943,10 +948,12 @@ PL/SQL语言中的运算符与SQL语言中的基本相同：
 
 在操作空值（NULL）时，需要牢记：
 \begin{itemize}
-  \item 在比较表达式中只要有空值，其结果总是空值；
+  \item 在{\bfseries\kaishu 比较表达式}（如<>）中只要有空值，其结果总是空值；
   \item 对一个空值进行NOT运算，其结果还是空值；
   \item 在条件（分支）语句中，如果条件为NULL，与这个条件相关的语句序列将不会执行。
 \end{itemize}
+
+
 
 \chapter{预定义函数}
 为了方便地使用Oracle数据库，Oracle SQL提供了大量的可以在SQL语句中使用预定义函数，实际上这些函数增强了SQL语言功能。这些函数的{\bfseries\kaishu 绝大多数}在PL/SQL表达式中也是有效的，如单行数字函数、单行字符函数、数据类型转换函数、日期函数、Timestamp函数、GREATEST、LEAST函数等。
@@ -1004,7 +1011,7 @@ PL/SQL支持动态数据类型转换，分为两大类：{\bfseries\kaishu 隐�
   \item[LAST\_DAY] 本月的最后一天。
   \item[NEXT\_DAY(start\_date, day\_of\_week)] 找到指定日期之后的下一个指定星期几的日期，\\day\_of\_week 是星期的缩写，例如 'MON' 表示星期一，'TUE' 表示星期二，以此类推。
   \item[\textup{ROUND(date\_expression [, format\_mask])}] 将日期四舍五入到指定的精度。\\如\textbf{rounded\_date := ROUND(current\_date, 'MONTH');}。
-  \item[\textup{TRUNC(date\_expression [, format\_mask]);}] 截断日期到指定的精度。
+  \item[\textup{TRUNC(date\_expression [, format\_mask]);}] 截断日期到指定的精度，类似ROUND函数。
 \end{description}
 \section{CHR函数}
 CHR(integer)函数的作用是将所给的数字换成对应的ASCII码字符（因为有一些字符无法用键盘输入）。
@@ -1045,7 +1052,7 @@ CREATE SEQUENCE sequence_name
 
 \section{PL/SQL中序列的操作} 
 \subsection{NEXTVAL}
-{\bfseries\kaishu NEXTVAL }函数用于获取序列的下一个值。每次调用 NEXTVAL 都会获取序列的下一个值，并且序列的计数器会递增（更新序列）。
+{\bfseries\kaishu NEXTVAL }函数用于获取序列的下一个值。{\bfseries\kaishu 每次调用 NEXTVAL 都会获取序列的下一个值，并且序列的计数器会递增（更新序列）。}
 \begin{plsql}[caption=NEXTVAL示例代码]
 DECLARE
   next_id NUMBER;
@@ -1088,7 +1095,7 @@ FROM 表
   \item INTO子句是{\bfseries\kaishu 强制性}的（必须存在），并只能放在SELECT子句和FROM子句之间。
   \item 每一个从表中提取的值{\bfseries\kaishu 必须存入一个PL/SQL的变量中}（通过INTO），而每一个变量都必须在使用前声明过；此外必须为所选择的项（列或表达式）指定一个变量，顺序要对应
   \item 在INTO子句中的变量的个数必须与查询列表中数据库列的个数完全相同，并且每一个变量数据类型和精度一定与对应位置的列兼容。
-  \item   \item 使用 SELECT INTO 语句时，{\bfseries\kaishu 确保查询返回的结果只有一行}。如果查询返回多行（此时应该使用BULK COLLECT INTO代替INTO）或没有数据，PL/SQL 将引发 TOO\_MANY\_ROWS 或 NO\_DATA\_FOUND 异常。
+  \item 使用 SELECT INTO 语句时，{\bfseries\kaishu 确保查询返回的结果只有一行}。如果查询返回多行（此时应该使用BULK COLLECT INTO代替INTO）或没有数据，PL/SQL 将引发 TOO\_MANY\_ROWS 或 NO\_DATA\_FOUND 异常。
   \item 可以在SQL语句中使用分组函数。
   \item INTO子句中使用的变量可以PL/SQL变量，也可以是宿主变量（如绑定变量）。
 \end{enumerate}
@@ -1120,20 +1127,22 @@ Oracle系统在执行PL/SQL中嵌入的SQL语句时是按照标识符的优先�
 \section{概述}
 在PL/SQL程序块中不能直接使用数据定义语言（DDL）的语句（如不能使用CREATE TABLE、ALTER TABLE或者TRUNCATE TABLE等），并且也不能直接使用数据控制语言（DCL）的语句（如不能使用GRANT或者REVOKE语句）。
 
+注意：EXECUTE IMMEDIATE 是用于执行动态 SQL 的语句，这允许PL/SQL程序在运行时动态生成 SQL 语句并执行（动态 SQL 允许以字符串形式构建 SQL 语句）。在使用动态 SQL 的情况下，PL/SQL 通过动态 SQL 获得了一种间接执行 DDL 和 DCL 操作的方式。
+
 DDL和DML的区别：
 \begin{enumerate}
-  \item DDL代表数据定义语言而DML代表数据操作语言
-  \item DDL中常用的命令有：create，drop，alter，truncate和rename 而 DML中常用的命令有：insert，update，delete和select等等
-  \item DDL命令会影响整个数据库或表而DML命令会影响表中的一个或多个记录
-  \item 带有DDL命令的SQL语句无法回滚；带有DML命令的SQL语句可以回滚
+  \item DDL代表数据定义语言，而DML代表数据操作语言。
+  \item DDL中常用的命令有：create，drop，alter，truncate和rename 而 DML中常用的命令有：insert，update，delete和select等等。
+  \item DDL命令会影响整个数据库或表而DML命令会影响表中的一个或多个记录。
+  \item 带有DDL命令的SQL语句无法回滚；带有DML命令的SQL语句可以回滚。
 \end{enumerate}
 
 PL/SQL中存在4类DML语言：
 \begin{enumerate}
-  \item {\bfseries\kaishu INSERT语句：}往一个表中添加一行新数据
-  \item {\bfseries\kaishu UPDATE语句：}更改一个表中现有的数据行
-  \item {\bfseries\kaishu DELETE语句：}从一个表中移除数据行
-  \item {\bfseries\kaishu MERGE语句：}从一个表中选择数据行以修改或插入到另一个表
+  \item {\bfseries\kaishu INSERT语句：}往一个表中添加一行新数据。
+  \item {\bfseries\kaishu UPDATE语句：}更改一个表中现有的数据行。
+  \item {\bfseries\kaishu DELETE语句：}从一个表中移除数据行。
+  \item {\bfseries\kaishu MERGE语句：}从一个表中选择数据行以修改或插入到另一个表。
 \end{enumerate}
 
 \section{DML代码示例}
@@ -1145,7 +1154,7 @@ BEGIN
 END;
 /
 \end{plsql}
-使用序列deptid\_sequence的伪NEXTVAL产生新记录的deptno。
+使用序列deptid\_sequence的NEXTVAL产生新记录的deptno。
 
 \subsection{UPDATE}
 \begin{plsql}[caption=UPDATE代码示例]
@@ -1233,8 +1242,57 @@ END;
 
 AND和OR用于把两个条件组合在一起最后产生一个结果，其语法是：
 
-{\bfseries\kaishu 条件1 逻辑运算符 条件2;}
+{\bfseries\kaishu 条件1\ 逻辑运算符\ 条件2;}
 
+\subsection{各类AND运算结果}
+思路：有F就是F，否则有N就是N。
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \centering
+    \begin{tabular}{|c|c|c|c|} 
+      \hline % 画水平线
+      \textbf{运算结果}   &   \textbf{T}  &   \textbf{F}  &   \textbf{NULL} \\
+      \hline
+      \textbf{T}          &   T AND T = T & T AND F = F  &  T AND N = N \\
+      \hline
+      \textbf{F}          &   F AND T = F & F AND F = F  &  F AND N = F \\
+      \hline
+      \textbf{NULL}       &   N AND T = N & N AND F = F  &  N AND N = N \\
+      \hline
+    \end{tabular}
+    \captionsetup{hypcap=false}
+    \captionof{table}{各类AND运算结果表}
+    \label{tab:各类AND运算结果表} % 用于交叉引用的标签
+  \end{minipage}
+\end{center}
+
+\subsection{各类OR运算结果}
+思路：有T就是T，否则有N就是N。
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \centering
+    \begin{tabular}{|c|c|c|c|} 
+      \hline % 画水平线
+      \textbf{运算结果}   &   \textbf{T}  &   \textbf{F}  &   \textbf{NULL} \\
+      \hline
+      \textbf{T}          &   T OR T = T & T OR F = T  &  T OR N = T \\
+      \hline
+      \textbf{F}          &   F OR T = T & F OR F = F  &  F OR N = N \\
+      \hline
+      \textbf{NULL}       &   N OR T = T & N OR F = N  &  N OR N = N \\
+      \hline
+    \end{tabular}
+    \captionsetup{hypcap=false}
+    \captionof{table}{各类OR运算结果表}
+    \label{tab:各类OR运算结果表} % 用于交叉引用的标签
+  \end{minipage}
+\end{center}
+\subsection{各类NOT运算结果}
+\begin{enumerate}
+  \item NOT T = F
+  \item NOT F = T
+  \item NOT NULL = N
+\end{enumerate}
 \section{IF语句}
 在PL/SQL中最常见的分支（条件）语句就是IF语句。PL/SQL语言的IF语句的结构与其它结构化语言中IF语句的结构完全相似。
 
@@ -2045,7 +2103,7 @@ EXCEPTION
 END;
 \end{plsql}
 \subsubsection{使用RAISE\_APPLICATION\_ERROR传播异常}
-RAISE\_APPLICATION\_ERROR是一个Oracle提供的过程，允许抛出一个错误号和消息，这个错误号的范围必须在20000到-20999之间。这允许你传播一个带有自定义消息的异常，这在封装异常信息和创建更具描述性的错误信息时非常有用。
+RAISE\_APPLICATION\_ERROR是一个Oracle提供的过程，允许抛出一个错误号和消息，这个错误号的范围必须在-20000到-20999之间，以避免与 Oracle 内部错误码冲突。这允许你传播一个带有自定义消息的异常，这在封装异常信息和创建更具描述性的错误信息时非常有用。
 \begin{plsql}[caption=RAISE\_APPLICATION\_ERROR传播异常示例代码]
 EXCEPTION
   WHEN my_exception THEN
@@ -2074,7 +2132,7 @@ END;
 \begin{center}
   \begin{minipage}{\textwidth}
     \center
-    \includegraphics[width=0.5\textwidth]{picture/常见预定义异常.png}
+    \includegraphics[width=1\textwidth]{picture/常见预定义异常.png}
     \captionsetup{hypcap=false}
     \captionof{figure}{常见预定义异常表}
     \label{fig:常见预定义异常}
@@ -2228,7 +2286,7 @@ Oracle推荐在开发捕获异常的PL/SQL程序代码时应该注意如下事�
 \end{enumerate}
 
 使用SQLCODE和SQLERRM的建议：
-\begin{plsql}[caption=记录异常]
+\begin{plsql}[caption=记录异常（需先建立错误记录表）]
 EXCEPTION
   WHEN OTHERS THEN
     ROLLBACK;
@@ -2245,6 +2303,29 @@ EXCEPTION
   \item {\bfseries\kaishu 清理errors表：}在处理完一个常见错误后，可以从errors表中删除与该错误代码关联的所有记录。这样做可以确保rrors表中只保留那些偶尔发生的、不常见的错误。
   \item {\bfseries\kaishu 代码维护和调试：}使用SQLCODE和SQLERRM可以在调试阶段帮助开发者理解错误的原因。一旦调试完毕，这些语句可以被注释掉或删除，以避免生产环境中不必要的性能开销。
 \end{enumerate}
+
+\chapter{过程}
+在PL/SQL程序设计中，{\bfseries\kaishu 子程序（也称为过程或函数）}是模块化程序设计的基础。要使子程序更灵活，重要的一点是可以改变所操作的数据（即可以通过计算，也可以通过使用输入参数传递给一个子程序），而子程序计算的结果可以通过输出（OUT）参数返回给子程序的调用者。{\bfseries\kaishu 子程序的目的是通过将代码组织成可重用的单元来提高代码的可维护性和可读性。}
+
+\begin{plsql}[caption=子程序示例]
+--定义过程
+CREATE OR REPLACE PROCEDURE CalculateSquare(
+  p_number IN NUMBER,
+  p_result OUT NUMBER
+) AS
+BEGIN
+  -- 计算平方
+  p_result := p_number * p_number;
+END;
+--调用过程
+DECLARE
+  v_input NUMBER := 5;
+v _output NUMBER;
+BEGIN
+  CalculateSquare(v_input, v_output);
+  DBMS_OUTPUT.PUT_LINE('Square of ' || v_input || ' is ' || v_output);
+END;
+\end{plsql}
 
 % 文章结束
 \end{document}
