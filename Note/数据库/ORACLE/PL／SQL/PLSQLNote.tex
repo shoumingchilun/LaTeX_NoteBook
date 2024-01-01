@@ -1939,5 +1939,312 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('Employee 2: ' || employees(2).emp_name || ' - Salary: ' || employees(2).emp_salary);
 END;
 \end{plsql}
+
+\chapter{异常处理}
+在运行期间所发生的这样的错误被称为异常。当一个异常发生时，程序块会被终止。
+这样的异常可以在PL/SQL程序块中被处理。PL/SQL运行期间的错误可能来自系统的设计缺陷、程序代码错误、硬件问题以及许多其他的来源。因此，无法预计所有可能的错误，但是可以编译异常处理程序代码让操作在出现错误时可以继续正常执行。
+
+\begin{plsql}[caption=示范代码]
+DECLARE
+  v_job emp_pl.job%TYPE;
+BEGIN
+  SELECT job INTO v_job
+  FROM emp_pl
+  WHERE job = '保安';
+  DBMS_OUTPUT.PUT_LINE(v_job);
+EXCEPTION
+  WHEN TOO_MANY_ROWS THEN
+    DBMS_OUTPUT.PUT_LINE('太多行了，请使用cursor解决问题。');
+  END;
+/
+\end{plsql}
+
+预期输出为：{\bfseries\kaishu 太多行了，请使用cursor解决问题。}
+
+有了异常段，虽然程序和之前的一样，SELECTINTO语句提取了多行数据问题依然存在，但这次这段PL/SQL程序代码就可以{\bfseries\kaishu 正常结束}。与之前的PL/SQL程序代码非正常终止不同，这段程序代码是被成功地执行了。\textbf{当一个异常被抛出时，程序的控制流程就转移到所定义的异常段并且执行该异常段中所有语句。}
+\section{抛出异常}
+抛出异常的方法有两种：
+\begin{enumerate}
+  \item {\bfseries\kaishu 自动抛出异常}：当出现一个Oracle错误时，相关的预定义或非预定义异常被自动地抛出。
+  \item {\bfseries\kaishu 显式抛出异常}：基于业务功能由程序员的程序实现，程序员可能必须要显式的抛出一个异常。通过在程序块中使用{\bfseries\kaishu RAISE语句程序}显式地抛出一个异常，这个抛出的异常既可以是用户定义的，也可以是预定义的。
+\end{enumerate}
+\section{异常处理方式}
+PL/SQL中有两种处理异常方法：
+\begin{enumerate}
+  \item 捕获异常
+  \item 传播异常
+\end{enumerate}
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.7\textwidth]{picture/异常处理方式.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{异常处理方式示意图}
+    \label{fig:异常处理方式}
+  \end{minipage}
+\end{center}
+\subsection{捕获异常}
+在PL/SQL程序中包含了一个{\bfseries\kaishu 异常段（EXCEPTION section）}以捕获异常。如果异常在这个程序的执行段中被抛出，那么处理就自动跳转到这个程序的异常段中的相应异常处理程序。如果异常处理程序成功地处理了这个异常，那么这个异常就不会传播到包含它的程序段，也不会传播到调用环境，而这个PL/SQL程序块成功地结束。
+
+语法：
+\begin{plsql}[caption=捕获异常语法]
+EXCEPTION
+  -- 处理指定异常的代码
+  WHEN 异常1 [或 异常2 …] THEN
+    语句1;
+    语句2;
+    …
+  [WHEN 异常1 [或 异常2 …] THEN
+    语句1;
+    语句2;
+  …]
+  [WHEN 异常1 [或 异常2 …] THEN
+    语句1;
+    语句2;
+  …]
+  -- 处理其他异常的代码
+  [WHEN OTHERS THEN
+    语句1;
+    语句2;
+  …]
+\end{plsql}
+
+\begin{description}
+  \item[异常(exception)] 一 个 预 定 义 异 常 的 标 准 名 （ 如  TOO\_MANY\_ROWS）或在声明段中用户定义的异常名。
+  \item[语句 (statement)] 一个或多个PL/SQL或SQL语句。
+  \item[OTHERS] 一个可选的异常处理子句，该子句捕获任何没有显式处理的异常（就是在之前的所有WHEN子句都没有捕获的异常）
+\end{description}
+
+可以在一个异常段中包含任意多个异常处理程序（实际上就是任意多个WHEN子句）以处理说明的异常。然而， 对应一个单一的异常不能有多个处理程序；异常处理段只捕获那些声明了的异常，而任何其他的异常都不捕获，除非使用了OTHERS异常处理程序。
+
+\begin{plsql}[caption=捕获异常示例代码]
+BEGIN
+  -- 主要执行部分
+EXCEPTION
+  WHEN ZERO_DIVIDE THEN
+  -- 处理除零异常的代码
+  WHEN OTHERS THEN
+  -- 处理其他异常的代码
+END;
+\end{plsql}
+
+\subsection{传播异常}
+如果一个异常在程序的执行段被抛出并且没有对应的异常处理程序，那么{\bfseries\kaishu 这个PL/SQL程序块以失败而终止}，并且这个异常被传播到包含它的程序块或调用环境，调用环境可以是任何应用程序。
+
+\subsubsection{使用RAISE传播异常}
+\begin{plsql}[caption=RAISE传播异常示例代码]
+BEGIN
+  -- 主要执行部分
+EXCEPTION
+  WHEN ZERO_DIVIDE THEN
+  -- 处理除零异常的代码
+  RAISE;    -- 在捕获的异常块中重新引发异常
+  WHEN OTHERS THEN
+  -- 处理其他异常的代码
+  RAISE;    -- 在捕获的异常块中重新引发异常
+END;
+\end{plsql}
+\subsubsection{使用RAISE\_APPLICATION\_ERROR传播异常}
+RAISE\_APPLICATION\_ERROR是一个Oracle提供的过程，允许抛出一个错误号和消息，这个错误号的范围必须在20000到-20999之间。这允许你传播一个带有自定义消息的异常，这在封装异常信息和创建更具描述性的错误信息时非常有用。
+\begin{plsql}[caption=RAISE\_APPLICATION\_ERROR传播异常示例代码]
+EXCEPTION
+  WHEN my_exception THEN
+  RAISE_APPLICATION_ERROR(-20001, '自定义错误信息');
+\end{plsql}
+\section{异常类型}
+在PL/SQL程序中可以使用的异常共有如下三种类型：
+\begin{enumerate}
+  \item 预定义的Oracle服务器错误（异常）。
+  \item 非预定义的Oracle服务器错误（异常）。
+  \item 用户定义的错误（异常）。
+\end{enumerate}
+\subsection{处理预定义的Oracle服务器错误}
+
+\begin{plsql}[caption=处理预定义的Oracle服务器错误示例]
+BEGIN
+  -- 主要执行部分
+EXCEPTION
+  WHEN ZERO_DIVIDE THEN
+  -- 处理除零异常的代码
+  WHEN OTHERS THEN
+  -- 处理其他异常的代码
+END;
+\end{plsql}
+常见预定义异常：
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=0.5\textwidth]{picture/常见预定义异常.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{常见预定义异常表}
+    \label{fig:常见预定义异常}
+  \end{minipage}
+\end{center}
+
+\subsection{处理非预定义的Oracle服务器错误}
+
+非预定义的异常与预定义的异常非常相似，只是它们没有被定义为Oracle服务器中的PL/SQL异常而已，它们是标准的Oracle错误。
+需使用{\bfseries\kaishu PRAGMA\ EXCEPTION\_INIT}将一个异常和一个 Oracle 错误代码关联起来，以便在捕获该异常时能够获取详细的错误信息。
+
+PRAGMA(也被称为伪指令“pesudoinstructions”)是关键字，它表示这个语句是一个编译指令，而当PL/SQL程序块执行时不会被处理。PRAGMA关键字指示PL/SQL编译器将这个程序块中出现的所有该异常名解释成相关的Oracle服务器错误代码。
+
+\begin{plsql}[caption=处理非预定义的Oracle服务器错误示例]
+DECLARE
+  no_permission_exception EXCEPTION;
+  PRAGMA EXCEPTION_INIT(no_permission_exception, -942); 
+BEGIN
+  FOR emp_rec IN (SELECT * FROM employees) LOOP
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_rec.employee_id);
+  END LOOP;
+EXCEPTION
+  WHEN no_permission_exception THEN -- 处理没有权限的异常
+    DBMS_OUTPUT.PUT_LINE('没有足够的权限访问 employees 表。');
+  WHEN OTHERS THEN -- 处理其他异常的代码
+  DBMS_OUTPUT.PUT_LINE('发生其他异常。');
+END;
+\end{plsql}
+
+\subsection{处理用户定义的错误}
+需使用{\bfseries\kaishu RAISE my\_exception;}显式抛出自定义异常。
+
+声明和捕获用户定义的异常步骤：
+\begin{enumerate}
+  \item 在一个PL/SQL程序块的声明段中声明一个用户定义的异常。
+  \item 使用RAISE语句显式地抛出这个异常。
+  \item 在EXCEPTION段处理这个异常。
+\end{enumerate}
+
+\begin{plsql}[caption=处理用户定义的错误示例1]
+DECLARE
+  my_custom_exception EXCEPTION;
+BEGIN
+  -- 主要执行部分
+  IF some_condition THEN -- 在某个条件下显式抛出自定义异常
+    RAISE my_custom_exception;
+  END IF;
+EXCEPTION
+  WHEN my_custom_exception THEN -- 处理自定义异常的代码
+  WHEN OTHERS THEN -- 处理其他异常的代码
+END;
+\end{plsql}
+
+\begin{plsql}[caption=处理用户定义的错误示例2]
+DECLARE
+  -- 步骤 1: 在声明段中声明用户定义的异常
+  department_not_found EXCEPTION;
+  PRAGMA EXCEPTION_INIT(department_not_found, -20001);
+  v_department_id NUMBER := &p_department_id; -- 用户输入的部门号
+BEGIN
+  -- 步骤 2: 检查部门是否存在，如果不存在则抛出用户定义的异常
+  IF NOT EXISTS (SELECT 1 FROM departments WHERE department_id = v_department_id) THEN
+    RAISE department_not_found;
+  END IF;
+  -- 在这里执行其他操作，因为部门存在
+EXCEPTION
+  -- 步骤 3: 在 EXCEPTION 段中捕获用户定义的异常并处理
+  WHEN department_not_found THEN
+    DBMS_OUTPUT.PUT_LINE('用户定义的异常：部门不存在。');
+END;
+\end{plsql}
+
+\section{捕获异常实例}
+\begin{plsql}[caption=一个捕获异常的实例]
+DECLARE
+  -- 自定义异常
+  emp_not_found EXCEPTION;
+  invalid_dept EXCEPTION;
+  application_error EXCEPTION;
+  -- 假设的员工编号和部门编号
+  v_empno emp.empno%TYPE := 1001;
+  v_deptno dept.deptno%TYPE := 10;
+  -- 用于检查的变量
+  v_count NUMBER;
+BEGIN
+  -- 检查员工是否存在
+  SELECT COUNT(*)
+  INTO v_count
+  FROM emp
+  WHERE empno = v_empno;
+  IF v_count = 0 THEN
+    RAISE emp_not_found;
+  END IF;
+  -- 检查部门是否有效
+  SELECT COUNT(*)
+  INTO v_count
+  FROM dept
+  WHERE deptno = v_deptno;
+  IF v_count = 0 THEN
+    RAISE invalid_dept;
+  END IF;
+  - 执行更新操作
+  UPDATE emp
+  SET deptno = v_deptno
+  WHERE empno = v_empno;
+  -- 提交事务
+  COMMIT;
+EXCEPTION
+  WHEN emp_not_found THEN
+    DBMS_OUTPUT.PUT_LINE('员工编号 ' || v_empno || ' 不存在。');
+    ROLLBACK;
+  WHEN invalid_dept THEN
+    DBMS_OUTPUT.PUT_LINE('部门编号 ' || v_deptno || ' 无效。');
+    ROLLBACK;
+  WHEN OTHERS THEN  -- 捕获其他所有未处理的异常
+    DBMS_OUTPUT.PUT_LINE('发生未知错误: ' || SQLERRM);
+    ROLLBACK;
+    RAISE; -- 重新抛出异常
+END;
+/
+\end{plsql}
+
+\section{SQLCODE和SQLERRM}
+PL/SQL提供了两个函数，当一个异常发生时，可以通过使用这两个函数来标识相关的错误代码信息。这二个函数就是SQLCODE和SQLERRM，{\bfseries\kaishu SQLCODE函数为内部异常返回一个Oracle错误号码，而SQLERRM函数则返回与这个错误号码相关的信息}。
+
+使用示例：
+\begin{plsql}[caption=SQLCODE和SQLERRM示例代码]
+DECLARE
+  my_exception EXCEPTION;
+BEGIN
+  -- 一个可能引发异常的 SQL 语句
+  SELECT 1 / 0 INTO my_variable FROM dual;
+EXCEPTION
+  WHEN OTHERS THEN
+    -- 获取异常的错误代码
+    DBMS_OUTPUT.PUT_LINE('SQLCODE: ' || SQLCODE);
+    -- 获取异常的详细错误信息
+    DBMS_OUTPUT.PUT_LINE('SQLERRM: ' || SQLERRM);
+END;
+\end{plsql}
+
+\section{处理异常建议}
+Oracle推荐在开发捕获异常的PL/SQL程序代码时应该注意如下事项：
+\begin{enumerate}
+  \item 以关键字EXCEPTION开始异常处理程序的程序段。
+  \item 在异常段中可以定义若干个异常处理程序（子句），每一个都有自己的一组操作。
+  \item 当一个异常发生时，PL/SQL在离开这个异常段之前只执行一个异常处理子句。
+  \item 将OTHERS子句放在所有其他异常处理子句之后。
+  \item 在一个异常段中只能有一个OTHER子句。
+  \item 异常不能出现在赋值语句中，也不能出现在SQL语句中。
+\end{enumerate}
+
+使用SQLCODE和SQLERRM的建议：
+\begin{plsql}[caption=记录异常]
+EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK;
+    v_error_code := SQLCODE;
+    v_error_message := SQLERRM;
+    INSERT INTO errors (user_name, error_date, error_code, error_message)
+    VALUES (USER, SYSDATE, v_error_code, v_error_message);
+    COMMIT;
+\end{plsql}
+\begin{enumerate}
+  \item {\bfseries\kaishu 监测频繁的错误：}通过查询errors表并计算每个error\_code的出现次数，可以识别出频繁出  现的错误。这通常通过一个简单的SELECT error\_code, COUNT(*) FROM errors GROUP BY error\_code查询来实现。
+  \item {\bfseries\kaishu 为常见错误定义异常：}对于每个频繁出现的错误代码，可以声明一个特定的异常，并使用 PRAGMA EXCEPTION\_INIT将其与错误代码关联。这样就可以在PL/SQL程序中直接引用这些异常。
+  \item {\bfseries\kaishu 增加异常处理逻辑：}在PL/SQL块的异常部分，可以为每个常见的错误代码增加一个WHEN子句。在这个子句中，可以编写特定的处理逻辑，如记录额外的信息、发送通知或采取其他纠正措施。
+  \item {\bfseries\kaishu 清理errors表：}在处理完一个常见错误后，可以从errors表中删除与该错误代码关联的所有记录。这样做可以确保rrors表中只保留那些偶尔发生的、不常见的错误。
+  \item {\bfseries\kaishu 代码维护和调试：}使用SQLCODE和SQLERRM可以在调试阶段帮助开发者理解错误的原因。一旦调试完毕，这些语句可以被注释掉或删除，以避免生产环境中不必要的性能开销。
+\end{enumerate}
+
 % 文章结束
 \end{document}

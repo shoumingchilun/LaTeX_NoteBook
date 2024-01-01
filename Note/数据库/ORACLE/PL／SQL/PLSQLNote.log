@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  1 JAN 2024 19:54
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  1 JAN 2024 22:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -841,17 +841,27 @@ File: picture/字符串分隔符效果图.png Graphic file (type bmp)
 第十三章
 [62
 
-] [63] [64] [65] [66] [67] [68] [69] [70] (./PLSQLNote.aux)
+] [63] [64] [65] [66] [67] [68] [69] [70]
+第十四章
+[71
+
+]
+File: picture/异常处理方式.png Graphic file (type bmp)
+<picture/异常处理方式.png>
+ [72] [73] [74] [75]
+File: picture/常见预定义异常.png Graphic file (type bmp)
+<picture/常见预定义异常.png>
+ [76] [77] [78] [79] [80] [81] (./PLSQLNote.aux)
 Package rerunfilecheck Info: File `PLSQLNote.out' has not changed.
-(rerunfilecheck)             Checksum: 2794168ADAA4F9103238D3823386261F;12961.
+(rerunfilecheck)             Checksum: 4E7F554A218CA987219A7C29187DBDD9;14378.
  ) 
 Here is how much of TeX's memory you used:
- 20966 strings out of 476683
- 461082 string characters out of 5804928
+ 21027 strings out of 476683
+ 462077 string characters out of 5804928
  2011012 words of memory out of 5000000
- 40870 multiletter control sequences out of 15000+600000
+ 40929 multiletter control sequences out of 15000+600000
  525266 words of font info for 130 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,8n,97p,482b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PLSQLNote.pdf (76 pages).
+Output written on PLSQLNote.pdf (87 pages).

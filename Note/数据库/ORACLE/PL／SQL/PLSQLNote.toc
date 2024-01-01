@@ -130,3 +130,17 @@
 \contentsline {subsection}{\numberline {13.2.2}INDEX BY 表使用示例}{67}{subsection.13.2.2}%
 \contentsline {subsection}{\numberline {13.2.3}INDEX BY表方法}{69}{subsection.13.2.3}%
 \contentsline {subsection}{\numberline {13.2.4}INDEX BY记录表}{70}{subsection.13.2.4}%
+\contentsline {chapter}{\numberline {第十四章\hspace {.3em}}异常处理}{71}{chapter.14}%
+\contentsline {section}{\numberline {14.1}抛出异常}{72}{section.14.1}%
+\contentsline {section}{\numberline {14.2}异常处理方式}{72}{section.14.2}%
+\contentsline {subsection}{\numberline {14.2.1}捕获异常}{72}{subsection.14.2.1}%
+\contentsline {subsection}{\numberline {14.2.2}传播异常}{74}{subsection.14.2.2}%
+\contentsline {subsubsection}{使用RAISE传播异常}{74}{subsubsection*.18}%
+\contentsline {subsubsection}{使用RAISE\_APPLICATION\_ERROR传播异常}{75}{subsubsection*.19}%
+\contentsline {section}{\numberline {14.3}异常类型}{75}{section.14.3}%
+\contentsline {subsection}{\numberline {14.3.1}处理预定义的Oracle服务器错误}{75}{subsection.14.3.1}%
+\contentsline {subsection}{\numberline {14.3.2}处理非预定义的Oracle服务器错误}{76}{subsection.14.3.2}%
+\contentsline {subsection}{\numberline {14.3.3}处理用户定义的错误}{77}{subsection.14.3.3}%
+\contentsline {section}{\numberline {14.4}捕获异常实例}{78}{section.14.4}%
+\contentsline {section}{\numberline {14.5}SQLCODE和SQLERRM}{80}{section.14.5}%
+\contentsline {section}{\numberline {14.6}处理异常建议}{80}{section.14.6}%
