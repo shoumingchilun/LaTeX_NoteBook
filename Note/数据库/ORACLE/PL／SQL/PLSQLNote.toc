@@ -87,36 +87,46 @@
 \contentsline {subsection}{\numberline {10.2.2}UPDATE}{44}{subsection.10.2.2}%
 \contentsline {subsection}{\numberline {10.2.3}DELETE}{44}{subsection.10.2.3}%
 \contentsline {section}{\numberline {10.3}MERGE}{45}{section.10.3}%
-\contentsline {subsection}{\numberline {10.3.1}基本语法}{45}{subsection.10.3.1}%
-\contentsline {subsection}{\numberline {10.3.2}示例代码}{45}{subsection.10.3.2}%
+\contentsline {subsection}{\numberline {10.3.1}MERGE基本语法}{45}{subsection.10.3.1}%
+\contentsline {subsection}{\numberline {10.3.2}MERGE示例代码}{45}{subsection.10.3.2}%
 \contentsline {chapter}{\numberline {第十一章\hspace {.3em}}条件语句}{47}{chapter.11}%
 \contentsline {section}{\numberline {11.1}布尔条件}{47}{section.11.1}%
 \contentsline {section}{\numberline {11.2}IF语句}{47}{section.11.2}%
-\contentsline {subsection}{\numberline {11.2.1}语法}{47}{subsection.11.2.1}%
-\contentsline {subsection}{\numberline {11.2.2}示例}{48}{subsection.11.2.2}%
+\contentsline {subsection}{\numberline {11.2.1}IF 语句语法}{47}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}IF 语句示例}{48}{subsection.11.2.2}%
 \contentsline {subsection}{\numberline {11.2.3}注意}{49}{subsection.11.2.3}%
 \contentsline {section}{\numberline {11.3}CASE表达式}{49}{section.11.3}%
-\contentsline {subsection}{\numberline {11.3.1}语法}{49}{subsection.11.3.1}%
-\contentsline {subsection}{\numberline {11.3.2}示例}{50}{subsection.11.3.2}%
+\contentsline {subsection}{\numberline {11.3.1}CASE 表达式语法}{49}{subsection.11.3.1}%
+\contentsline {subsection}{\numberline {11.3.2}CASE 表达式示例}{50}{subsection.11.3.2}%
 \contentsline {section}{\numberline {11.4}CASE语句}{51}{section.11.4}%
-\contentsline {subsection}{\numberline {11.4.1}示例代码}{51}{subsection.11.4.1}%
+\contentsline {subsection}{\numberline {11.4.1}CASE 语句示例代码}{51}{subsection.11.4.1}%
 \contentsline {subsection}{\numberline {11.4.2}使用CASE语句取代DECODE}{52}{subsection.11.4.2}%
 \contentsline {section}{\numberline {11.5}GOTO}{52}{section.11.5}%
 \contentsline {subsection}{\numberline {11.5.1}用处}{52}{subsection.11.5.1}%
 \contentsline {chapter}{\numberline {第十二章\hspace {.3em}}循环语句}{55}{chapter.12}%
 \contentsline {section}{\numberline {12.1}基本循环}{55}{section.12.1}%
-\contentsline {subsection}{\numberline {12.1.1}语法}{55}{subsection.12.1.1}%
-\contentsline {subsection}{\numberline {12.1.2}示例}{56}{subsection.12.1.2}%
+\contentsline {subsection}{\numberline {12.1.1}基本循环语法}{55}{subsection.12.1.1}%
+\contentsline {subsection}{\numberline {12.1.2}基本循环示例}{56}{subsection.12.1.2}%
 \contentsline {section}{\numberline {12.2}WHILE循环}{57}{section.12.2}%
-\contentsline {subsection}{\numberline {12.2.1}语法}{57}{subsection.12.2.1}%
-\contentsline {subsection}{\numberline {12.2.2}示例}{57}{subsection.12.2.2}%
+\contentsline {subsection}{\numberline {12.2.1}WHILE 循环语法}{57}{subsection.12.2.1}%
+\contentsline {subsection}{\numberline {12.2.2}WHILE 循环示例}{57}{subsection.12.2.2}%
 \contentsline {section}{\numberline {12.3}FOR循环}{58}{section.12.3}%
-\contentsline {subsection}{\numberline {12.3.1}语法}{58}{subsection.12.3.1}%
-\contentsline {subsection}{\numberline {12.3.2}示例}{59}{subsection.12.3.2}%
+\contentsline {subsection}{\numberline {12.3.1}FOR 循环语法}{58}{subsection.12.3.1}%
+\contentsline {subsection}{\numberline {12.3.2}FOR 循环示例}{59}{subsection.12.3.2}%
 \contentsline {section}{\numberline {12.4}循环的嵌套与标号}{59}{section.12.4}%
 \contentsline {subsection}{\numberline {12.4.1}介绍}{59}{subsection.12.4.1}%
-\contentsline {subsection}{\numberline {12.4.2}示例}{60}{subsection.12.4.2}%
+\contentsline {subsection}{\numberline {12.4.2}循环的嵌套与标号示例}{60}{subsection.12.4.2}%
 \contentsline {section}{\numberline {12.5}CONTINUE}{60}{section.12.5}%
 \contentsline {subsection}{\numberline {12.5.1}介绍}{60}{subsection.12.5.1}%
-\contentsline {subsection}{\numberline {12.5.2}示例}{61}{subsection.12.5.2}%
+\contentsline {subsection}{\numberline {12.5.2}CONTINUE示例}{61}{subsection.12.5.2}%
 \contentsline {chapter}{\numberline {第十三章\hspace {.3em}}组合数据类型}{62}{chapter.13}%
+\contentsline {section}{\numberline {13.1}PL/SQL记录（records）}{62}{section.13.1}%
+\contentsline {subsection}{\numberline {13.1.1}介绍}{62}{subsection.13.1.1}%
+\contentsline {subsection}{\numberline {13.1.2}创建记录语法}{63}{subsection.13.1.2}%
+\contentsline {subsection}{\numberline {13.1.3}创建记录示例代码}{64}{subsection.13.1.3}%
+\contentsline {subsection}{\numberline {13.1.4}\%ROWTYPE}{65}{subsection.13.1.4}%
+\contentsline {section}{\numberline {13.2}INDEX BY表}{66}{section.13.2}%
+\contentsline {subsection}{\numberline {13.2.1}INDEX BY表创建语法}{67}{subsection.13.2.1}%
+\contentsline {subsection}{\numberline {13.2.2}INDEX BY 表使用示例}{67}{subsection.13.2.2}%
+\contentsline {subsection}{\numberline {13.2.3}INDEX BY表方法}{69}{subsection.13.2.3}%
+\contentsline {subsection}{\numberline {13.2.4}INDEX BY记录表}{70}{subsection.13.2.4}%

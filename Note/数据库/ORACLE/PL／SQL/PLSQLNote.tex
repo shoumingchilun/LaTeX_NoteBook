@@ -1095,7 +1095,7 @@ FROM 表
 
 \begin{plsql}[caption=INTO案例代码]
 DECLARE
-  v_deptno dept.deptno\%TYPE;
+  v_deptno dept.deptno%TYPE;
   v_loc VARCHAR2(38);
 BEGIN
   SELECT deptno,loc
@@ -1175,7 +1175,7 @@ END;
 \section{MERGE}
 利用MERGE语句，可以根据设定的条件来决定对表的操作是修改、插入还是删除，从而避免了使用多个DML语句。
 
-\subsection{基本语法}
+\subsection{MERGE基本语法}
 \begin{plsql}[caption=MERGE语法]
 MERGE INTO target_table USING source_table
 ON (condition)
@@ -1193,7 +1193,7 @@ WHEN NOT MATCHED THEN
   \item[WHEN NOT MATCHED THEN] 定义当条件不满足时所做的操作
 \end{description}
 
-\subsection{示例代码}
+\subsection{MERGE示例代码}
 \begin{plsql}[caption=MERGE示例代码1]
 MERGE INTO employees target
 USING employees_backup source
@@ -1238,7 +1238,7 @@ AND和OR用于把两个条件组合在一起最后产生一个结果，其语法
 \section{IF语句}
 在PL/SQL中最常见的分支（条件）语句就是IF语句。PL/SQL语言的IF语句的结构与其它结构化语言中IF语句的结构完全相似。
 
-\subsection{语法}
+\subsection{IF 语句语法}
 \begin{plsql}[caption=IF语法]
 IF 条件 THEN
   statements
@@ -1276,7 +1276,7 @@ END IF;
   \item[END IF] IF语句结束的标志，END IF后需要接 \textbf{;} 以结束
 \end{description}
 
-\subsection{示例}
+\subsection{IF 语句示例}
 \begin{plsql}
 DECLARE
   v_age number := &p_age;
@@ -1304,7 +1304,7 @@ END;
 \end{enumerate}
 
 \section{CASE表达式}
-\subsection{语法}
+\subsection{CASE 表达式语法}
 \begin{plsql}[caption=带选择器]
 CASE selector
   WHEN 表达式1 THEN 结果1
@@ -1326,7 +1326,7 @@ CASE
   [ELSE 结果 N+1]
 END;
 \end{plsql}
-\subsection{示例}
+\subsection{CASE 表达式示例}
 \begin{plsql}[caption=CASE示例代码]
 DECLARE
   v_degree CHAR(1) := UPPER('&p_degree');
@@ -1353,7 +1353,7 @@ CASE表达式的结果（返回值）可以是任何数据类型，只要与要�
 
 \section{CASE语句}
 CASE表达式测试条件并返回一个值，而CASE语句测试条件并执行一个操作。一个CASE语句可以是一个完整的PL/SQL程序块。CASE语句必须以“END CASE;”结束，而CASE表达式必须以“END;”结束。
-\subsection{示例代码}
+\subsection{CASE 语句示例代码}
 \begin{plsql}
 DECLARE
   v_degree CHAR(1) := UPPER('&p_degree');
@@ -1462,7 +1462,7 @@ PL/SQL提供一下三种类型的循环结构：
 \end{itemize}
 
 \section{基本循环}
-\subsection{语法}
+\subsection{基本循环语法}
 最简单的循环语句就是
 基本循环，它是由包含在\textbf{LOOP}和\textbf{END LOOP}关键字之间的一个语句序列构成。每次执行的流程达到END LOOP语句时，程序的控制就是转到LOOP结构的最上面。基本循环运行它的语句至少执行一次，即使在进入这个循环时EXIT条件已经满足，也要执行一次。如果没有EXIT语句，基本循环是一个死循环。
 
@@ -1480,7 +1480,7 @@ END LOOP; -- 定界符
   \item[Statement] 一个或多个SQL语句或一个或多个PL/SQL语句。
 \end{description}
 
-\subsection{示例}
+\subsection{基本循环示例}
 \begin{plsql}[caption=基本循环示例代码]
 DECLARE
   v_empno emp_pl.empno%TYPE;
@@ -1502,7 +1502,7 @@ END;
 \end{plsql}
 
 \section{WHILE循环}
-\subsection{语法}
+\subsection{WHILE 循环语法}
 PL/SQL还提供了一种与基本（LOOP）循环相似的WHILE LOOP循环语句，但是使用WHILE循环条件为真（TRUE）时重复执行循环体中的语句，而当条件不再是TRUE（F或N）时退出循环。
 
 循环的条件是在每次重复开始时测试，这种循环是在条件为FALSE或NULL终止。WHILE LOOP的循环语句语法如下：
@@ -1516,7 +1516,7 @@ END LOOP;
 
 在WHILE LOOP循环语句中，循环的条件必须放在WHILE和LOOP两个关键字之间，而循环的条件是在每次重复开始时测试的。与LOOP循环语句相同，在WHILE LOOP循环语句中所包含的语句既可以是PL/SQL语句也可以是SQL语句。
 
-\subsection{示例}
+\subsection{WHILE 循环示例}
 \begin{plsql}[caption=WHILE循环示例代码]
 DECLARE
   v_deptno dept.deptno%TYPE;
@@ -1534,7 +1534,7 @@ END;
 \end{plsql}
 
 \section{FOR循环}
-\subsection{语法}
+\subsection{FOR 循环语法}
 For循环具有与基本循环一样的通用结构，不过For循环在LOOP关键字之前有一个控制语句用来设置PL/SQL程序执行的重复次数。For循环具有如下特性：
 \begin{enumerate}
   \item 使用FOR循环简化了对重复次数的测试.
@@ -1559,7 +1559,7 @@ END LOOP;
 
 语句序列每执行一次，计数器默认加1。除了整数之外，循环范围的下限和上限还可以是文字、变量和表达式，但是必须可以转换成整数的数据类型。如果下限和上限不是整数，PL/SQL按四舍五入的方法将其转为整数。因此，13/2和17/3都是有效的上限或下限值。
 
-\subsection{示例}
+\subsection{FOR 循环示例}
 \begin{plsql}[caption=FOR循环示例代码]
 DECLARE
   v_deptno dept.deptno%TYPE;
@@ -1589,7 +1589,7 @@ END;
 
 标号的命名规则与其它标识符完全相同（在之前条件语句中，GOTO章节也用到了标号）。标号必须放在一个语句之前，既可以是在同一行，也可以是在单独的行。为基本循环加标号时，标号要放在关键字LOOP之前并用标号定界符 “<<”和“>>”括起来，如<<dog\_loop>>，其中dog\_loop为标号。在FOR循环和WHILE循环中，标号要放在关键字FOR或WHILE之前。
 
-\subsection{示例}
+\subsection{循环的嵌套与标号示例}
 程序有2个嵌套的FOR循环，用户利用代替变量输入一个正整数n，之后再外循环中的程序计算出1~n所有自然数之和。内循环计算所输入自然数的阶乘（n!）。
 当i+j>4成立时，程序就跳转到Inner\_loop标号所再得语句。其中，i和j分别为外循环和内循环的计数。
 
@@ -1619,7 +1619,7 @@ END;
 \subsection{介绍}
 Oracle 11g和Oracle 12c引入了CONTINUE语句，该语句能够使程序的控制转移到循环体中的下一次新循环或者直接离开循环。通常使用CONTINUE语句在主要的处理开始之前在一个循环内部过滤掉不需要的数据（和处理操作）。
 
-\subsection{示例}
+\subsection{CONTINUE示例}
 注意：此代码效果与嵌套循环示例代码效果相同。
 
 \begin{plsql}[caption=CONTINUE示例代码]
@@ -1645,5 +1645,299 @@ END;
 \end{plsql}
 
 \chapter{组合数据类型}
+一个组合类型的变量可以存放多个变量类型的值或多个组合类型的值。
+
+与标量数据类型不同，组合数据类型包含了内部结构（组件），一旦定义了一个数据类型，这个数据类型就可以重用——用来定义一个或多个组合类型变量。
+
+PL/SQL语言中的组合数据类型可以分为以下几类：
+\begin{enumerate}
+  \item PL/SQL记录（records）：将逻辑上相关的但是类型不同的数据当作一个逻辑单元来处理，{\bfseries\kaishu 一个PL/SQL记录可以包含多个不同类型的数据}，如可以定义一个存储客户详细信息的记录。
+  \item PL/SQL集合（collections）：将一组（集合）数据当作一个单独的单元来处理。
+  \begin{enumerate}
+    \item INDEX BY表
+    \item 嵌套表（Nested Table）
+    \item 变长数组（VARRAY）
+  \end{enumerate}
+\end{enumerate}
+
+PL/SQL记录和PL/SQL集合都是组合数据类型，在实际编程中选择的原则：
+\begin{itemize}
+  \item 如果要存储和操作的数据是逻辑上相关的但是具有不同的数据类型，一般使用PL/SQL记录。
+  \item 如果要存储和操作的数据具有相同的数据类型，而且其数据类型本身又可以是组合类型，使用INDEX BY表。
+\end{itemize}
+
+\section{PL/SQL记录（records）}
+\subsection{介绍}
+所谓一个PL/SQL记录就是{\bfseries\kaishu 一组存储在若干字段中的相关联的数据}（类似对象），而记录中的每个字段都具有自己的名字和数据类型。
+
+PL/SQL记录具有如下特性：
+\begin{enumerate}
+  \item 一定包含一个或多个被称为字段的组件，其组件是任何的标量、记录或INDEX BY表的数据类型。
+  \item 在结构上与第三代语言（3GL）的记录相似。
+  \item {\bfseries\kaishu 与数据库中表的行不同。}
+  \item 每一个定义的记录可以根据实际需要有任意多个字段。
+  \item 可以为记录赋初始值，也可以将记录定义为非空（NOT NULL），没有初始值的字段其初始值被初始化为空（NULL），也可以使用关键字DEFAULT为其定义初始值。
+  \item 是将字段的集合当作一个逻辑单元来处理。
+  \item 可以在任何程序块（如子程序或软件包）的声明部分定义记录类型并声明用户定义的记录变量。
+  \item 一个记录可以是另一个记录的组件。
+  \item 当从一个表中获取一行数据时，使用记录处理非常方便。
+\end{enumerate}
+
+\subsection{创建记录语法}
+与创建变量类型数据不同，创建一个PL/SQL记录变量需要两步：
+\begin{enumerate}
+  \item {\bfseries\kaishu 创建一个}PL/SQL记录数据{\bfseries\kaishu 类型}。
+  \item 使用这个已创建的PL/SQL记录数据类型来{\bfseries\kaishu 定义（声明）变量}。
+\end{enumerate}
+
+创建记录数据类型的语法：
+\begin{plsql}[caption=创建记录类型的语法]
+TYPE 数据类型名 IS RECORD(
+  字段声明[,字段声明],
+  字段声明[,字段声明],
+  …
+  字段声明[,字段声明]
+);
+\end{plsql}
+
+字段的声明部分为：
+\begin{plsql}[caption=字段声明语法]
+字段名 { 字段类型 | 变量%TYPE 
+  | 表名.列名%TYPE | 表名%ROWTYPE}
+  [[NOT NULL] {:= DEFAULT} 表达式]
+\end{plsql}
+
+定义这一记录类型的变量的语法：
+\begin{plsql}[caption=定义变量]
+  标识符 数据类型名;
+\end{plsql}
+
+\begin{description}
+  \item[数据类型名] 为记录（RECORD）类型的名字。
+  \item[字段名] 为记录内部一个字段的名字。
+  \item[字段类型] 为该字段的数据类型。
+  \item[表达式] 为字段数据类型的表达式或初始值。
+\end{description}
+
+引用内部组件格式：{\bfseries\kaishu 记录名.字段名}
+
+\subsection{创建记录示例代码}
+
+\begin{plsql}[caption=使用记录类型变量示例]
+DECLARE
+  -- 步骤 1: 创建 PL/SQL 记录数据类型
+  TYPE EmployeeRecord IS RECORD (
+    employee_id NUMBER,
+    first_name VARCHAR2(50),
+    last_name VARCHAR2(50),
+    hire_date DATE
+  );
+  -- 步骤 2: 声明一个记录类型的变量
+  emp_info EmployeeRecord;
+BEGIN
+  -- 分配值给记录的字段
+  emp_info.employee_id := 101;
+  emp_info.first_name := 'John';
+  emp_info.last_name := 'Doe';
+  emp_info.hire_date := TO_DATE('2023-01-15', 'YYYY-MM-DD');
+  -- 访问记录中的字段
+  DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_info.employee_id);
+  DBMS_OUTPUT.PUT_LINE('Employee Name: ' || emp_info.first_name || ' ' || emp_info.last_name);
+  DBMS_OUTPUT.PUT_LINE('Hire Date: ' || TO_CHAR(emp_info.hire_date, 'YYYY-MM-DD'));
+END;
+\end{plsql}
+
+\subsection{\%ROWTYPE}
+使用\%TYPE属性每次只能定义一个变量，如果要访问或操作表中一行数据的每一列时，必须使用\%TYPE属性基于每一列定义一个相应的变量。
+{\bfseries\kaishu PL/SQL提供的\%ROWTYPE属性会极大地简化以上过程，可以利用\%ROWTYPE属性声明一个能够存储一个表或视图中一整行的记录（变量）。该记录中的每一个字段的名字和数据类型取自表或视图中对应的列。}
+
+\%ROWTYPE属性声明的记录变量的特性：
+\begin{enumerate}
+  \item 可以按照数据库中一个表或视图中的列的集合来声明一个变量。
+  \item 将数据库表冠在\%ROWTYPE的前面。
+  \item 记录中的字段与表或视图中的列有相同的名和相同的数据类型。
+\end{enumerate}
+
+使用语法：
+
+{\bfseries\kaishu Identifier reference\%ROWTYPE;}
+
+\begin{description}
+  \item[Identifier] 记录类型名。
+  \item[reference] 表名、视图名、游标等。
+\end{description}
+
+使用示例：
+\begin{plsql}[caption=\%ROWTYPE示例代码]
+DECLARE
+  -- 声明一个记录变量，具有与查询结果行相同的结构
+  emp_info employees%ROWTYPE;
+BEGIN
+  -- 使用 SELECT 语句将查询结果中的一行数据赋予记录
+  SELECT * INTO emp_info FROM employees WHERE employee_id = 101;
+  -- 访问记录中的字段
+  DBMS_OUTPUT.PUT_LINE('Employee Name: ' || emp_info.first_name || ' ' ||emp_info.last_name);
+  -- 可以继续访问其他字段
+END;
+\end{plsql}
+
+\%ROWTYPE的好处：
+\begin{enumerate}
+  \item 不需要知道所基于的表中列的数目和数据类型。
+  \item 在运行期间所基于的表中列的数目和数据类型可能变化，但记录不需要修改。
+  \item 当使用SELECT * 语句提取一行数据时，这个属性很有用。
+\end{enumerate}
+
+实际上，当无法确定所基于的数据库表的结构时，使用\%ROWTYPE属性应该是最合适的，使用\%ROWTYPE属性最主要的好处就是简化PL/SQL程序代码的维护，当所基于的表发生变化时，使用\%ROWTYPE属性就可以确保利用这一属性声明的变量的数据类型动态的变化。如果一个DDL语句更改了表中的列，那么相应的PL/SQL程序单元被置为无效。而当这个程序被重新编译时，该程序将自动地反映这个表的新结构。
+
+\section{INDEX BY表}
+INDEX BY 表（也称为索引表或关联数组）是一种特殊类型的数据结构，其允许使用索引值作为键来访问和操作元素。与传统的数据库表不同，INDEX BY 表是内存中的数据结构，通常用于存储临时数据、中间结果或在程序执行期间动态管理数据。
+
+特性：
+\begin{enumerate}
+  \item 由两个组件（两列）所组成：
+  \begin{enumerate}
+    \item 数据类型为BINARY\_INTEGER和PLS\_INTEGER的“主键”。
+    \item 标量或记录数据类型的列。
+  \end{enumerate}
+  \item 没有界限，其大小可以动态地增加。
+\end{enumerate}
+
+主键一般使用BINARY\_INTEGER或PLS\_INTEGER数据类型，因为与NUMBER类型的数据相比，BINARY\_INTEGER或PLS\_INTEGER数据需要较小的存储空间。
+
+\subsection{INDEX BY表创建语法}
+创建一个INDEX BY表型变量同样需要两步：
+\begin{enumerate}
+  \item 声明一个INDEX BY表的数据类型。
+  \item 利用以上声明的INDEX BY表数据类型声明一个这一数据的变量。
+\end{enumerate}
+
+\begin{plsql}[caption=创建INDEX BY表类型语法]
+TYPE 数据类型名 IS TABLE OF
+  {列数据类型 | 变量%TYPE | 表名.列名%TYPE | 表名%ROWTYPE} [NOT NULL]
+  INDEX BY [PLS_INTEGER | BINARY_INTEGER| VARCHAR2(<size>)];
+
+标识符 数据类型名；
+\end{plsql}
+
+\begin{description}
+  \item[数据类型名] 为INDEX BY表数据类型的名字。
+  \item[列数据类型] 为任何标量和组合数据类型，如NUMBER、DATE、VARCHAR2或\%TYPE等。
+  \item[标识符] 为表示整个INDEX BY表的标识符的名字。
+\end{description}
+
+注意：如果没有INDEX BY，将声明为嵌套表，其通过索引进行访问。
+
+\subsection{INDEX BY 表使用示例}
+\begin{plsql}[caption=INDEX BY表使用示例1]
+DECLARE
+  -- 声明一个索引表类型，使用字符串作为主键
+  TYPE EmployeeInfo IS TABLE OF VARCHAR2(100) INDEX BY VARCHAR2(50);
+  -- 声明一个索引表变量
+  employee_data EmployeeInfo;
+BEGIN
+  -- 向索引表中插入数据，使用员工姓名作为主键
+  employee_data('John Doe') := 'Software Engineer';
+  employee_data('Alice Smith') := 'Project Manager';
+  employee_data('Bob Johnson') := 'Data Analyst';
+  -- 访问索引表中的数据
+  DBMS_OUTPUT.PUT_LINE('John Doe''s Job: ' || employee_data('John Doe'));
+  DBMS_OUTPUT.PUT_LINE('Bob Johnson''s Job: ' || employee_data('Bob Johnson'));
+END;
+\end{plsql}
+
+\begin{plsql}[caption=INDEX BY表使用示例2]
+DECLARE
+  TYPE ename_table_type IS TABLE OF emp.ename%TYPE INDEX BY PLS_INTEGER;
+  TYPE hiredate_table_type IS TABLE OF DATE INDEX BY BINARY_INTEGER;
+  ename_table ename_table_type;
+  hiredate_table hiredate_table_type;
+  v_count NUMBER(6) := &p_count;
+BEGIN 
+  FOR i IN 1..v_count LOOP 
+  ename_table(i) := '武大';
+  hiredate_table(i) := SYSDATE + 14;
+  DBMS_OUTPUT.PUT_LINE(ename_table(i) ||':'||hiredate_table(i));
+  END LOOP;
+END;
+/
+\end{plsql}
+
+\subsection{INDEX BY表方法}
+为了使INDEX BY表的使用更加容易，PL/SQL引入了一些INDEX BY表的方法。一个INDEX BY表的方法就是在一个INDEX BY表上执行某种操作的一个内置函数或过程，它可以用点号（.）表示法调用，语法：（其中参数列表为一个或多个参数）
+
+{\bfseries\kaishu 表名.方法名[(参数列表)]}
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \centering
+    \begin{tabular}{|c|c|} 
+      \hline % 画水平线
+      \textbf{方法} & \textbf{描述}  \\
+      \hline
+      EXISTS(n)  & 如果第n个元素在PL/SQL表（数组）中存在，返回TRUE \\
+      \hline
+      COUNT & 返回一个PL/SQL表当前所包含的元素个数 \\
+      \hline
+      FIRST & 返回在一个PL/SQL表中第一个（最小的）下标数字\\
+            & 如果PL/SQL表是空的，返回NULL\\
+            \hline
+      LAST &返回在一个PL/SQL表中第一个（最大的）下标数字\\
+          & 如果PL/SQL表是空的，返回NULL\\
+          \hline
+      PRIOR(n) & 返回在一个PL/SQL表中当前元素的前n个元素的下标值\\
+      \hline
+      NEXT(n) & 返回在一个PL/SQL表中当前元素的后n个元素的下标值\\
+      \hline
+      DELETE & DELETE即删一个PL/SQL表中的全部元素\\
+            & DELETE(n)即删一个PL/SQL表中的第n个元素\\
+            & DELETE(m,n)即删一个数组中m~n范围内的元素\\
+      \hline
+    \end{tabular}
+    \captionsetup{hypcap=false}
+    \captionof{table}{INDEX BY表方法表}
+    \label{tab:INDEX BY表方法表} % 用于交叉引用的标签
+  \end{minipage}
+\end{center}
+
+使用示例：
+\begin{plsql}[caption=表方法示例代码]
+-- 声明一个 INDEX BY 表类型
+TYPE ScoresTable IS TABLE OF NUMBER INDEX BY PLS_INTEGER;
+-- 声明 INDEX BY 表变量
+scores ScoresTable;
+-- 使用方法向 INDEX BY 表中插入元素
+scores(1) := 95;
+scores(2) := 88;
+-- 使用方法获取元素的值
+DBMS_OUTPUT.PUT_LINE('Score at index 1: ' || scores(1));
+-- 使用方法删除元素
+scores.DELETE(1); -- 删除索引为1的元素
+\end{plsql}
+
+\subsection{INDEX BY记录表}
+INDEX BY记录表，就是定义一个存放一个表中整行数据（每一列）的INDEX BY表变量。
+
+\begin{plsql}[caption=INDEX BY记录表使用示例]
+DECLARE
+  -- 声明一个 INDEX BY 记录表类型，该类型表示一个员工记录
+  TYPE EmployeeRecord IS RECORD (
+    emp_id NUMBER,
+    emp_name VARCHAR2(50),
+    emp_salary NUMBER
+  );
+  -- 声明一个 INDEX BY 记录表，每个元素存储一个员工记录
+  TYPE EmployeeTable IS TABLE OF EmployeeRecord INDEX BY PLS_INTEGER;
+  -- 声明一个 INDEX BY 记录表变量
+  employees EmployeeTable;
+BEGIN
+  -- 向 INDEX BY 记录表中插入数据
+  employees(1) := EmployeeRecord(101, 'John Doe', 50000);
+  employees(2) := EmployeeRecord(102, 'Alice Smith', 60000);
+  -- 访问 INDEX BY 记录表中的数据
+  DBMS_OUTPUT.PUT_LINE('Employee 1: ' || employees(1).emp_name || ' - Salary: ' || employees(1).emp_salary);
+  DBMS_OUTPUT.PUT_LINE('Employee 2: ' || employees(2).emp_name || ' - Salary: ' || employees(2).emp_salary);
+END;
+\end{plsql}
 % 文章结束
 \end{document}
