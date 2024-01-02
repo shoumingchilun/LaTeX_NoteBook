@@ -2317,6 +2317,7 @@ BEGIN
   -- 计算平方
   p_result := p_number * p_number;
 END;
+
 --调用过程
 DECLARE
   v_input NUMBER := 5;
@@ -2325,6 +2326,391 @@ BEGIN
   CalculateSquare(v_input, v_output);
   DBMS_OUTPUT.PUT_LINE('Square of ' || v_input || ' is ' || v_output);
 END;
+\end{plsql}
+\section{模块化与分层}
+利用子程序进行{\bfseries\kaishu 模块化}程序设计的基本原则是：尽可能地创建较小的、灵活的、可重用的代码段以方便程序的管理和维护。
+灵活性是通过使用带有参数的子程序而获得的，而正是这种灵活性又通过使用不同的输入值使得相同的程序代码能够重用。
+
+模块化{\bfseries\kaishu 现存的程序代码}的步骤：
+\begin{enumerate}
+  \item 定位和标识重复的程序代码序列。
+  \item 将这些重复的程序代码移到一个PL/SQL子程序中。
+  \item 将原来的重复程序代码以新的PL/SQL子程序调用代替。
+\end{enumerate}
+
+模块化的优势：
+\begin{enumerate}
+  \item {\bfseries\kaishu 语法分析重用：}优化器能够有效地重复利用经过解析的SQL语句，更好地利用服务器资源。
+  \item 可维护性：将业务逻辑分解为独立的模块，使得对系统进行更新、修复或新增功能变得更加简单。
+  \item 可读性：代码结构更加清晰。
+  \item 性能优化：通过将复杂的业务逻辑分解为独立的模块，优化器可以更精确地评估每个模块的性能，并采取相应的优化措施。
+  \item 减少代码冗余：将通用功能抽象为可重用的模块，可以避免在不同部分中重复编写相似的代码。
+\end{enumerate}
+
+分层设计思路：
+\begin{enumerate}
+  \item 数据访问层：使用SQL语句访问数据库子程序。
+  \begin{enumerate}
+    \item 使用 SQL 语句访问数据库。
+    \item 封装数据库细节。
+    \item 提供数据访问接口。
+  \end{enumerate}
+  \item 业务逻辑层：实现业务处理规则的子程序，这些子程序可以调用也可以不调用数据访问层的子程序。
+  \begin{enumerate}
+    \item 实现业务处理规则。
+    \item 调用数据访问层。
+    \item 与用户界面交互。
+  \end{enumerate}
+\end{enumerate}
+
+与模块化有关的组件：
+\begin{itemize}
+  \item 匿名程序块。
+  \item 子程序（过程和函数）。
+  \item 软件包。
+  \item 数据库触发器。
+\end{itemize}
+
+\section{子程序}
+子程序是基于标准的PL/SQL结构的，其实就是一个命名的PL/SQL程序块，它可以接收参数和在调用环境中被调用。子程序包括一个声明段、一个执行段和一个可选的异常处理段。子程序可以被编译或存储在数据库中以提高模块化、可扩展性和重用性，以及方便维护。
+
+一个PL/SQL子程序就是一个命名的、可以使用一组参数调用的PL/SQL程序块。可以在一个PL/SQL程序块中也可以在另一个子程序中声明和定义子程序。 
+
+\begin{plsql}[caption=子程序语法模版]
+--子程序说明部分
+<header>
+
+IS | AS
+--子程序体
+  Declaration 部分
+BEGIN
+  可执行部分
+EXCEPTION (optional)
+  异常部分
+END;
+\end{plsql}
+
+PL/SQL有两种类型的子程序，即过程和函数。{\bfseries\kaishu 通常，使用过程来执行一个操作，而使用一个函数计算并返回一个值。}过程和函数具有相同的结构，它们唯一的区别是\textbf{函数有一个额外的项——RETURN子句或RETURN语句}。
+
+\begin{plsql}[caption=过程示例]
+CREATE OR REPLACE PROCEDURE my_procedure(p_parameter IN VARCHAR2) 
+  IS
+BEGIN
+  -- Procedure code here
+  DBMS_OUTPUT.PUT_LINE('Parameter received: ' || p_parameter);
+END my_procedure;
+\end{plsql}
+
+\begin{plsql}[caption=函数示例]
+CREATE OR REPLACE FUNCTION calculate_area(radius NUMBER) RETURN NUMBER 
+  IS
+  v_area NUMBER;
+BEGIN
+  v_area := 3.14 * radius * radius;
+  RETURN v_area;
+END calculate_area;
+\end{plsql}
+
+匿名程序块与子程序之间的差别：
+\begin{enumerate}
+  \item 子程序只编译一次；匿名程序块在执行时编译。（如果想重用一个匿名块，就必须重新运行创建这个匿名块的脚本，这会造成重新编译和执行）
+  \item 子程序可以存储在数据库中；匿名程序块不可以。
+  \item 子程序可以被其他程序调用；匿名程序块不可以。
+  \item 子程序的函数必须有返回值；匿名程序块不能带返回值。
+  \item 子程序可以有参数；匿名程序块不能有参数。
+\end{enumerate}
+
+\section{过程}
+
+\subsection{过程语法}
+过程是指可以接收参数并命名的PL/SQL程序块，过程是子程序的一种类型，通常使用它来执行一个动作。过程包括\textbf{过程头、声明段、执行段和可选的异常处理段}。在另外的PL/SQL程序块的执行段中通过使用过程名调用这个过程。
+
+在PL/SQL中，可以使用SQL的{\bfseries\kaishu CREATE[OR REPLACE]PROCEDURE}语句创建存储在数据库中的独立过程。一个过程与一个微型的程序类似——执行一个特定的操作。在创建过程语句中，要说明过程名、过程的参数、过程的本地变量和包括过程代码和处理代码的BEGIN-END所包括的程序块。
+
+\begin{plsql}[caption=创建过程的语法]
+CREATE [OR REPLACE] PROCEDURE 过程名
+  [(参数1 [参数模式] 数据类型1，参数2 [参数模式] 数据类型2, …)]
+IS|AS
+  [本地变量的声明; …]
+BEGIN
+  -- 执行的操作;
+END [过程名];
+\end{plsql}
+
+参数可以被看作本地变量。在一个PL/SQL存储过程的定义中，参数和本地变量在合适的作用域内都是可以被引用的。
+
+\begin{plsql}[caption=创建过程示例代码]
+CREATE OR REPLACE PROCEDURE ExampleProcedure (
+ p_input_param IN VARCHAR2,
+ p_output_param OUT NUMBER
+) IS
+  -- 这是一个本地变量，只在当前存储过程中可见
+  v_local_variable NUMBER := 0;
+BEGIN
+  -- 使用输入参数
+  DBMS_OUTPUT.PUT_LINE('Input parameter: ' || p_input_param);
+  -- 修改本地变量的值
+  v_local_variable := 42;
+  -- 使用输出参数
+  p_output_param := v_local_variable;
+  -- 在这里可以引用输入参数、输出参数和本地变量
+END ExampleProcedure;
+\end{plsql}
+
+\subsection{过程参数数据类型}
+可以使用如下方法制定参数的数据类型：
+\begin{enumerate}
+  \item {\bfseries\kaishu 显式数据类型：}如p\_param1 VARCHAR2(50)。
+  \item {\bfseries\kaishu \%TYPE定义：}如p\_param2 employees.salary\%TYPE。
+  \item {\bfseries\kaishu \%ROWTYPE定义：}如p\_param2 employees\%ROWTYPE。
+\end{enumerate}
+
+\subsection{过程参数的参数模式}
+
+参数被用来在调用环境和过程之间进行数据的传递。参数是在子程序（过程）的头中声明的，即在过程名之后和本地变量声明段之前，调用环境和过程之间进行参数传递的操作。
+
+\begin{enumerate}
+  \item {\bfseries\kaishu IN参数：}从调用环境传递一个常数值给过程，可赋予默认值。（默认）
+  \item {\bfseries\kaishu OUT参数：}从过程传递一个值给调用环境，实参必须为变量，不可赋予默认值。
+  \item {\bfseries\kaishu IN OUT参数：}从调用环境传递一个值给过程，并且使用相同的参数名从过程返回给调用环境一个可能不同的值，实参必须为变量，不可赋予默认值。
+\end{enumerate}
+
+可以把参数看成本地变量的一种特殊形式；当子程序被调用时，参数的输入值由调用环境初始化，并且当子程序将控制返回给调用者时，参数的输出值被返回给调用环境。
+
+\begin{plsql}[caption=IN参数模式实例]
+--为某一个员工提升工资的过程
+CREATE OR REPLACE PROCEDURE raise_salary(p_empno IN emp_pl.empno%TYPE,p_rate IN NUMBER)
+IS
+BEGIN
+  UPDATE emp_pl
+  SET sal = sal * (1 + p_rate * 0.01)
+  WHERE empno = p_empno;
+END raise_salary;
+/
+\end{plsql}
+
+\begin{plsql}[caption=OUT参数模式实例]
+--输出指定员工信息
+CREATE OR REPLACE PROCEDURE get_employee
+  (p_empno IN emp_pl.empno%TYPE,
+  p_name OUT emp.ename%TYPE,
+  p_salary OUT emp.sal%TYPE,
+  p_job OUT emp.job%TYPE)
+IS
+BEGIN
+  SELECT ename, sal, job
+  INTO p_name, p_salary, p_job
+  FROM emp
+  WHERE empno = p_empno;
+END;
+/
+\end{plsql}
+
+\begin{plsql}[caption=IN OUT参数模式实例]
+--将输入的电话号码转换为标准的容易阅读格式
+CREATE OR REPLACE PROCEDURE standard_phone
+  (p_phone_no IN OUT VARCHAR2) 
+IS
+BEGIN
+  p_phone_no := '(' || SUBSTR(p_phone_no,1,3) ||')' || SUBSTR(p_phone_no,4,3) ||'-' || SUBSTR(p_phone_no,7);
+END standard_phone;
+\end{plsql}
+
+\subsection{绑定变量获得过程的OUT输出}
+步骤：
+\begin{enumerate}
+  \item 声明过程变量：{\bfseries\kaishu VARIABLE myvar NUMBER}。
+  \item （可选：如果是IN OUT参数需要为这个数字变量赋初值：{\bfseries\kaishu EXEC :myvar := 10}。）
+  \item 以绑定变量为参数执行过程：{\bfseries\kaishu EXEC my\_procedure(:myvar)}。
+  \item 使用PRINT命令打印绑定变量：{\bfseries\kaishu PRINT myvar}。
+\end{enumerate}
+
+\subsection{在过程中处理异常}
+在过程中处理异常的方式与在一般程序块中处理异常的方法完全相同：
+当在一个调用过程中抛出一个异常时，程序的控制立刻跳转到这个程序块的异常段。如果这个异常段提供了一个处理所抛出异常的异常处理程序，那么这个异常被认定处理了。
+
+PL/SQL将执行如下代码流程：
+\begin{enumerate}
+  \item 这个异常被抛出。
+  \item 控制转移到匹配的异常处理程序。
+  \item 执行异常处理程序的代码块。
+  \item 异常处理程序执行完成后，程序块执行结束。
+\end{enumerate}
+
+如果一个DML操作是在异常之前在异常所在的过程中执行的，那么这个DML操作被回滚。
+
+\begin{plsql}[caption=过程异常处理示例代码]
+ CREATE OR REPLACE PROCEDURE add_depte
+  (p_name IN dept_pl.dname%TYPE DEFAULT '服务',
+  p_loc IN dept_pl.loc%TYPE DEFAULT '狼山镇')
+IS
+BEGIN
+  INSERT INTO dept_pl
+  VALUES (deptid_sequence.NEXTVAL, p_name, p_loc);
+  DBMS_OUTPUT.PUT_LINE('添加部门：'||p_name);
+EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('错误：添加部门：'||p_name);
+END add_depte;
+/
+\end{plsql}
+
+\subsection{在过程中抛出异常}
+当被调用过程的异常段没有提供所抛出异常的处理程序时，PL/SQL程序代码流程如下：
+\begin{enumerate}
+  \item 抛出异常。
+  \item 程序块结束，因为不存在异常处理程序，在该过程中所执行的任何DML操作全部被回滚。
+  \item 异常传播到调用过程的异常段，即控制返回到调用块的异常段。
+\end{enumerate}
+
+如果一个异常没有被处理，那么{\bfseries\kaishu 在调用过程和被调用过程中的所有DML语句连同对任何绑定变量的更改一起全部被回滚}。但是在调用抛出异常过程之前所执行的DML语句并不受影响。
+
+\section{实参的传递方式}
+PL/SQL提供了三种不同的参数传递表示法，分别{\bfseries\kaishu 按位置（position）}、{\bfseries\kaishu 按名字（Named）}和{\bfseries\kaishu 组合（Combination）表示法}。
+
+\begin{description}
+  \item[按位置] 以所声明的形参相同的顺序列出实参。
+  \item[按名字] 以任意顺序列出实参和与之相关的对应形参，但要是使用关联操作符将每一个实参与对应的形参用名关联起来。
+  \item[组合] 部分实参按位置，部分实参按名称。
+\end{description}
+
+在开发一个子程序时可以将几乎所有的可能情况考虑进去，这样可能需要很多形参。但是在使用时用户并不需要了解全部参数，一个用户只需要理解他所需要的参数即可。
+\begin{plsql}[caption=按位置传递示例]
+CREATE OR REPLACE PROCEDURE example_proc
+  (p_name IN VARCHAR2, p_age IN NUMBER) 
+IS
+BEGIN
+  -- procedure body
+END example_proc;
+
+-- 调用过程
+EXEC example_proc('John', 30);
+\end{plsql}
+
+\begin{plsql}[caption=按参数名传递示例]
+CREATE OR REPLACE PROCEDURE example_proc
+  (p_name IN VARCHAR2, p_age IN NUMBER) 
+IS
+BEGIN
+  -- procedure body
+END example_proc;
+
+-- 调用过程，通过参数名传递
+EXEC example_proc(p_age => 30, p_name => 'John');
+\end{plsql}
+
+\begin{plsql}[caption=组合传递示例]
+CREATE OR REPLACE PROCEDURE example_proc
+  (p_name IN VARCHAR2, p_age IN NUMBER) IS
+BEGIN
+  -- procedure body
+END example_proc;
+  
+-- 调用过程，混合使用按位置和按名字传递
+EXEC example_proc('John', p_age => 30);
+\end{plsql}
+
+\chapter{游标}
+在PL/SQL中，游标（CURSOR）是一种数据库查询的控制结构，它用于存储从SQL语句如SELECT查询返回的结果集。游标使得开发者能够在PL/SQL程序中逐行处理查询结果。
+
+游标用途:
+\begin{enumerate}
+  \item 逐行处理数据。
+  \item 复杂逻辑的实现。
+  \item 锁定行。
+  \item 资源优化。
+\end{enumerate}
+
+\section{游标类型}
+\begin{enumerate}
+  \item 显式游标：开发者需要显式声明、打开、获取数据、关闭。这给了开发者更多的控制，但也需要更多的代码。
+  \item 隐式游标：Oracle 为 每 个 SQL DML 语 句 （ 如 INSERT, UPDATE,  DELETE, SELECT INTO）提供的自动游标。它们不需要  显式声明和管理，但控制较少。
+\end{enumerate}
+\section{游标的操作过程}
+\begin{enumerate}
+  \item 声明：CURSOR my\_cursor IS SELECT column1, column2 FROM my\_table WHERE condition;  
+  \item 打开：OPEN my\_cursor;
+  \item 提取：FETCH my\_cursor INTO variable1, variable2;
+  \item 关闭：CLOSE my\_cursor;
+\end{enumerate}
+
+\section{游标逐行处理数据示例}
+\begin{plsql}[caption=游标逐行处理数据示例1]
+-- 创建一个简单的表
+CREATE TABLE employee (
+  emp_id NUMBER PRIMARY KEY,
+  emp_name VARCHAR2(50),
+  emp_salary NUMBER
+);
+
+-- 插入一些示例数据
+INSERT INTO employee VALUES (1, 'Alice', 50000);
+INSERT INTO employee VALUES (2, 'Bob', 60000);
+INSERT INTO employee VALUES (3, 'Charlie', 70000);
+
+-- 创建一个存储过程，使用游标逐行处理数据
+CREATE OR REPLACE PROCEDURE display_employee_data 
+IS
+  -- 定义游标
+  CURSOR emp_cursor IS
+    SELECT emp_id, emp_name, emp_salary FROM employee;
+  
+  -- 定义变量来存储检索到的列值
+  v_emp_id employee.emp_id%TYPE;
+  v_emp_name employee.emp_name%TYPE;
+  v_emp_salary employee.emp_salary%TYPE;
+BEGIN
+  -- 打开游标
+  OPEN emp_cursor;
+  -- 逐行处理数据
+  LOOP
+    -- 从游标中检索数据
+    FETCH emp_cursor INTO v_emp_id, v_emp_name, v_emp_salary;
+    -- 判断是否还有数据
+    EXIT WHEN emp_cursor%NOTFOUND;
+    -- 处理当前行数据，这里简单地显示在输出
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_emp_id || ', Name: ' || v_emp_name || ', Salary: ' || v_emp_salary);
+  END LOOP;
+
+  -- 关闭游标
+  CLOSE emp_cursor;
+END;
+/
+
+-- 执行存储过程以显示数据
+SET SERVEROUTPUT ON;
+EXEC display_employee_data;
+\end{plsql}
+
+使用FOR循环简化：FOR循环是一种简化的循环结构，它允许在循环声明中直接指定一个游标，并在循环体内自动处理每一行，无需显式地使用OPEN、FETCH和CLOSE语句。
+\begin{plsql}[caption=游标逐行处理数据示例2]
+-- 创建一个简单的表
+CREATE TABLE employee (
+  emp_id NUMBER PRIMARY KEY,
+  emp_name VARCHAR2(50),
+  emp_salary NUMBER
+);
+
+-- 插入一些示例数据
+INSERT INTO employee VALUES (1, 'Alice', 50000);
+INSERT INTO employee VALUES (2, 'Bob', 60000);
+INSERT INTO employee VALUES (3, 'Charlie', 70000);
+
+-- 创建一个存储过程，使用FOR循环处理数据
+CREATE OR REPLACE PROCEDURE display_employee_data 
+IS
+BEGIN
+  -- 使用FOR循环声明游标和直接处理每一行
+  FOR emp_rec IN (SELECT emp_id, emp_name, emp_salary FROM employee) LOOP
+    -- 在循环体内直接访问每一行的字段
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_rec.emp_id || ', Name: ' || emp_rec.emp_name || ', Salary: ' || emp_rec.emp_salary);
+  END LOOP;
+END;
+/
+
+-- 执行存储过程以显示数据
+SET SERVEROUTPUT ON;
+EXEC display_employee_data;
 \end{plsql}
 
 % 文章结束
