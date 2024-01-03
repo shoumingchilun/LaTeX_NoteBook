@@ -501,7 +501,7 @@ END;
 如果在一个变量声明中引用了其他变量，一定要确保在之前的语句中已经声明了引用的变量。
 
 声明语法：
-{\bfseries\kaishu 标识符 [CONSTANT] 数据类型 [NOT NULL] [[:= | DEFAULT] initial\_value]}
+{\bfseries\kaishu 标识符 [CONSTANT] 数据类型 [NOT NULL] [<:= | DEFAULT> initial\_value]}
 
 \begin{plsql}[caption=PL/SQL变量声明语法示例]
 DECLARE
@@ -595,7 +595,7 @@ WHERE SNO=&ReplaceVariable1;
 \end{center}
 
 
-在这里，ReplaceVariable1是一个代替变量，SQL*Plus会在执行查询之前提示用户输入ReplaceVariable1的值，并将其替换到SQL语句中。DEFINE ReplaceVariable1 = 982 用于定义SQLPlus变量。
+在这里，ReplaceVariable1是一个代替变量，SQL*Plus会在执行查询之前提示用户输入ReplaceVariable1的值（如果未定义变量），并将其替换到SQL语句中。DEFINE ReplaceVariable1 = 982 用于定义SQLPlus变量。
 
 注意：如果需要`\&variable '这样的字符串，可以使用两个连续的 \& 来避免 SQL*Plus 将其解释为代替变量，如\textbf{`\&\&your\_value'}。
 \subsection{绑定变量}
