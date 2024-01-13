@@ -1,0 +1,61 @@
+\contentsline {chapter}{\numberline {第一章\hspace {.3em}}功能需求基础概念}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}软件功能需求}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}软件非功能需求}{5}{section.1.2}%
+\contentsline {chapter}{\numberline {第二章\hspace {.3em}}软件非功能需求反例}{7}{chapter.2}%
+\contentsline {chapter}{\numberline {第三章\hspace {.3em}}AI主播定义}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}定义}{9}{section.3.1}%
+\contentsline {section}{\numberline {3.2}发展历史}{9}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}1.0时代——雏形初显，虚拟主持人登场}{9}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}2.0时代——偶像先行，AI虚拟主播顺风飞翔}{10}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}3.0时代——全面AI化，虚拟主播走入千家万户}{11}{subsection.3.2.3}%
+\contentsline {chapter}{\numberline {第四章\hspace {.3em}}AI主播出现的背景}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}AI主播与人工智能技术}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}AI主播与个人虚拟社交需求}{14}{section.4.2}%
+\contentsline {section}{\numberline {4.3}AI主播与数字化媒体}{15}{section.4.3}%
+\contentsline {chapter}{\numberline {第五章\hspace {.3em}}结构化的分析方法有哪些基本特点?基本思想是什么? 包括那些模型?}{16}{chapter.5}%
+\contentsline {section}{\numberline {5.1}基本特点}{16}{section.5.1}%
+\contentsline {section}{\numberline {5.2}基本思想}{16}{section.5.2}%
+\contentsline {section}{\numberline {5.3}常见模型}{17}{section.5.3}%
+\contentsline {chapter}{\numberline {第六章\hspace {.3em}}有没有可能在分析模型创建后就立即开始编码?为什么?}{18}{chapter.6}%
+\contentsline {chapter}{\numberline {第七章\hspace {.3em}}订单处理系统}{19}{chapter.7}%
+\contentsline {section}{\numberline {7.1}0层DFD图}{19}{section.7.1}%
+\contentsline {section}{\numberline {7.2}1层DFD图}{20}{section.7.2}%
+\contentsline {section}{\numberline {7.3}实体关系图及数据对象、关系、属性}{21}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Order的状态转换图}{22}{section.7.4}%
+\contentsline {chapter}{\numberline {第八章\hspace {.3em}}开发用例}{23}{chapter.8}%
+\contentsline {section}{\numberline {8.1}使用在线书店购书}{23}{section.8.1}%
+\contentsline {chapter}{\numberline {第九章\hspace {.3em}}需求定义}{25}{chapter.9}%
+\contentsline {section}{\numberline {9.1}对于需求分析，结构化分析和面对对象方法有何本质区别}{25}{section.9.1}%
+\contentsline {section}{\numberline {9.2}状态图和顺序图有何异同}{26}{section.9.2}%
+\contentsline {section}{\numberline {9.3}需求规格说明（SRS）有哪些作用}{26}{section.9.3}%
+\contentsline {section}{\numberline {9.4}需求规格说明必须满足哪些特性}{27}{section.9.4}%
+\contentsline {section}{\numberline {9.5}用自然语言描述需求时应注意些什么}{27}{section.9.5}%
+\contentsline {chapter}{\numberline {第十章\hspace {.3em}}课后讨论1}{29}{chapter.10}%
+\contentsline {section}{\numberline {10.1}常见应用软件}{29}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}定义}{29}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {10.1.2}常用应用软件}{29}{subsection.10.1.2}%
+\contentsline {section}{\numberline {10.2}软件中间件}{30}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}定义}{30}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}常见软件中间件}{30}{subsection.10.2.2}%
+\contentsline {section}{\numberline {10.3}大规模工业软件}{30}{section.10.3}%
+\contentsline {subsection}{\numberline {10.3.1}定义}{30}{subsection.10.3.1}%
+\contentsline {subsection}{\numberline {10.3.2}分类}{31}{subsection.10.3.2}%
+\contentsline {section}{\numberline {10.4}游戏软件}{31}{section.10.4}%
+\contentsline {subsection}{\numberline {10.4.1}定义}{31}{subsection.10.4.1}%
+\contentsline {subsection}{\numberline {10.4.2}介绍}{32}{subsection.10.4.2}%
+\contentsline {section}{\numberline {10.5}目前的大型国产硬件及其原装软件}{32}{section.10.5}%
+\contentsline {chapter}{\numberline {第十一章\hspace {.3em}}课后讨论2}{34}{chapter.11}%
+\contentsline {section}{\numberline {11.1}技术发展跟不上软件需求的原因与应对措施}{34}{section.11.1}%
+\contentsline {subsection}{\numberline {11.1.1}原因}{34}{subsection.11.1.1}%
+\contentsline {subsection}{\numberline {11.1.2}应对措施}{34}{subsection.11.1.2}%
+\contentsline {section}{\numberline {11.2}不同软件开发过程的特点}{35}{section.11.2}%
+\contentsline {section}{\numberline {11.3}限制软件发展的原因？}{36}{section.11.3}%
+\contentsline {section}{\numberline {11.4}解决需求冲突的方法？}{37}{section.11.4}%
+\contentsline {section}{\numberline {11.5}协调不一致业务需求的方法}{38}{section.11.5}%
+\contentsline {chapter}{\numberline {第十二章\hspace {.3em}}从哪些角度进行需求规格说明的评审？}{39}{chapter.12}%
+\contentsline {chapter}{\numberline {第十三章\hspace {.3em}}有哪些评审方法？各有什么特点？}{40}{chapter.13}%
+\contentsline {chapter}{\numberline {第十四章\hspace {.3em}}为什么软件需求过程中需求变更是难免的？}{41}{chapter.14}%
+\contentsline {chapter}{\numberline {第十五章\hspace {.3em}}为什么必须进行需求变更管理？}{43}{chapter.15}%
+\contentsline {chapter}{\numberline {第十六章\hspace {.3em}}总结}{45}{chapter.16}%
+\contentsline {section}{\numberline {16.1}总结1}{45}{section.16.1}%
+\contentsline {section}{\numberline {16.2}总结2}{46}{section.16.2}%
