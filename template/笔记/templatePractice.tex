@@ -17,6 +17,11 @@
 % 行间距为1.5倍
 \linespread{1.5}
 
+% 生成的书签大纲包含章节序号
+\hypersetup{
+  bookmarksnumbered=true
+}
+
 % 定义定理环境
 \newtheorem{theorem}{定理}[chapter]
 \newtheorem{definition}[theorem]{定义}
@@ -24,6 +29,8 @@
 \newtheorem{corollary}[theorem]{推论}
 \newtheorem{example}[theorem]{例}
 \newtheorem{proposition}[theorem]{命题}
+
+
 
 % 自定义配置
 % 设置全局的 enumerate 环境项之间的距离
@@ -74,6 +81,12 @@
 
 % 生成标题
 \maketitle
+
+% 生成作者的话
+\newpage                    %新的一页
+\pagenumbering{roman}       %页码以小写罗马数字形式表示
+\setcounter{page}{1}        %设置当前页为第一页
+\section*{作者的话}
 
 % 生成目录
 \newpage                    %新的一页
