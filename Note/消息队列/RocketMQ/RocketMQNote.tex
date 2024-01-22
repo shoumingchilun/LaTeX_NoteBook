@@ -1,5 +1,5 @@
-\documentclass[11pt, a4paper, oneside]{ctexbook}
-\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor, listings, fontspec, caption}
+\documentclass[11pt, a4paper, oneside, fontset=none]{ctexbook}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor, listings, fontspec, caption, unicode-math}
 
 % 标题、作者、创建日期
 \title{{\Huge{\textbf{RocketMQ}}}\\学习笔记}
@@ -7,9 +7,25 @@
 \date{2024年1月20日}
 
 % 设置全局字体
-\setmainfont{Times New Roman}
-\let\kaishu\relax                               %清除旧定义
-\newCJKfontfamily\kaishu{KaiTi}[AutoFakeBold]   %重定义\kaishu，开启加粗功能
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+
+% 中文默认字体：方正书宋_GBK，粗体为思源宋体半粗体，斜体为方正楷体_GBK
+\setCJKmainfont[Path=../../../fonts/, BoldFont=SOURCEHANSERIFCN-MEDIUM-6.otf, ItalicFont=FANGZHENGKAITI-GBK-1.ttf]{FANGZHENGSHUSONG-GBK-1.ttf}
+% 中文无衬线字体：方正黑体_GBK，粗体为思源黑体中粗体
+\setCJKsansfont[Path=../../../fonts/, BoldFont=SOURCEHANSANSSC-MEDIUM-2.otf,AutoFakeSlant]{FANGZHENGHEITI-GBK-1.ttf}
+% 中文等宽字体：方正仿宋_GBK
+\setCJKmonofont[Path=../../../fonts/]{FANGZHENGFANGSONG-GBK-1.ttf}
+\newCJKfontfamily\songti{FANGZHENGSHUSONG-GBK-1.ttf}[Path=../../../fonts/, BoldFont=SOURCEHANSERIFCN-MEDIUM-6.otf,AutoFakeSlant]
+\newCJKfontfamily\xbsong{SOURCEHANSERIFCN-MEDIUM-6.otf}[Path=../../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\dbsong{SOURCEHANSERIFCN-BOLD-2.otf}[Path=../../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\cusong{SOURCEHANSERIFCN-HEAVY-4.otf}[Path=../../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\heiti{FANGZHENGHEITI-GBK-1.ttf}[Path=../../../fonts/, BoldFont=SOURCEHANSANSSC-MEDIUM-2.otf,AutoFakeSlant]
+\newCJKfontfamily\dahei{SOURCEHANSANSSC-MEDIUM-2.otf}[Path=../../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\cuhei{SOURCEHANSANSSC-BOLD-2.otf}[Path=../../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\fangsong{FANGZHENGFANGSONG-GBK-1.ttf}[Path=../../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\kaiti{FANGZHENGKAITI-GBK-1.ttf}[Path=../../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\kaishu{FANGZHENGKAITI-GBK-1.ttf}[Path=../../../fonts/,AutoFakeBold,AutoFakeSlant]
 
 % 设置页面的尺寸和布局。
 \geometry{a4paper,scale=0.75}
@@ -31,8 +47,9 @@
 \newtheorem{proposition}[theorem]{命题}
 
 % 自定义配置
-% 设置全局的 enumerate 环境项之间的距离
-\setlist[enumerate]{itemsep=5pt, parsep=0pt, leftmargin=20pt, topsep=5pt, partopsep=0pt}
+% 设置全局的 enumerate、itemize 环境项之间的距离
+\setlist[enumerate]{itemsep=-1pt, parsep=0pt, leftmargin=20pt, topsep=5pt, partopsep=0pt}
+\setlist[itemize]{itemsep=2pt, parsep=0pt, leftmargin=20pt, topsep=5pt, partopsep=0pt}
 
 % 定义新环境
 % 定义颜色
@@ -376,16 +393,6 @@
 \end{itemize}
 
 \section{基本概念}
-领域模型图：
-\begin{center}
-  \begin{minipage}{\textwidth}
-    \center
-    \includegraphics[width=\textwidth]{picture/领域模型图.png}
-    \captionsetup{hypcap=false}
-    \captionof{figure}{领域模型图}
-    \label{fig:领域模型图}
-  \end{minipage}
-\end{center}
 
 \subsection{消息的生命周期}
 RocketMQ 中消息的生命周期主要分为{\bfseries\kaishu 消息生产、消息存储、消息消费}这三部分。
@@ -452,15 +459,159 @@ RocketMQ 的订阅关系是指在发布订阅模型中，用于配置消息过�
   \end{minipage}
 \end{center}
 
-优势如下：
+异步通信优势如下：
 \begin{enumerate}
   \item 星型结构系统，拓扑简单，易于维护和管理。
   \item 上下游耦合性弱，可以独立升级和变更，不会互相影响。
   \item 容量削峰填谷。基于消息的中间代理往往具备很强的流量缓冲和整形能力，业务流量高峰到来时不会击垮下游。
 \end{enumerate}
 
+\subsection{消息传输模型}
+主流的消息中间件的传输模型主要为{\bfseries\kaishu 点对点模型}和{\bfseries\kaishu 发布订阅模型}。
+\subsubsection{点对点模型}
+点对点模型也叫队列模型，具有如下特点：
+\begin{enumerate}
+  \item 消费匿名：消息上下游沟通的唯一的身份就是队列，下游消费者从队列获取消息无法申明独立身份（即中间件对同一个队列中的所有消费者都一视同仁）。
+  \item 一对一通信：基于消费匿名特点，下游消费者即使有多个，但都没有自己独立的身份，因此共享队列中的消息，每一条消息都只会被唯一一个消费者处理。因此点对点模型只能实现一对一通信。
+\end{enumerate}
 
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/点对点模型.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{点对点模型}
+    \label{fig:点对点模型}
+  \end{minipage}
+\end{center}
 
+\subsubsection{发布订阅模型}
+发布订阅模型具有如下特点：
+\begin{enumerate}
+  \item 消费独立：相比队列模型的匿名消费方式，发布订阅模型中消费方都会具备的身份，一般叫做订阅组（订阅关系），不同订阅组之间相互独立不会相互影响。
+  \item 一对多通信：基于独立身份的设计，同一个主题内的消息可以被多个订阅组处理，每个订阅组都可以拿到全量消息。因此发布订阅模型可以实现一对多通信。
+\end{enumerate}
 
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/发布订阅模型.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{发布订阅模型}
+    \label{fig:发布订阅模型}
+  \end{minipage}
+\end{center}
+
+\subsubsection{对比}
+点对点模型和发布订阅模型各有优势，点对点模型更为简单，而发布订阅模型的扩展性更高。RocketMQ 使用的传输模型为发布订阅模型，因此也具有发布订阅模型的特点。
+
+\section*{领域模型图}
+领域模型图：
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/领域模型图.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{领域模型图}
+    \label{fig:领域模型图}
+  \end{minipage}
+\end{center}
+\section{主题（Topic）}
+主题是 RocketMQ 中消息传输和存储的顶层容器，用于标识同一类业务逻辑的消息。
+主题的作用主要如下：
+\begin{enumerate}
+  \item {\bfseries\kaishu 数据分类}：在 RocketMQ 的方案设计中，建议将不同业务类型的数据拆分到不同的主题中管理，通过主题实现存储的隔离性和订阅隔离性。
+  \item {\bfseries\kaishu 区分身份和权限}：RocketMQ 的消息本身是匿名无身份的，同一分类的消息使用相同的主题来做身份识别和权限管理。
+\end{enumerate}
+
+\subsection{模型关系：主题}
+在整个RocketMQ领域模型中，主题所处的位置如下（橙色区域）：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/模型关系：主题}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{模型关系：主题}
+    \label{fig:模型关系：主题}
+  \end{minipage}
+\end{center}
+
+主题是 RocketMQ 的顶层存储，所有消息资源的定义都在主题内部完成，但主题是一个{\bfseries\kaishu 逻辑概念}，并不是实际的消息容器。
+
+\textbf{主题内部由多个队列组成，消息的存储和水平扩展能力最终是由队列实现的；并且针对主题的所有约束和属性设置，最终也是通过主题内部的队列来实现。}
+
+\subsection{内部属性}
+\begin{enumerate}
+  \item \textbf{主题名称}：主题的名称，用于标识主题，主题名称集群内全局唯一，由用户创建主题时定义。
+  \item \textbf{队列列表}：队列作为主题的组成单元，是消息存储的实际容器，一个主题内包含一个或多个队列，消息实际存储在主题的各队列内；队列数量创建主题时定义（一个主题内至少包含一个队列）。
+  \item \textbf{消息类型}：主题所支持的消息类型（包括普通消息、顺序消息、定时/延时消息、事务消息），每个主题只允许发送一种消息类型的消息。
+\end{enumerate}
+
+\subsection{Admin工具相关操作}
+创建主题操作命令：\\
+\textbf{sh mqadmin updateTopic -n <nameserver\_address> -t <topic\_name> -c <cluster\_name> -a +message.type=<message\_type>}
+
+各类操作（详情见\href{https://rocketmq.apache.org/zh/docs/deploymentOperations/02admintool}{RocketMQ官网}）：
+\begin{enumerate}
+  \item updateTopic：创建/更新Topic配置。
+  \item deleteTopic：删除Topic。
+  \item topicList：查看 Topic 列表信息。
+  \item topicRoute：查看 Topic 路由信息。
+  \item topicStatus：查看 Topic 消息队列offset。
+  \item topicClusterList：查看 Topic 所在集群列表。
+  \item updateTopicPerm：更新 Topic 读写权限。
+  \item updateOrderConf：以平均负载算法计算消费者列表负载消息队列的负载结果。
+  \item statsAll：打印Topic订阅关系、TPS、积累量、24h读写总量等信息。
+\end{enumerate}
+
+\subsection{使用建议}
+\begin{itemize}
+  \item 合理拆分主题，注意消息量级与消息时效性，避免将时效性要求高的业务消息与量级大的业务消息归到同一主题。
+  \item 单一主题只收发一种类型消息，避免混用。
+  \item 主题管理尽量避免自动化机制，并在生产环境需保证严格管理主题资源，不随意进行增、删、改、查操作。
+\end{itemize}
+
+\section{队列（MessageQueue）}
+队列是 RocketMQ 中{\bfseries\kaishu 消息存储和传输的实际容器}，也是 RocketMQ 消息的最小存储单元。
+
+RocketMQ 的所有主题都是由多个队列组成，以此实现队列数量的水平拆分和队列内部的流式存储。
+
+队列的作用如下：
+\begin{enumerate}
+  \item 存储顺序性：队列天然具备顺序性，即消息按照进入队列的顺序写入存储。消息在队列中的位置通过位点（Offset）进行记录，队列头部为最早写入的消息（Offset=0），队列尾部为最新写入的消息（Offset逐渐递增）。
+  \item 流式操作语义：RocketMQ 基于队列的存储模型可确保消息从任意位点（Offset）读取任意数量的消息，以此实现类似聚合读取、回溯读取等特性，这些特性是队列存储模型特有的。
+\end{enumerate}
+
+\subsection{模型关系：队列}
+在整个RocketMQ领域模型中，队列所处的位置如下（橙色区域）：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/模型关系：队列.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{模型关系：队列}
+    \label{fig:模型关系：队列}
+  \end{minipage}
+\end{center}
+
+RocketMQ 默认提供{\bfseries\kaishu 可靠的消息存储机制}，所有发送成功的消息都被持久化存储到队列中，配合生产者和消费者客户端的调用保证至少投递一次。
+
+\textbf{队列属于主题的一部分，虽然所有的消息资源以主题粒度管理，但实际的操作实现是面向队列。}例如，生产者指定某个主题，向主题内发送消息，但实际消息发送到该主题下的某个队列中。
+
+RocketMQ 中可通过修改队列数量，以此实现横向的水平扩容和缩容。
+
+\subsection{内部属性}
+\begin{enumerate}
+  \item 读写权限：当前队列是否可以读写数据（队列的读写权限属于运维侧操作，不建议频繁修改）。
+\end{enumerate}
+
+\subsection{使用建议}
+\begin{itemize}
+  \item 队列数量的设置应遵循少用够用原则，否则可能导致集群元数据膨胀、系统负荷增加（队列越多，消费者的轮询越多）。
+  \item 在集群水平扩容增加节点后，为了保证集群流量的负载均衡，建议在新的服务节点上新增队列，或将旧的队列迁移到新的服务节点上。
+  \item 顺序消息的并发度会在一定程度上受队列数量的影响，当达到性能瓶颈时需要再增加队列。
+\end{itemize}
 % 文章结束
 \end{document}

@@ -30,7 +30,20 @@
 \contentsline {subsection}{\numberline {3.2.1}消息的生命周期}{12}{subsection.3.2.1}%
 \contentsline {subsubsection}{消息生产}{12}{subsubsection*.15}%
 \contentsline {subsubsection}{消息存储}{12}{subsubsection*.16}%
-\contentsline {subsubsection}{消息消费}{13}{subsubsection*.17}%
+\contentsline {subsubsection}{消息消费}{12}{subsubsection*.17}%
 \contentsline {subsection}{\numberline {3.2.2}通信方式}{13}{subsection.3.2.2}%
 \contentsline {subsubsection}{同步RPC调用模型}{13}{subsubsection*.18}%
 \contentsline {subsubsection}{异步通信模型}{14}{subsubsection*.19}%
+\contentsline {subsection}{\numberline {3.2.3}消息传输模型}{14}{subsection.3.2.3}%
+\contentsline {subsubsection}{点对点模型}{14}{subsubsection*.20}%
+\contentsline {subsubsection}{发布订阅模型}{15}{subsubsection*.21}%
+\contentsline {subsubsection}{对比}{16}{subsubsection*.22}%
+\contentsline {section}{\numberline {3.3}主题（Topic）}{17}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}模型关系：主题}{17}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}内部属性}{17}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Admin工具相关操作}{18}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}使用建议}{18}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}队列（MessageQueue）}{18}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}模型关系：队列}{19}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}内部属性}{19}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}使用建议}{20}{subsection.3.4.3}%
