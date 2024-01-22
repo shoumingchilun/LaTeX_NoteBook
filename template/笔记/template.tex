@@ -1,15 +1,31 @@
-\documentclass[11pt, a4paper, oneside]{ctexbook}
-\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor, listings, fontspec, caption}
+\documentclass[11pt, a4paper, oneside, fontset=none]{ctexbook}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor, listings, fontspec, caption, unicode-math}
 
 % 标题、作者、创建日期
 \title{{\Huge{\textbf{XXXXXX}}}\\XXXX}
-\author{徐鸣飞}
-\date{2023年12月27日}
+\author{作者}
+\date{}
 
 % 设置全局字体
-\setmainfont{Times New Roman}
-\let\kaishu\relax                               %清除旧定义
-\newCJKfontfamily\kaishu{KaiTi}[AutoFakeBold]   %重定义\kaishu，开启加粗功能
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+
+% 中文默认字体：方正书宋_GBK，粗体为思源宋体半粗体，斜体为方正楷体_GBK
+\setCJKmainfont[Path=../../fonts/, BoldFont=SOURCEHANSERIFCN-MEDIUM-6.otf, ItalicFont=FANGZHENGKAITI-GBK-1.ttf]{FANGZHENGSHUSONG-GBK-1.ttf}
+% 中文无衬线字体：方正黑体_GBK，粗体为思源黑体中粗体
+\setCJKsansfont[Path=../../fonts/, BoldFont=SOURCEHANSANSSC-MEDIUM-2.otf,AutoFakeSlant]{FANGZHENGHEITI-GBK-1.ttf}
+% 中文等宽字体：方正仿宋_GBK
+\setCJKmonofont[Path=../../fonts/]{FANGZHENGFANGSONG-GBK-1.ttf}
+\newCJKfontfamily\songti{FANGZHENGSHUSONG-GBK-1.ttf}[Path=../../fonts/, BoldFont=SOURCEHANSERIFCN-MEDIUM-6.otf,AutoFakeSlant]
+\newCJKfontfamily\xbsong{SOURCEHANSERIFCN-MEDIUM-6.otf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\dbsong{SOURCEHANSERIFCN-BOLD-2.otf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\cusong{SOURCEHANSERIFCN-HEAVY-4.otf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\heiti{FANGZHENGHEITI-GBK-1.ttf}[Path=../../fonts/, BoldFont=SOURCEHANSANSSC-MEDIUM-2.otf,AutoFakeSlant]
+\newCJKfontfamily\dahei{SOURCEHANSANSSC-MEDIUM-2.otf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\cuhei{SOURCEHANSANSSC-BOLD-2.otf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\fangsong{FANGZHENGFANGSONG-GBK-1.ttf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\kaiti{FANGZHENGKAITI-GBK-1.ttf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\kaishu{FANGZHENGKAITI-GBK-1.ttf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
 
 % 设置页面的尺寸和布局。
 \geometry{a4paper,scale=0.75}
@@ -74,6 +90,16 @@
   }
 }{}
 
+% 定义一个名为ignore的新环境，表示不重要的内容。
+\newenvironment{ignore}{%
+  \color{gray}% 设置字体颜色为灰色
+  \ignorespaces% 忽略环境前的空格
+  （% 在灰色文本前添加左括号
+}{%
+  ）% 在灰色文本后添加右括号
+  \ignorespacesafterend% 忽略环境后的空格
+}
+
 % 文章开始
 \begin{document}
 
@@ -98,7 +124,7 @@
 \setcounter{page}{1}        %设置当前页为第一页
 
 % 文章内容
-\chapter{第一章}
+\chapter{XXX}
 
 % 文章结束
 \end{document}

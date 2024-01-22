@@ -74,6 +74,16 @@
   }
 }{}
 
+% 定义一个名为ignore的新环境，表示不重要的内容。
+\newenvironment{ignore}{%
+  \color{gray}% 设置字体颜色为灰色
+  \ignorespaces% 忽略环境前的空格
+  （% 在灰色文本前添加左括号
+}{%
+  ）% 在灰色文本后添加右括号
+  \ignorespacesafterend% 忽略环境后的空格
+}
+
 % 文章开始
 \begin{document}
 
@@ -94,8 +104,11 @@
   \item 网上各类与消息队列相关的博客
 \end{enumerate}
 
-使用系统:Ubuntu22.04(云服务器)
-
+环境：
+\begin{description}
+  \item[系统] Ubuntu22.04(云服务器)
+  \item[Java版本] 17
+\end{description}
 
 % 生成目录
 \newpage                    %新的一页
@@ -338,6 +351,116 @@
 \end{center}
 
 至此，RocketMQ启动成功。
+
+\chapter{领域模型}
+\section{架构总览}
+组件示意图：
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/RocketMQ全局图.jpg}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{RocketMQ全局图}
+    \label{fig:RocketMQ全局图}
+  \end{minipage}
+\end{center}
+
+\begin{itemize}
+  \item {\bfseries\kaishu Producer：}消息生产者。
+  \item {\bfseries\kaishu NameSrv：}名称服务，即路由注册中心，可记录中转者提供给消费者和生产者。
+  \item {\bfseries\kaishu Broker：}中转者（也可以认为是队列Queen），负责接受、存储、转发消息。
+  \item {\bfseries\kaishu Comsumer：}消息消费者。
+  \item Producer group：生产者组。
+  \item Comsumer group：消费者组。
+  \item Broker cluster：中转者集群。
+\end{itemize}
+
+\section{基本概念}
+领域模型图：
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/领域模型图.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{领域模型图}
+    \label{fig:领域模型图}
+  \end{minipage}
+\end{center}
+
+\subsection{消息的生命周期}
+RocketMQ 中消息的生命周期主要分为{\bfseries\kaishu 消息生产、消息存储、消息消费}这三部分。
+
+生产者生产消息并发送至RocketMQ 服务端，消息被存储在服务端的主题中，消费者通过订阅主题消费消息。
+
+\subsubsection{消息生产}
+\textbf{生产者（Producer）：}
+在RocketMQ中，生产者是用来发送消息的组件，通常它被集成到业务系统的前端。生产者是轻量级匿名无身份的。
+
+\subsubsection{消息存储}
+\textbf{消息（Message）：}
+RocketMQ 的最小传输单元。消息具备不可变性，在初始化发送和完成存储后即不可变。
+
+\textbf{主题（Topic）：}
+RocketMQ 消息传输和存储的分组容器，主题内部由多个队列组成，消息的存储和水平扩展实际是通过主题内的队列实现的。
+
+\textbf{队列（MessageQueue）：}
+RocketMQ 消息传输和存储的实际单元容器，类比于其他消息队列中的分区。 RocketMQ 使用流式特性的无限队列结构来存储消息，消息在队列内会按顺序进行存储。
+
+\subsubsection{消息消费}
+\textbf{消费者分组（ConsumerGroup）：}
+RocketMQ 发布订阅模型中定义的独立的消费身份分组，用于统一管理底层运行的多个消费者（Consumer）。同一个消费组的多个消费者必须保持消费逻辑和配置一致，共同分担该消费组订阅的消息，实现消费能力的水平扩展。
+
+\textbf{消费者（Consumer）：}
+RocketMQ 消费消息的运行实体，通常它被集成到业务系统的后端。消费者必须被指定到某一个消费组中。
+
+\textbf{订阅关系（Subscription）：}
+RocketMQ 的订阅关系是指在发布订阅模型中，用于配置消息过滤、重试以及消费进度的规则。订阅关系是以消费组为单位进行管理的，消费组通过定义订阅关系来控制该组下的消费者如何处理消息的过滤、重试以及消费进度恢复等操作。
+简单来说，订阅关系就是消费组对消息的一种规则设定，可以让我们更加灵活地控制消息的处理方式，确保系统能够按照我们预期的方式来消费和处理消息。\\
+\begin{ignore}
+  RocketMQ 的订阅关系除过滤表达式之外都是持久化的，即服务端重启或请求断开，订阅关系依然保留。
+\end{ignore}
+
+\subsection{通信方式}
+分布式系统架构思想下，将复杂系统拆分为多个独立的子模块，例如微服务模块。此时就需要考虑子模块间的远程通信，典型的通信模式分为以下两种，一种是{\bfseries\kaishu 同步的RPC远程调用}；一种是{\bfseries\kaishu 基于中间件代理的异步通信}。
+
+\subsubsection{同步RPC调用模型}
+同步RPC调用模型下，不同系统之间直接进行调用通信，每个请求直接从调用方发送到被调用方，然后要求被调用方立即返回响应结果给调用方，以确定本次调用结果是否成功。\\
+\begin{ignore}
+  注意：此处的同步并不代表RPC的编程接口方式，RPC也可以有异步非阻塞调用的编程方式，但本质上仍然是需要在指定时间内得到目标端的直接响应。
+\end{ignore}
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/同步RPC调用模型.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{同步RPC调用模型}
+    \label{fig:同步RPC调用模型}
+  \end{minipage}
+\end{center}
+
+\subsubsection{异步通信模型}
+异步消息通信模式下，各子系统之间无需强耦合直接连接，调用方只需要将请求转化成异步事件（消息）发送给中间代理，发送成功即可认为该异步链路调用完成，剩下的工作中间代理会负责将事件可靠通知到下游的调用系统，确保任务执行完成。该中间代理一般就是消息中间件。
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/异步通信模型.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{异步通信模型}
+    \label{fig:异步通信模型}
+  \end{minipage}
+\end{center}
+
+优势如下：
+\begin{enumerate}
+  \item 星型结构系统，拓扑简单，易于维护和管理。
+  \item 上下游耦合性弱，可以独立升级和变更，不会互相影响。
+  \item 容量削峰填谷。基于消息的中间代理往往具备很强的流量缓冲和整形能力，业务流量高峰到来时不会击垮下游。
+\end{enumerate}
+
+
+
 
 % 文章结束
 \end{document}

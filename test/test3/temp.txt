@@ -1,0 +1,34 @@
+% % 中文默认字体：方正书宋_GBK，粗体为思源宋体半粗体，斜体为方正楷体_GBK
+% \setCJKmainfont{FANGZHENGSHUSONG-GBK-1.TTF}[BoldFont={SOURCEHANSERIFCN-MEDIUM-6.OTF}, ItalicFont=FANGZHENGKAITI-GBK-1.TTF]
+% % 中文无衬线字体：方正黑体_GBK，粗体为思源黑体中粗体
+% \setCJKsansfont{FANGZHENGHEITI-GBK-1.TTF}[BoldFont={SOURCEHANSANSSC-MEDIUM-2.OTF}]
+% % 中文等宽字体：方正仿宋_GBK
+% \setCJKmonofont{FANGZHENGFANGSONG-GBK-1.TTF}
+
+% \newCJKfontfamily\songti{FANGZHENGSHUSONG-GBK-1.TTF}[BoldFont={SOURCEHANSERIFCN-MEDIUM-6.OTF}]
+% \newCJKfontfamily\xbsong{SOURCEHANSERIFCN-MEDIUM-6.OTF} % 小标宋
+% \newCJKfontfamily\dbsong{SOURCEHANSERIFCN-BOLD-2.OTF} % 大标宋
+% \newCJKfontfamily\cusong{SOURCEHANSERIFCN-HEAVY-4.OTF} % 粗宋
+% \newCJKfontfamily\heiti{FANGZHENGHEITI-GBK-1.TTF}[BoldFont={SOURCEHANSANSSC-MEDIUM-2.OTF}]
+% \newCJKfontfamily\dahei{SOURCEHANSANSSC-MEDIUM-2.OTF} % 大黑
+% \newCJKfontfamily\cuhei{SOURCEHANSANSSC-BOLD-2.OTF} % 粗黑
+% \newCJKfontfamily\fangsong{FANGZHENGFANGSONG-GBK-1.TTF}
+% \newCJKfontfamily\kaiti{FANGZHENGKAITI-GBK-1.TTF}
+
+% % 中文默认字体：方正书宋_GBK，粗体为思源宋体半粗体，斜体为方正楷体_GBK
+% \setCJKmainfont{FANGZHENGSHUSONG-GBK-1}[BoldFont={SOURCEHANSERIFCN-MEDIUM-6}, ItalicFont=FANGZHENGKAITI-GBK-1]
+% % 中文无衬线字体：方正黑体_GBK，粗体为思源黑体中粗体
+% \setCJKsansfont{FANGZHENGHEITI-GBK-1}[BoldFont={SOURCEHANSANSSC-MEDIUM-2}]
+% % 中文等宽字体：方正仿宋_GBK
+% \setCJKmonofont{FANGZHENGFANGSONG-GBK-1}
+
+% \newCJKfontfamily\songti{FANGZHENGSHUSONG-GBK-1}[BoldFont={SOURCEHANSERIFCN-MEDIUM-6}]
+% \newCJKfontfamily\xbsong{SOURCEHANSERIFCN-MEDIUM-6} % 小标宋
+% \newCJKfontfamily\dbsong{SOURCEHANSERIFCN-BOLD-2} % 大标宋
+% \newCJKfontfamily\cusong{SOURCEHANSERIFCN-HEAVY-4} % 粗宋
+% \newCJKfontfamily\heiti{FANGZHENGHEITI-GBK-1}[BoldFont={SOURCEHANSANSSC-MEDIUM-2}]
+% \newCJKfontfamily\dahei{SOURCEHANSANSSC-MEDIUM-2} % 大黑
+% \newCJKfontfamily\cuhei{SOURCEHANSANSSC-BOLD-2} % 粗黑
+% \newCJKfontfamily\fangsong{FANGZHENGFANGSONG-GBK-1}
+% \newCJKfontfamily\kaiti{FANGZHENGKAITI-GBK-1}
+

@@ -1,5 +1,5 @@
-\documentclass[11pt, a4paper, oneside]{ctexbook}
-\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor, listings, fontspec, caption}
+\documentclass[11pt, a4paper, oneside, fontset=none]{ctexbook}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor, listings, fontspec, caption, unicode-math}
 
 % 标题、作者、创建日期
 \title{{\Huge{\textbf{XXXXXX}}}\\XXXX}
@@ -7,9 +7,25 @@
 \date{2023年12月27日}
 
 % 设置全局字体
-\setmainfont{Times New Roman}
-\let\kaishu\relax                               %清除旧定义
-\newCJKfontfamily\kaishu{KaiTi}[AutoFakeBold]   %重定义\kaishu，开启加粗功能
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+
+% 中文默认字体：方正书宋_GBK，粗体为思源宋体半粗体，斜体为方正楷体_GBK
+\setCJKmainfont[Path=../../fonts/, BoldFont=SOURCEHANSERIFCN-MEDIUM-6.otf, ItalicFont=FANGZHENGKAITI-GBK-1.ttf]{FANGZHENGSHUSONG-GBK-1.ttf}
+% 中文无衬线字体：方正黑体_GBK，粗体为思源黑体中粗体
+\setCJKsansfont[Path=../../fonts/, BoldFont=SOURCEHANSANSSC-MEDIUM-2.otf,AutoFakeSlant]{FANGZHENGHEITI-GBK-1.ttf}
+% 中文等宽字体：方正仿宋_GBK
+\setCJKmonofont[Path=../../fonts/]{FANGZHENGFANGSONG-GBK-1.ttf}
+\newCJKfontfamily\songti{FANGZHENGSHUSONG-GBK-1.ttf}[Path=../../fonts/, BoldFont=SOURCEHANSERIFCN-MEDIUM-6.otf,AutoFakeSlant]
+\newCJKfontfamily\xbsong{SOURCEHANSERIFCN-MEDIUM-6.otf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\dbsong{SOURCEHANSERIFCN-BOLD-2.otf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\cusong{SOURCEHANSERIFCN-HEAVY-4.otf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\heiti{FANGZHENGHEITI-GBK-1.ttf}[Path=../../fonts/, BoldFont=SOURCEHANSANSSC-MEDIUM-2.otf,AutoFakeSlant]
+\newCJKfontfamily\dahei{SOURCEHANSANSSC-MEDIUM-2.otf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\cuhei{SOURCEHANSANSSC-BOLD-2.otf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\fangsong{FANGZHENGFANGSONG-GBK-1.ttf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\kaiti{FANGZHENGKAITI-GBK-1.ttf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
+\newCJKfontfamily\kaishu{FANGZHENGKAITI-GBK-1.ttf}[Path=../../fonts/,AutoFakeBold,AutoFakeSlant]
 
 % 设置页面的尺寸和布局。
 \geometry{a4paper,scale=0.75}
@@ -29,8 +45,6 @@
 \newtheorem{corollary}[theorem]{推论}
 \newtheorem{example}[theorem]{例}
 \newtheorem{proposition}[theorem]{命题}
-
-
 
 % 自定义配置
 % 设置全局的 enumerate 环境项之间的距离
@@ -76,6 +90,16 @@
   }
 }{}
 
+% 定义一个名为ignore的新环境，表示不重要的内容。
+\newenvironment{ignore}{%
+  \color{gray}% 设置字体颜色为灰色
+  \ignorespaces% 忽略环境前的空格
+  （% 在灰色文本前添加左括号
+}{%
+  ）% 在灰色文本后添加右括号
+  \ignorespacesafterend% 忽略环境后的空格
+}
+
 % 文章开始
 \begin{document}
 
@@ -108,7 +132,8 @@
 
 教育领域也将因人工智能的介入而发生翻天覆地的变化。个性化的智能教育系统将根据学生的学习特点和需求，量身定制最合适的教学内容和方法。学生将通过与智能教育助手的互动，更加深入地理解知识，培养创新思维和解决问题的能力。这将有助于打破传统教育的条条框框，培养更具创造力和适应力的人才。
 
-智能城市的建设也是智能社会发展的一个重要方向。通过大数据和人工智能技术，城市能够更高效地管理交通、能源、环境等方面的问题。智能交通系统将实现车辆的智能导航和交通流的优化，减少拥堵和事故的发生。智能能源管理系统将推动城市向可持续发展方向迈进，减少能源浪费，提高能源利用效率。这将使城市更加宜居，提升居民的生活质量。
+\begin{ignore}智能城市的建设也是智能社会发展的一个重要方向。通过大数据和人工智能技术，城市能够更高效地管理交通、能源、环境等方面的问题。智能交通系统将实现车辆的智能导航和交通流的优化，减少拥堵和事故的发生。智能能源管理系统将推动城市向可持续发展方向迈进，减少能源浪费，提高能源利用效率。这将使城市更加宜居，提升居民的生活质量。
+\end{ignore}
 
 \textbf{常见的人工智能应用：}
 \begin{enumerate}
@@ -171,5 +196,37 @@ public class HelloWorld {
     \label{fig:NosqlDatabase}
   \end{minipage}
 \end{center}
+
+\chapter{字体}
+默认字体：方正书宋\_GBK，粗体为思源宋体半粗体，斜体为方正楷体\_GBK
+
+你好abc123\ \textbf{你好abc123}\  \textit{你好abc123}\  
+% \textbf{\textit{你好abc123}}
+
+中文无衬线字体：方正黑体\_GBK，粗体为思源黑体中粗体
+\textsf{你好abc123}\ \textbf{\textsf{你好abc123}}
+
+中文等宽字体：方正仿宋\_GBK
+\texttt{你好abc123}
+
+songti{\songti 你好abc123}
+
+xbsong{\xbsong 你好abc123}
+
+dbsong{\dbsong 你好abc123}
+
+cusong{\cusong 你好abc123}
+
+heiti{\heiti 你好abc123}
+
+dahei{\dahei 你好abc123}
+
+cuhei{\cuhei 你好abc123}
+
+fangsong{\fangsong 你好abc123}
+
+kaiti{\kaiti 你好abc123}
+
+bfserieskaiti{\bfseries\kaiti 你好abc123}
 % 文章结束
 \end{document}
