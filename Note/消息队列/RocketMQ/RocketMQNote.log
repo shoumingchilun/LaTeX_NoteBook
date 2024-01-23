@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  22 JAN 2024 22:38
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  23 JAN 2024 13:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -940,17 +940,38 @@ File: picture/模型关系：主题.png Graphic file (type bmp)
  [17] [18]
 File: picture/模型关系：队列.png Graphic file (type bmp)
 <picture/模型关系：队列.png>
- [19] [20] (./RocketMQNote.aux)
+ [19]
+File: picture/模型关系：消息.png Graphic file (type bmp)
+<picture/模型关系：消息.png>
+ [20] [21]
+File: picture/模型关系：生产者.png Graphic file (type bmp)
+<picture/模型关系：生产者.png>
+ [22]
+File: picture/模型关系：消费者分组.png Graphic file (type bmp)
+<picture/模型关系：消费者分组.png>
+ [23] [24]
+File: picture/模型关系：消费者.png Graphic file (type bmp)
+<picture/模型关系：消费者.png>
+ [25]
+File: picture/模型关系：订阅关系.png Graphic file (type bmp)
+<picture/模型关系：订阅关系.png>
+ [26]
+File: picture/不同消费者分组对于同一个主题的订阅相互独立.png Graphic file (type bmp)
+<picture/不同消费者分组对于同一个主题的订阅相互独立.png>
+ [27]
+File: picture/同一个消费者分组对于不同主题的订阅.png Graphic file (type bmp)
+<picture/同一个消费者分组对于不同主题的订阅.png>
+ [28] [29] (./RocketMQNote.aux)
 Package rerunfilecheck Info: File `RocketMQNote.out' has not changed.
-(rerunfilecheck)             Checksum: 960616953526381B1F944FD98C32B32F;4079.
+(rerunfilecheck)             Checksum: AB8ABE4837CA5CF88A97AF2840CC889D;7165.
  ) 
 Here is how much of TeX's memory you used:
- 23816 strings out of 476683
- 503210 string characters out of 5804928
- 1863012 words of memory out of 5000000
- 43713 multiletter control sequences out of 15000+600000
+ 23893 strings out of 476683
+ 505664 string characters out of 5804928
+ 1864012 words of memory out of 5000000
+ 43783 multiletter control sequences out of 15000+600000
  526886 words of font info for 143 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,6n,114p,499b,498s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on RocketMQNote.pdf (24 pages).
+Output written on RocketMQNote.pdf (33 pages).

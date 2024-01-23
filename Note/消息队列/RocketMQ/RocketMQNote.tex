@@ -139,7 +139,7 @@
 \setcounter{page}{1}        %设置当前页为第一页
 
 % 文章内容
-\chapter{初识：消息队列}
+\chapter{消息队列：初识}
 \section{介绍}
 消息队列，顾名思义，存放\textbf{消息}（可类比为请求）的\textbf{队列}（一种先进先出的数据结构）。
 
@@ -239,7 +239,7 @@
 \end{enumerate}
 本文将使用RabbitMQ。
 
-\chapter{启动：RocketMQ}
+\chapter{RocketMQ：启动}
 \section{下载二进制文件包}
 官网地址：https://rocketmq.apache.org/zh/docs/quickStart/01quickstart
 
@@ -613,5 +613,245 @@ RocketMQ 中可通过修改队列数量，以此实现横向的水平扩容和�
   \item 在集群水平扩容增加节点后，为了保证集群流量的负载均衡，建议在新的服务节点上新增队列，或将旧的队列迁移到新的服务节点上。
   \item 顺序消息的并发度会在一定程度上受队列数量的影响，当达到性能瓶颈时需要再增加队列。
 \end{itemize}
+
+\section{消息（Message）}
+消息是RocketMQ 中的{\bfseries\kaishu 最小数据传输单元}。
+生产者将业务数据的负载和拓展属性包装成消息发送到 RocketMQ 服务端，服务端按照相关语义将消息投递到消费端进行消费。
+
+消息的特点：
+\begin{enumerate}
+  \item 不可变性：一旦产生后，消息的内容不会发生改变；消费端获取的消息都是只读消息视图。
+  \item 持久化：RocketMQ 会默认对消息进行持久化，即将接收到的消息存储到 RocketMQ 服务端的存储文件中，保证消息的可回溯性和系统故障场景下的可恢复性。
+\end{enumerate}
+
+\subsection{模型关系：消息}
+在整个 RocketMQ 领域模型中，消息所处的位置如下（橙色区域）：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/模型关系：消息.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{模型关系：消息}
+    \label{fig:模型关系：消息}
+  \end{minipage}
+\end{center}
+
+消息由生产者初始化并发送到 RocketMQ 服务端，并按照到达 RocketMQ 服务端的顺序存储到队列中。消费者按照指定的订阅关系从 RocketMQ 服务端中获取消息并消费。
+
+\subsection{内部属性}
+\begin{enumerate}
+  \item 主题名称：当前消息所属的主题的名称。
+  \item 消息队列：实际存储当前消息的队列。
+  \item 消息位点：当前消息存储在队列中的位置（Offset）。
+  \item 消息ID：消息的唯一标识，集群内每条消息的ID全局唯一，自动生成的32位字符串。
+  \item 消息类型：当前消息的类型，分为Normal（普通消息）、FIFO（顺序消息）、Delay（定时消息）、Transaction（事务消息）。
+  \item 消息负载：业务消息的实际报文数据，由生产者负责序列化编码，按照二进制字节传输。
+  \item 消息发送时间戳：消息发送时，生产者客户端系统的本地毫秒级时间戳。
+  \item 消息保存时间戳：消息在 RocketMQ 服务端完成存储时，服务端系统的本地毫秒级时间戳。
+  \item 消费重试次数：消息消费失败后， RocketMQ 服务端重新投递的次数。每次重试后，重试次数加1。
+  \item 其他自定义属性。
+  \item 索引Key列表（可选）：消息的索引键，可通过设置不同的Key区分消息和快速查找消息，由生产者定义。
+  \item 过滤标签Tag（可选）：消息的过滤标签。消费者可通过Tag对消息进行过滤，仅接收指定标签的消息，由生产者定义。
+\end{enumerate}
+
+\subsection{使用建议}
+\begin{itemize}
+  \item 单条消息不建议传输超大负载。
+  \item 由于消息的不可变性，在使用过程中对消息进行中转操作时，需要对消息重新初始化。
+\end{itemize}
+
+\section{生产者（Producer）}
+生产者是 RocketMQ 系统中用来构建并传输消息到 RocketMQ 服务端的运行实体，生产者是匿名的。
+
+在消息生产者中，可以定义如下传输行为：
+\begin{enumerate}
+  \item 发送方式：生产者可通过API接口设置消息发送的方式，支持同步传输和异步传输。
+  \item 批量发送：生产者可通过API接口设置消息批量传输的方式。例如，批量发送的消息条数或消息大小。
+  \item 事务行为：Apache RocketMQ 支持事务消息，对于事务消息需要生产者配合进行事务检查等行为保障事务的最终一致性。
+\end{enumerate}
+
+生产者和主题的关系为{\bfseries\kaishu 多对多关系}，即同一个生产者可以向多个主题发送消息，对于平台类场景如果需要发送消息到多个主题，并不需要创建多个生产者；同一个主题也可以接收多个生产者的消息，以此可以实现生产者性能的水平扩展和容灾。
+
+\subsection{模型关系：生产者}
+在整个 RocketMQ 领域模型中，生产者所处的位置如下（橙色区域）：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/模型关系：生产者.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{模型关系：生产者}
+    \label{fig:模型关系：生产者}
+  \end{minipage}
+\end{center}
+
+消息由生产者初始化并发送到RocketMQ 服务端。
+
+\subsection{内部属性}
+\begin{enumerate}
+  \item 生产者客户端ID：生产者客户端的标识，用于区分不同的生产者。集群内全局唯一。
+  \item 通信参数：接入点信息（必选，连接服务端的接入地址，用于识别服务端集群）、身份认证信息 （可选）、请求超时时间 （可选）。
+  \item 发送重试策略；生产者在消息发送失败时的重试策略。
+  \item 预绑定主题列表：生产者需要将消息发送到的目标主题列表。服务端会在生产者初始化时根据预绑定主题列表，检查目标主题的访问权限和合法性，而不需要等到应用启动后再检查。事务消息场景下，生产者在故障、重启恢复时，需要检查事务消息的主题中是否有未提交的事务消息，因此必须设置。
+  \item 事务检查器：事务消息场景下，生产者需要主动实现事务检查器的接口，以保证异常场景下事务的最终一致性。
+\end{enumerate}
+
+\subsection{使用建议}
+\begin{itemize}
+  \item 对于生产者的创建和初始化，建议遵循够用即可、最大化复用原则，如果有需要发送消息到多个主题的场景，无需为每个主题都创建一个生产者。
+  \item 生产者是可以重复利用的底层资源，类似数据库的连接池中的连接一样，不建议频繁创建和销毁。
+\end{itemize}
+
+\section{消费者分组（ConsumerGroup）}
+消费者分组是 RocketMQ 系统中承载多个消费行为一致的消费者的负载均衡分组，并可通过消费者分组内初始化多个消费者实现消费性能的水平扩展以及高可用容灾。
+和消费者不同，消费者分组并不是运行实体，而是一个{\bfseries\kaishu 逻辑资源}。
+
+同一分组下的多个消费者将\textbf{按照分组内统一的消费行为和负载均衡策略}消费消息，包含以下消费行为：
+\begin{enumerate}
+  \item 订阅关系：RocketMQ 以消费者分组的粒度管理订阅关系。
+  \item 投递顺序性：RocketMQ 的服务端将消息投递给消费者消费时，支持顺序投递和并发投递，投递方式在消费者分组中统一配置。
+  \item 消费重试策略：消费者消费消息失败时的重试策略，包括重试次数、死信队列设置等。
+\end{enumerate}
+
+\subsection{模型关系：消费者分组}
+在整个 RocketMQ 领域模型中，消费者分组所处的位置如下（橙色区域）：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/模型关系：消费者分组.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{模型关系：消费者分组}
+    \label{fig:模型关系：消费者分组}
+  \end{minipage}
+\end{center}
+
+消费者按照指定的订阅关系从 RocketMQ 服务端中获取消息并消费。
+
+\subsection{内部属性}
+\begin{enumerate}
+  \item 消费者分组名称：消费者分组的名称，用于区分不同的消费者分组。集群内全局唯一。
+  \item 订阅关系：当前消费者分组关联的订阅关系集合。包括消费者订阅的主题，以及消息的过滤规则等。订阅关系由消费者动态注册到消费者分组中，RocketMQ 服务端会持久化订阅关系并匹配消息的消费进度。
+  \item 投递顺序性：消费者消费消息时，RocketMQ 向消费者客户端投递消息的顺序（支持顺序投递和并发投递）。
+  \item 消费重试策略：消费者消费消息失败时，系统的重试策略（将特定消息投递给消费者重新消费）。包括最大重试次数（超过则放入死信队列）、重试间隔。
+\end{enumerate}
+
+\subsection{使用建议}
+\begin{itemize}
+  \item 按照业务合理拆分分组。
+  \item 消费者分组管理尽量避免自动化机制，请勿随意进行增、删、改、查操作。
+\end{itemize}
+
+\section{消费者（Consumer）}
+消费者是 RocketMQ 中用来接收并处理消息的运行实体。
+消费者通常被集成在业务系统中，从 RocketMQ 服务端获取消息，并将消息转化成业务可理解的信息，供业务逻辑处理。
+
+在消息消费端，可以定义如下传输行为：
+\begin{enumerate}
+  \item 消费者身份：消费者必须关联一个指定的消费者分组，以获取分组内统一定义的行为配置和消费状态。
+  \item 消费者类型：RocketMQ 面向不同的开发场景提供了多样的消费者类型，包括PushConsumer类型、SimpleConsumer类型、PullConsumer类型（仅推荐流处理场景使用）等。
+  \item 消费者本地运行配置：消费者根据不同的消费者类型，控制消费者客户端本地的运行配置。例如消费者客户端的线程数，消费并发度等，实现不同的传输效果。
+\end{enumerate}
+
+\subsection{模型关系：消费者}
+在整个 RocketMQ 领域模型中，消费者所处的位置如下（橙色区域）：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/模型关系：消费者.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{模型关系：消费者}
+    \label{fig:模型关系：消费者}
+  \end{minipage}
+\end{center}
+
+消费者按照指定的订阅关系从 RocketMQ 服务端中获取消息并消费。
+
+\subsection{内部属性}
+\begin{enumerate}
+  \item 客户端ID：消费者客户端的标识，用于区分不同的消费者。集群内全局唯一。
+  \item 消费者分组名称：当前消费者关联的消费者分组名称，消费者必须关联到指定的消费者分组，\textbf{通过消费者分组获取消费行为}。
+  \item 预绑定订阅关系列表：指定消费者的订阅关系列表。RocketMQ 服务端可在消费者初始化阶段，根据预绑定的订阅关系列表对目标主题进行权限及合法性校验，无需等到应用启动后才能校验。
+  \item 通信参数：接入点信息（必选）、身份认证信息（可选）、请求超时时间（可选）。
+  \item 消费监听器：获得RocketMQ服务端的消息后，消费者调用消息消费逻辑的监听器。
+\end{enumerate}
+
+\subsection{使用建议}
+\begin{itemize}
+  \item 消费者是可以重复利用的底层资源，类似数据库的连接池中的连接一样，不建议频繁创建和销毁。
+  \item 由于消费者在通信协议层面支持非阻塞传输模式，大部分场景下，单台主机内的一个消费分组只需要初始化一个唯一的消费者即可。
+\end{itemize}
+
+\section{订阅关系（Subscription）}
+订阅关系是 RocketMQ 系统中消费者获取消息、处理消息的规则和状态配置。
+订阅关系由消费者分组动态注册到服务端系统，并在后续的消息传输中按照订阅关系定义的过滤规则进行消息匹配和消费进度维护。
+
+通过配置订阅关系，可控制如下传输行为：
+\begin{enumerate}
+  \item 消息过滤规则：用于控制消费者在消费消息时，选择主题内的哪些消息进行消费，设置消费过滤规则可以高效地过滤消费者需要的消息集合，灵活根据不同的业务场景设置不同的消息接收范围。
+  \item 消费状态：Apache RocketMQ 服务端默认提供订阅关系持久化的能力，即消费者分组在服务端注册订阅关系后，当消费者离线并再次上线后，可以获取离线前的消费进度并继续消费。
+\end{enumerate}
+
+\subsection{模型关系：订阅关系}
+在整个 RocketMQ 领域模型中，订阅关系所处的位置如下（橙色区域）：
+
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/模型关系：订阅关系.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{模型关系：订阅关系}
+    \label{fig:模型关系：订阅关系}
+  \end{minipage}
+\end{center}
+
+消费者按照指定的订阅关系从 RocketMQ 服务端中获取消息并消费。
+
+\subsection{订阅关系判断原则}
+RocketMQ 的订阅关系{\bfseries\kaishu 按照消费者分组和主题粒度}设计，因此，一个订阅关系指的是指定某个消费者分组对于某个主题的订阅。
+
+判断原则如下：
+\subsubsection{不同消费者分组对于同一个主题的订阅}
+不同消费者分组对于同一个主题的订阅是相互独立的。如图：
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/不同消费者分组对于同一个主题的订阅相互独立.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{不同消费者分组对于同一个主题的订阅}
+    \label{fig:不同消费者分组对于同一个主题的订阅}
+  \end{minipage}
+\end{center}
+
+消费者分组Group A和消费者分组Group B分别以不同的订阅关系订阅了同一个主题Topic A，这两个订阅关系互相独立，可以各自定义，不受影响。
+
+\subsubsection{同一个消费者分组对于不同主题的订阅}
+同一个消费者分组对于不同主题的订阅也是相互独立的。如图：
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/同一个消费者分组对于不同主题的订阅.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{同一个消费者分组对于不同主题的订阅}
+    \label{fig:同一个消费者分组对于不同主题的订阅}
+  \end{minipage}
+\end{center}
+
+消费者分组Group A订阅了两个主题Topic A和Topic B，对于Group A中的消费者来说，订阅的Topic A为一个订阅关系，订阅的Topic B为另外一个订阅关系，且这两个订阅关系互相独立，可以各自定义，不受影响。
+
+\subsection{内部属性}
+\begin{enumerate}
+  \item 过滤类型：消息过滤规则的类型，分为TAG过滤（对Tag字符串进行全文过滤匹配）和SQL92过滤（按照SQL语法对消息属性进行过滤匹配）。
+  \item 过滤表达式：自定义的过滤规则表达式。
+\end{enumerate}
+
+\subsection{使用建议}
+\begin{itemize}
+  \item 不要频繁修改订阅关系，这样可能会导致客户端一直处于负载均衡调整和变更的过程，从而影响消息接收。
+\end{itemize}
+
+
 % 文章结束
 \end{document}
