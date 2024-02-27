@@ -24,6 +24,7 @@
 \contentsline {section}{\numberline {2.1}下载二进制文件包}{6}{section.2.1}%
 \contentsline {section}{\numberline {2.2}启动NameServer}{7}{section.2.2}%
 \contentsline {section}{\numberline {2.3}启动Broker+Proxy}{9}{section.2.3}%
+\contentsline {section}{\numberline {2.4}关闭服务器}{10}{section.2.4}%
 \contentsline {chapter}{\numberline {第三章\hspace {.3em}}领域模型}{11}{chapter.3}%
 \contentsline {section}{\numberline {3.1}架构总览}{11}{section.3.1}%
 \contentsline {section}{\numberline {3.2}基本概念}{12}{section.3.2}%

@@ -1,0 +1,33 @@
+\documentclass[11pt, a4paper, oneside, fontset=none]{ctexbook}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, enumitem, geometry, listings, xcolor, listings, fontspec, caption, unicode-math, tikz}
+
+% 作者、标题、时间等信息
+\input{config/metaData.tex}
+
+\input{config/pdfBookmarks.tex}
+\input{config/fontConfig.tex}
+\input{config/composeConfig.tex}
+
+\input{config/color.tex}
+\input{config/Environment.tex}
+
+% \includeonly{content/title, content/preface, content/catalogue, content/chapter_1}
+\begin{document}
+
+\include{content/title}
+
+\pagenumbering{roman}       %页码以小写罗马数字形式表示
+\setcounter{page}{1}        %设置当前页为第一页
+\include{content/preface}   %前言
+
+\pagenumbering{Roman}       %页码以大写罗马数字形式表示
+\setcounter{page}{1}        %设置当前页为第一页
+\include{content/catalogue} %目录
+
+% 内容
+\pagenumbering{arabic}      %页码以阿拉伯数字形式表示
+\setcounter{page}{1}        %设置当前页为第一页
+
+\include{content/chapter_1}
+
+\end{document}

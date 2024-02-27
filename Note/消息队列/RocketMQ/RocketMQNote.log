@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  23 JAN 2024 13:06
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  27 FEB 2024 12:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -963,7 +963,7 @@ File: picture/同一个消费者分组对于不同主题的订阅.png Graphic fi
 <picture/同一个消费者分组对于不同主题的订阅.png>
  [28] [29] (./RocketMQNote.aux)
 Package rerunfilecheck Info: File `RocketMQNote.out' has not changed.
-(rerunfilecheck)             Checksum: AB8ABE4837CA5CF88A97AF2840CC889D;7165.
+(rerunfilecheck)             Checksum: 3A7A9A50D8AB94909BBB8C1352A0BFFC;7283.
  ) 
 Here is how much of TeX's memory you used:
  23893 strings out of 476683
