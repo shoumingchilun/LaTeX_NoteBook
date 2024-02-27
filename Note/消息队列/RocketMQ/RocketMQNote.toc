@@ -71,3 +71,14 @@
 \contentsline {subsubsection}{同一个消费者分组对于不同主题的订阅}{28}{subsubsection*.25}%
 \contentsline {subsection}{\numberline {3.9.3}内部属性}{29}{subsection.3.9.3}%
 \contentsline {subsection}{\numberline {3.9.4}使用建议}{29}{subsection.3.9.4}%
+\contentsline {chapter}{\numberline {第四章\hspace {.3em}}Springboot快速集成RocketMQ}{30}{chapter.4}%
+\contentsline {section}{\numberline {4.1}添加Maven依赖}{30}{section.4.1}%
+\contentsline {section}{\numberline {4.2}添加配置文件属性}{30}{section.4.2}%
+\contentsline {section}{\numberline {4.3}生产者}{31}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}普通消息}{31}{subsection.4.3.1}%
+\contentsline {subsubsection}{同步发送}{31}{subsubsection*.26}%
+\contentsline {subsubsection}{异步发送}{32}{subsubsection*.27}%
+\contentsline {subsubsection}{单向发送}{32}{subsubsection*.28}%
+\contentsline {subsection}{\numberline {4.3.2}顺序消息}{33}{subsection.4.3.2}%
+\contentsline {subsubsection}{同步发送}{33}{subsubsection*.29}%
+\contentsline {subsubsection}{异步发送}{33}{subsubsection*.30}%

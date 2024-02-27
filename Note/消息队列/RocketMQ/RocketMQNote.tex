@@ -64,6 +64,7 @@
     stringstyle=\color{commentcolor},
     showstringspaces=false,
     breaklines=true,
+    breakindent=0pt,
     frame=single,
     flexiblecolumns=true,
     backgroundcolor=\color{gray!5},
@@ -80,6 +81,54 @@
     keywordstyle=\color{blue},
     commentstyle=\color{green!60!black},
     stringstyle=\color{commentcolor},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    flexiblecolumns=true,
+    backgroundcolor=\color{gray!5},
+    numbers=left,
+    numberstyle=\tiny,
+    #1
+  }
+}{}
+% 定义代码环境：XML文本
+\lstnewenvironment{xml}[1][]{
+  \lstset{
+    language=XML,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{purple},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    flexiblecolumns=true,
+    backgroundcolor=\color{gray!5},
+    numbers=left,
+    numberstyle=\tiny,
+    #1
+  }
+}{}
+
+% 定义代码环境：YAML文本
+\lstdefinelanguage{yaml}{
+  keywords={true,false,null,y,n},
+  keywordstyle=\color{darkgray}\bfseries,
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstnewenvironment{yaml}[1][]{
+  \lstset{
+    language=YAML,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{purple},
     showstringspaces=false,
     breaklines=true,
     frame=single,
@@ -330,7 +379,9 @@
 \end{center}
 
 \section{启动Broker+Proxy}
-执行命令：\\{\bfseries\kaishu nohup sh bin/mqbroker -n localhost:9876 --enable-proxy \&}
+执行命令：\\{\bfseries\kaishu nohup sh bin/mqbroker -n localhost:9876 -{}-enable-proxy \&}
+
+可使用命令来查看是否启动成功：{\bfseries\kaishu tail -f ~/logs/rocketmqlogs/proxy.log}
 
 未报错，查看nohup.out文件，发现启动还是失败：
 \begin{center}
@@ -859,6 +910,117 @@ RocketMQ 的订阅关系{\bfseries\kaishu 按照消费者分组和主题粒度}�
   \item 不要频繁修改订阅关系，这样可能会导致客户端一直处于负载均衡调整和变更的过程，从而影响消息接收。
 \end{itemize}
 
+\chapter{Springboot快速集成RocketMQ}
+资料来源：\\
+\href{https://github.com/apache/rocketmq-spring/wiki}{rocketmq-spring的Github地址}\\
+\href{https://blog.csdn.net/qq_36737803/article/details/112261352}{CSDN上的一篇优质介绍文章}
+
+\section{添加Maven依赖}
+作者使用的版本是2.2.2，也可以直接看\href{https://mvnrepository.com/artifact/org.apache.rocketmq}{rocketmq-spring-boot-starter的Maven仓库}来获得最新版本。
+
+\begin{xml}[caption=Maven依赖]
+<dependency>
+  <groupId>org.apache.rocketmq</groupId>
+  <artifactId>rocketmq-spring-boot-starter</artifactId>
+  <version>2.2.2</version>
+</dependency>
+\end{xml}
+
+\section{添加配置文件属性}
+\begin{yaml}[caption=配置文件application.yml]
+rocketmq:
+  name-server: 192.168.146.132:9876 # 名称服务访问地址
+  producer:
+    group: TEST_GROUP # 必须指定group
+    send-message-timeout: 3000 # 消息发送超时时长，默认3s
+    retry-times-when-send-failed: 3 # 同步发送消息失败重试次数，默认2
+    retry-times-when-send-async-failed: 3 # 异步发送消息失败重试次数，默认2
+\end{yaml}
+
+\section{生产者}
+\subsection{普通消息}
+需要先注入RocketMQTemplate的Bean，用于进行消息的发送;
+topic用于指定发送消息到的主题，sendMessage为发送的具体消息;
+可使用topic:tag的格式附带消息的Tag;
+可使用setHeader方法来设置消息的key。
+
+\subsubsection{同步发送}
+阻塞当前线程，等待broker响应发送结果。
+\begin{java}[caption=普通消息同步发送方式]
+@Resource
+private RocketMQTemplate rocketMQTemplate;
+public SendResult syncSend(Object sendMessage,String topic,String tag,String key) {
+  return rocketMQTemplate.syncSend(topic+":"+tag, MessageBuilder.withPayload(sendMessage).setHeader(RocketMQHeaders.KEYS, key).build());
+}
+\end{java}
+\begin{java}[caption=同步发送方式简化版]
+@Resource
+private RocketMQTemplate rocketMQTemplate;
+public SendResult syncSend(Object sendMessage,String topic) {
+  return rocketMQTemplate.syncSend(topic, MessageBuilder.withPayload(sendMessage).build());
+}
+\end{java}
+
+\subsubsection{异步发送}
+通过线程池执行发送到broker的消息任务，执行完后回调：在SendCallback中可处理相关成功失败时的逻辑。
+\begin{java}[caption=普通消息异步发送方式]
+@Resource
+private RocketMQTemplate rocketMQTemplate;
+public void asyncSend(Object sendMessage, String topic, String tag, String key) {
+  rocketMQTemplate.asyncSend(topic + ":" + tag, MessageBuilder.withPayload(sendMessage).setHeader(RocketMQHeaders.KEYS, key).build(), new SendCallback() {
+    @Override
+    public void onSuccess(SendResult sendResult) {
+      //发送异步消息成功后的处理...
+    }
+
+    @Override
+    public void onException(Throwable throwable) {
+      //发送异步消息失败后的处理...
+    }
+  });
+}
+\end{java}
+
+\subsubsection{单向发送}
+只负责发送消息，不等待应答，不关心发送结果。
+\begin{java}[caption=普通消息单向发送方式]
+@Resource
+private RocketMQTemplate rocketMQTemplate;
+public void oneWaySend(Object sendMessage,String topic,String tag,String key) {
+  rocketMQTemplate.sendOneWay(topic+":"+tag, MessageBuilder.withPayload(sendMessage).setHeader(RocketMQHeaders.KEYS, key).build());
+}
+\end{java}
+
+\subsection{顺序消息}
+topic必须为顺序类型的主题，不允许将消息放到不同类型的主题。hashkey用于确定发送到同一个主题中的哪个队列。要求顺序消费的多个消息必须使用同一个hashkey以保证进入同一个队列。
+\subsubsection{同步发送}
+\begin{java}[caption=顺序消息同步发送方式]
+@Resource
+private RocketMQTemplate rocketMQTemplate;
+public SendResult syncOrderlySend(Object sendMessage,String topic,String tag,String key,String hashkey) {
+  return rocketMQTemplate.syncSendOrderly(topic+":"+tag,MessageBuilder.withPayload(sendMessage).setHeader(RocketMQHeaders.KEYS, key).build(),hashkey);
+}
+\end{java}
+\subsubsection{异步发送}
+\begin{java}[caption=顺序消息异步发送方式]
+@Resource
+private RocketMQTemplate rocketMQTemplate;
+public void asyncOrderlySend(Object sendMessage,String topic,String tag,String key,String hashkey) {
+  rocketMQTemplate.asyncSendOrderly(topic+":"+tag,MessageBuilder.withPayload(sendMessage).setHeader(RocketMQHeaders.KEYS, key).build(),hashkey,new SendCallback() {
+    @Override
+    public void onSuccess(SendResult sendResult) {
+      System.out.println("发送异步消息成功" + JSON.toJSONString(sendResult));
+      //发送异步消息成功后的处理...
+    }
+
+    @Override
+    public void onException(Throwable throwable) {
+      System.out.println("发送异步消息失败" + JSON.toJSONString(throwable));
+      //发送异步消息失败后的处理...
+    }
+  });
+}
+\end{java}
 
 % 文章结束
 \end{document}
