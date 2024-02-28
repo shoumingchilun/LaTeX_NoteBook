@@ -140,6 +140,26 @@
   }
 }{}
 
+% 定义代码环境：Linux命令
+\lstnewenvironment{bash}[1][]{
+  \lstset{
+    language=bash,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    breakindent=0pt,
+    frame=single,
+    flexiblecolumns=true,
+    backgroundcolor=\color{gray!5},
+    numbers=left,
+    numberstyle=\tiny,
+    #1
+  }
+}{}
+
 % 定义一个名为ignore的新环境，表示不重要的内容。
 \newenvironment{ignore}{%
   \color{gray}% 设置字体颜色为灰色
@@ -1074,7 +1094,7 @@ public void syncBatchSend(List<Object> sendMessage, String topic) {
 
 复杂版本和异步版本省略。
 \subsection{事务消息}
-暂不考虑。
+还不会。
 
 \section{消费者}
 在RocketMQMessageListener注解中，topic用于指定接收的主题，selectorType用于指定过滤的方式（默认为Tag，可更改为SQL92），selectorExpression用于控制消息的过滤规则（Tag模式下，*代表全部Tag），consumeMode用于指定是即时接收消息还是顺序接收消息。
@@ -1109,6 +1129,124 @@ public void Pull() throws Exception {
 }
 \end{java}
 
+\chapter{功能特性}
+\section{四类消息}
+\subsection{普通消息}
+普通消息是RocketMQ中最基础的消息。常用于微服务解耦、数据集成\footnote{在不同系统、应用程序或数据存储之间传输、转换、共享和同步数据的情况}等场景。
 
+\subsubsection{普通消息的生命周期}
+\begin{enumerate}
+  \item 初始化：消息被生产者构建并完成初始化，{\bfseries\kaishu 待发送到服务端}的状态。
+  \item 待消费：消息{\bfseries\kaishu 被发送到服务端}，对消费者可见，等待消费者消费的状态。
+  \item 消费中：消息{\bfseries\kaishu 被消费者获取}，并按照消费者本地的业务逻辑进行处理的过程。 
+  \item 消费提交：消费者完成消费处理，并向服务端提交消费结果，服务端标记当前{\bfseries\kaishu 消息已经被处理}（包括消费成功和失败）。
+  \item 消息删除：RocketMQ按照消息保存机制滚动清理最早的消息数据，将消息从物理文件中删除。
+\end{enumerate}
+
+\subsubsection{使用方式}
+\begin{itemize}
+  \item 在broker中先提前创建NORMAL类型的消息主题：
+  \begin{bash}
+    sh mqadmin updateTopic -n <nameserver_address> -t <topic_name> -c <cluster_name> -a +message.type=NORMAL
+  \end{bash}
+  \item 在客户端SDK中向该主题发送消息即可。
+\end{itemize}
+
+\subsection{定时/延时消息}
+定时/延时消息为RocketMQ 中的高级特性消息。常用于分布式定时调度\footnote{如每天5点执行文件清理}、任务超时处理\footnote{订单下单后暂未支付，需要等待一段时间后关闭订单}等场景。
+
+RocketMQ 定时消息设置的定时时间是一个预期触发的系统时间戳，延时时间也需要转换成当前系统时间后的某一个时间戳，而不是一段延时时长，
+定时时间的格式为毫秒级的Unix时间戳。
+
+社区版的定时消息支持18个等级的延迟：
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \centering % 居中对齐
+    \begin{tabular}{|c|c|c|c|} % c=居中对齐列，列之间用竖线分隔
+      \hline % 画水平线
+      \textbf{延迟等级} & \textbf{延迟时间} & \textbf{延迟等级} & \textbf{延迟时间} \\
+      \hline
+      1 & 1s & 10 & 6min \\
+      2 & 5s & 11 & 7min \\
+      3 & 15s & 12 & 8min \\
+      4 & 30s & 13 & 9min \\
+      5 & 1min & 14 & 10min \\
+      6 & 2min & 15 & 20min \\
+      7 & 3min & 16 & 30min \\
+      8 & 4min & 17 & 1h \\
+      9 & 5min & 18 & 2h \\
+      \hline
+    \end{tabular}
+    \captionsetup{hypcap=false}
+    \captionof{table}{18个等级的延迟}
+    \label{tab:18个等级的延迟} % 用于交叉引用的标签
+  \end{minipage}
+\end{center}
+
+\subsection{延时消息的生命周期}
+\begin{enumerate}
+  \item 初始化：消息被生产者构建并完成初始化，待发送到服务端的状态。
+  \item {\bfseries\kaishu 定时中：消息被发送到服务端，和普通消息不同的是，服务端不会直接构建消息索引，而是会将定时消息单独存储在定时存储系统中，等待定时时刻到达。}
+  \item 待消费：定时时刻到达后，服务端将消息重新写入普通存储引擎，对下游消费者可见，等待消费者消费的状态。
+  \item 消费中：消息被消费者获取，并按照消费者本地的业务逻辑进行处理的过程。
+  \item 消费提交：消费者完成消费处理，并向服务端提交消费结果，服务端标记当前消息已经被处理（包括消费成功和失败）。
+  \item 消息删除：RocketMQ按照消息保存机制滚动清理最早的消息数据，将消息从物理文件中删除。
+\end{enumerate}
+
+\subsubsection{使用方式}
+\begin{enumerate}
+  \item 使用mqadmin工具创建延迟类型的主题：
+  \begin{bash}
+    sh mqadmin updateTopic -n <nameserver_address> -t <topic_name> -c <cluster_name> -a +message.type=DELAY
+  \end{bash}
+\end{enumerate}
+
+\subsection{顺序消息}
+顺序消息为RocketMQ 中的高级特性消息，常用于有序事件处理、数据库变更增量同步\footnote{如数据库操作日志，不可乱序}等场景。
+
+\subsubsection{保证顺序性}
+为保证顺序性，需同时保证生产顺序性和消费顺序性。
+\begin{itemize}
+  \item 保证消息生产的顺序性，必须满足单一生产者、串行发送两个条件。
+  \begin{itemize}
+    \item 单一生产者：消息生产的顺序性仅支持单一生产者，不同生产者分布在不同的系统，即使设置相同的消息组，不同生产者之间产生的消息也无法判定其先后顺序。
+    \item 串行发送：生产者客户端支持多线程安全访问，但如果生产者使用多线程并行发送，则不同线程间产生的消息将无法保证先后顺序。
+  \end{itemize}
+  \item 保证消息消费的顺序性，必须满足投递顺序、有限重试两个条件。
+  \begin{itemize}
+    \item 投递顺序：RocketMQ 通过客户端SDK和服务端通信协议保障消息按照服务端存储顺序投递，但业务方消费消息时需要严格按照接收---处理---应答的语义处理消息，避免因异步处理导致消息乱序。
+    \item 有限重试：生产者客户端支持多线程安全访问，但如果生产者使用多线程并行发送，则不同线程间产生的消息将无法保证先后顺序。\footnote{如果设置的重试次数过大，当消息消费失败时会进行多次重试，导致消息消费的延迟。如果后续消息的处理速度快于重试消息的消费速度，可能会导致后续消息先于重试消息被消费，从而导致消息乱序。}
+  \end{itemize}
+\end{itemize}
+
+服务端顺序存储逻辑如下：
+相同消息组的消息按照先后顺序被存储在同一个队列；
+不同消息组的消息可以混合在同一个队列中，且不保证连续。
+\begin{center}
+  \begin{minipage}{\textwidth}
+    \center
+    \includegraphics[width=\textwidth]{picture/服务端顺序存储逻辑.png}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{服务端顺序存储逻辑}
+    \label{fig:服务端顺序存储逻辑}
+  \end{minipage}
+\end{center}
+如上图所示，同组的消息均保证顺序。
+
+\subsubsection{顺序消息生命周期}
+顺序消息生命周期与普通消息生命周期相同。
+
+\subsubsection{使用方式}
+\begin{enumerate}
+  \item 使用mqadmin工具创建顺序消息类型的主题：
+  \begin{bash}
+    sh mqadmin updateTopic -n <nameserver_address> -t <topic_name> -c <cluster_name> -a +message.type=FIFO
+  \end{bash}
+  \item 发送消息时需要设置MessageGroup，该值用于为消息设置 GroupID，同一个 GroupID 的消息只会被其中一个消费者\footnote{如果有一个包含多个消费者的消费者组订阅顺序主题}消费，从而确保消息的顺序性。
+  \item 消费消息时，必须提交消费结果。同一个MessageGroup的消息，如果前序消息没有消费完成，再次调用Receive是获取不到后续消息的。
+\end{enumerate}
+
+\subsection{事务消息}
+还不会。
 % 文章结束
 \end{document}

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  28 FEB 2024 14:00
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  28 FEB 2024 18:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -735,27 +735,27 @@ Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 39.
  (./RocketMQNote.aux)
 \openout1 = `RocketMQNote.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-Package hyperref Info: Link coloring OFF on input line 154.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+Package hyperref Info: Link coloring OFF on input line 174.
  (./RocketMQNote.out) (./RocketMQNote.out)
 \@outlinefile=\write3
 \openout3 = `RocketMQNote.out'.
@@ -799,34 +799,34 @@ Package hyperref Info: Link coloring OFF on input line 154.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 154.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 174.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 154.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 174.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 154.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 174.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 154.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 174.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(2)/m/n' will be
-(Font)              scaled to size 12.00128pt on input line 158.
+(Font)              scaled to size 12.00128pt on input line 178.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(2)/m/n' will be
-(Font)              scaled to size 8.00085pt on input line 158.
+(Font)              scaled to size 8.00085pt on input line 178.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(2)/m/n' will be
-(Font)              scaled to size 6.00064pt on input line 158.
+(Font)              scaled to size 6.00064pt on input line 178.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(3)/m/n' will be
-(Font)              scaled to size 11.99872pt on input line 158.
+(Font)              scaled to size 11.99872pt on input line 178.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 158.
+(Font)              scaled to size 7.99915pt on input line 178.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 158.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 158.
+(Font)              scaled to size 5.99936pt on input line 178.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 178.
 (d:/LaTeX/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 158.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 178.
  (d:/LaTeX/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 158.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 178.
  (d:/LaTeX/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ) [1
@@ -834,7 +834,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 
 ]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermes(0)/m/sl' in size <10.95> not available
-(Font)              Font shape `TU/TeXGyreTermes(0)/m/it' tried instead on input line 180.
+(Font)              Font shape `TU/TeXGyreTermes(0)/m/it' tried instead on input line 200.
  [1] (./RocketMQNote.toc
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(2)/m/n' will be
 (Font)              scaled to size 10.95116pt on input line 2.
@@ -894,7 +894,7 @@ File: picture/解压二进制文件.png Graphic file (type bmp)
 File: picture/名字服务器启动失败.png Graphic file (type bmp)
 <picture/名字服务器启动失败.png>
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 341.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 361.
 
 Package fontspec Info: Font family 'FANGZHENGFANGSONG-GBK-1.ttf(0)' created
 (fontspec)             for font 'FANGZHENGFANGSONG-GBK-1.ttf' with options
@@ -969,22 +969,41 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) (d:/LaTeX/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 921.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 941.
  [30
 
 ] (d:/LaTeX/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
-) [31] [32] [33] [34] [35] [36] [37] (./RocketMQNote.aux)
+) [31] [32] [33] [34] [35] [36] [37]
+第五章
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(2)/m/n' will be
+(Font)              scaled to size 9.00096pt on input line 1135.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(2)/m/n' will be
+(Font)              scaled to size 5.00053pt on input line 1135.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(3)/m/n' will be
+(Font)              scaled to size 8.99904pt on input line 1135.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesMath(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 1135.
+(d:/LaTeX/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+) (d:/LaTeX/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+) [38
+
+] [39] [40]
+File: picture/服务端顺序存储逻辑.png Graphic file (type bmp)
+<picture/服务端顺序存储逻辑.png>
+ [41] [42] (./RocketMQNote.aux)
 Package rerunfilecheck Info: File `RocketMQNote.out' has not changed.
-(rerunfilecheck)             Checksum: 4E34A9E8F01935EED45CB95324B70324;8867.
+(rerunfilecheck)             Checksum: 39E4AE096CAB32233854FC125D4F0FBA;9789.
  ) 
 Here is how much of TeX's memory you used:
- 24153 strings out of 476683
- 510064 string characters out of 5804928
- 1980012 words of memory out of 5000000
- 44031 multiletter control sequences out of 15000+600000
- 526910 words of font info for 146 fonts, out of 8000000 for 9000
+ 24338 strings out of 476683
+ 515465 string characters out of 5804928
+ 1981012 words of memory out of 5000000
+ 44195 multiletter control sequences out of 15000+600000
+ 530674 words of font info for 168 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,6n,114p,499b,1836s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,8n,114p,499b,1836s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on RocketMQNote.pdf (42 pages).
+Output written on RocketMQNote.pdf (47 pages).

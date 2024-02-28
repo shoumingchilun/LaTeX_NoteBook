@@ -91,3 +91,16 @@
 \contentsline {section}{\numberline {4.4}消费者}{36}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Push模式}{36}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Pull模式}{37}{subsection.4.4.2}%
+\contentsline {chapter}{\numberline {第五章\hspace {.3em}}功能特性}{38}{chapter.5}%
+\contentsline {section}{\numberline {5.1}四类消息}{38}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}普通消息}{38}{subsection.5.1.1}%
+\contentsline {subsubsection}{普通消息的生命周期}{38}{subsubsection*.34}%
+\contentsline {subsubsection}{使用方式}{38}{subsubsection*.35}%
+\contentsline {subsection}{\numberline {5.1.2}定时/延时消息}{39}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}延时消息的生命周期}{39}{subsection.5.1.3}%
+\contentsline {subsubsection}{使用方式}{40}{subsubsection*.36}%
+\contentsline {subsection}{\numberline {5.1.4}顺序消息}{40}{subsection.5.1.4}%
+\contentsline {subsubsection}{保证顺序性}{40}{subsubsection*.37}%
+\contentsline {subsubsection}{顺序消息生命周期}{41}{subsubsection*.38}%
+\contentsline {subsubsection}{使用方式}{41}{subsubsection*.39}%
+\contentsline {subsection}{\numberline {5.1.5}事务消息}{42}{subsection.5.1.5}%
