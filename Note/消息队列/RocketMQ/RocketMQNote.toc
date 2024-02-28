@@ -82,3 +82,12 @@
 \contentsline {subsection}{\numberline {4.3.2}顺序消息}{33}{subsection.4.3.2}%
 \contentsline {subsubsection}{同步发送}{33}{subsubsection*.29}%
 \contentsline {subsubsection}{异步发送}{33}{subsubsection*.30}%
+\contentsline {subsection}{\numberline {4.3.3}延迟消息}{34}{subsection.4.3.3}%
+\contentsline {subsubsection}{同步发送}{34}{subsubsection*.31}%
+\contentsline {subsubsection}{异步发送}{35}{subsubsection*.32}%
+\contentsline {subsection}{\numberline {4.3.4}批量消息}{35}{subsection.4.3.4}%
+\contentsline {subsubsection}{同步发送}{36}{subsubsection*.33}%
+\contentsline {subsection}{\numberline {4.3.5}事务消息}{36}{subsection.4.3.5}%
+\contentsline {section}{\numberline {4.4}消费者}{36}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Push模式}{36}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Pull模式}{37}{subsection.4.4.2}%

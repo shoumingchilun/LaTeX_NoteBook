@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  28 FEB 2024 02:32
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.27)  28 FEB 2024 14:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -974,17 +974,17 @@ Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on in
 
 ] (d:/LaTeX/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
-) [31] [32] [33] [34] (./RocketMQNote.aux)
+) [31] [32] [33] [34] [35] [36] [37] (./RocketMQNote.aux)
 Package rerunfilecheck Info: File `RocketMQNote.out' has not changed.
-(rerunfilecheck)             Checksum: 2C4C81C638000C1E838B5010682FE17D;8122.
+(rerunfilecheck)             Checksum: 4E34A9E8F01935EED45CB95324B70324;8867.
  ) 
 Here is how much of TeX's memory you used:
- 24124 strings out of 476683
- 509652 string characters out of 5804928
- 1955012 words of memory out of 5000000
- 44002 multiletter control sequences out of 15000+600000
+ 24153 strings out of 476683
+ 510064 string characters out of 5804928
+ 1980012 words of memory out of 5000000
+ 44031 multiletter control sequences out of 15000+600000
  526910 words of font info for 146 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,6n,114p,499b,1836s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on RocketMQNote.pdf (39 pages).
+Output written on RocketMQNote.pdf (42 pages).

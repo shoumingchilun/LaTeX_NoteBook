@@ -361,7 +361,7 @@
   \\{\bfseries\kaishu JAVA\_OPT=\texttt{"}\${JAVA\_OPT} -server -Xms1g -Xmx1g -Xmn256m -XX:MetaspaceSize=128m 
   \\-XX:MaxMetaspaceSize=128m\texttt{"}}
   \\替换为
-  \\{\bfseries\kaishu JAVA\_OPT=\texttt{"}\${JAVA\_OPT} -server -Xms256g -Xmx256g -Xmn128m 
+  \\{\bfseries\kaishu JAVA\_OPT=\texttt{"}\${JAVA\_OPT} -server -Xms256m -Xmx256m -Xmn128m 
   \\-XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m\texttt{"}}。
 \end{enumerate}
 
@@ -381,7 +381,7 @@
 \section{启动Broker+Proxy}
 执行命令：\\{\bfseries\kaishu nohup sh bin/mqbroker -n localhost:9876 -{}-enable-proxy \&}
 
-可使用命令来查看是否启动成功：{\bfseries\kaishu tail -f ~/logs/rocketmqlogs/proxy.log}
+可使用命令来查看是否启动成功：{\bfseries\kaishu tail\  -f\ \textasciitilde/logs/rocketmqlogs/proxy.log}
 
 未报错，查看nohup.out文件，发现启动还是失败：
 \begin{center}
@@ -414,7 +414,7 @@
     \includegraphics[width=\textwidth]{picture/broker启动成功.png}
     \captionsetup{hypcap=false}
     \captionof{figure}{broker启动成功}
-    \label{fig:broker启动成功}
+    \label{fig:broker启动成功}namesrv
   \end{minipage}
 \end{center}
 
@@ -422,10 +422,10 @@
 
 \section{关闭服务器}
 先关闭消息队列：
-{\bfseries\kaishu sh bin/mqshutdown broker}
+{\bfseries\kaishu sh\  bin/mqshutdown\  broker}
 
 再关闭名称服务：
-{\bfseries\kaishu sh bin/mqshutdown namesrv}
+{\bfseries\kaishu sh\  bin/mqshutdown\  namesrv}
 
 \chapter{领域模型}
 \section{架构总览}
@@ -1021,6 +1021,94 @@ public void asyncOrderlySend(Object sendMessage,String topic,String tag,String k
   });
 }
 \end{java}
+
+\subsection{延迟消息}
+延迟消息就是普通消息发送的后面加上一个timeout属性和delayLevel属性。
+timeout是消息发送超时时长，为默认3s。
+delayLevel属性分为18个等级，分别为：1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h。
+\subsubsection{同步发送}
+\begin{java}[caption=延迟消息同步发送方式]
+@Resource
+private RocketMQTemplate rocketMQTemplate;
+public SendResult syncDelaySend(Object sendMessage,String topic,String tag,String key,long timeout, int delayLevel) {
+  return rocketMQTemplate.syncSend(topic+":"+tag,MessageBuilder.withPayload(sendMessage).setHeader(RocketMQHeaders.KEYS, key).build(),timeout,delayLevel);
+}
+\end{java}
+
+\subsubsection{异步发送}
+\begin{java}[caption=延迟消息异步发送方式]
+@Resource
+private RocketMQTemplate rocketMQTemplate;
+public void asyncDelaySend(Object sendMessage, String topic, String tag, String key, long timeout, int delayLevel) {
+  rocketMQTemplate.asyncSend(topic + ":" + tag, MessageBuilder.withPayload(sendMessage).setHeader(RocketMQHeaders.KEYS, key).build(), new SendCallback() {
+    @Override
+    public void onSuccess(SendResult sendResult) {
+      System.out.println("发送异步消息成功" + JSON.toJSONString(sendResult));
+      //发送异步消息成功后的处理...
+    }
+
+    @Override
+    public void onException(Throwable throwable) {
+      System.out.println("发送异步消息失败" + JSON.toJSONString(throwable));
+      //发送异步消息失败后的处理...
+    }
+  }, timeout, delayLevel);
+}
+\end{java}
+
+\subsection{批量消息}
+批量消息的发送方式即将原先普通消息中的sendMessage换成Collection<Message>的对象即可。
+\subsubsection{同步发送}
+
+\begin{java}[caption=批量消息同步发送方式（简化版）]
+@Resource
+private RocketMQTemplate rocketMQTemplate;
+public void syncBatchSend(List<Object> sendMessage, String topic) {
+  ArrayList<Message<Object>> list = new ArrayList<>();
+  for (Object message : sendMessage) {
+    list.add(MessageBuilder.withPayload(message).build());
+  }
+  rocketMQTemplate.syncSend(topic, list);
+}
+\end{java}
+
+复杂版本和异步版本省略。
+\subsection{事务消息}
+暂不考虑。
+
+\section{消费者}
+在RocketMQMessageListener注解中，topic用于指定接收的主题，selectorType用于指定过滤的方式（默认为Tag，可更改为SQL92），selectorExpression用于控制消息的过滤规则（Tag模式下，*代表全部Tag），consumeMode用于指定是即时接收消息还是顺序接收消息。
+（其他注解属性请自行了解）
+\subsection{Push模式}
+消费消息仅通过消费监听器处理业务并返回消费结果。消息的获取、消费状态提交以及消费重试都通过 Apache RocketMQ 的客户端SDK完成。
+\begin{java}[caption=Push模式消费者]
+@Service
+@RocketMQMessageListener(topic = "TEST_TOPIC", selectorExpression = "test", consumerGroup = "Group_One")
+public class ConsumerSend implements RocketMQListener<User> {
+  // 监听到消息就会执行此方法
+  @Override
+  public void onMessage(Object message) {
+    //此处为处理消息的方法
+  }
+}
+\end{java}
+
+\subsection{Pull模式}
+如果使用Pull模型，需要补充配置文件属性。（注意：如果不使用，就不要添加该属性。）
+
+\begin{yaml}[caption=lite pull consumer所需配置属性]
+rocketmq.pull-consumer.group=Group_One
+rocketmq.pull-consumer.topic=TEST_TOPIC
+\end{yaml}
+
+Pull模型通过调用RocketMQTemplate的receive方法实现。
+\begin{java}[caption=Pull模式消费者]
+public void Pull() throws Exception {
+  List<Object> messages = rocketMQTemplate.receive(Object.class);
+  //此处处理接收到的message集合
+}
+\end{java}
+
 
 % 文章结束
 \end{document}
